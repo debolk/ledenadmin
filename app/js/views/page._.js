@@ -24,7 +24,7 @@
     Page.prototype._createActions = function(actions) {
       var action, result, templ, _i, _len;
 
-      templ = '<a href="<%= link %>"><%= text %></a>';
+      templ = '<a href="#<%= link %>" data-route="<%= link %>"><%= text %></a>';
       result = $('<ul></ul>');
       for (_i = 0, _len = actions.length; _i < _len; _i++) {
         action = actions[_i];

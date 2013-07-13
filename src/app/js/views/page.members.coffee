@@ -10,8 +10,8 @@ class Bolk.MembersPage extends Bolk.Page
 		super title
 		
 		actions = []
-		actions.push { link: '#/home', text: 'Home' }
-		actions.push { link: '#/leden/oud', text: 'Oud-leden' }
-		actions.push { link: '#/leden/kandidaat', text: 'Kandidaatleden' }
+		actions.push { link: '/home', text: 'Home' }
+		actions.push { link: '/leden/oud', text: 'Oud-leden' }
+		actions.push { link: '/leden/kandidaat', text: 'Kandidaatleden' }
 		
 		@contents.append( @_createActions actions )

@@ -30,7 +30,7 @@ class Bolk.Page extends Bolk.ViewCollection
 	# @return [String] the ul HTML with all the links
 	#
 	_createActions: ( actions ) ->
-		templ = '<a href="<%= link %>"><%= text %></a>' 
+		templ = '<a href="#<%= link %>" data-route="<%= link %>"><%= text %></a>' 
 		result = $ '<ul></ul>'
 		for action in actions
 			result.append( 
