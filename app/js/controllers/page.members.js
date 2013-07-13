@@ -26,6 +26,6 @@
 
     return MembersPageController;
 
-  })(Bolk.Controller);
+  })(Bolk.PageController);
 
 }).call(this);

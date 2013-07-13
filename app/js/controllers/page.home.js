@@ -12,6 +12,6 @@
 
     return HomePageController;
 
-  })(Bolk.Controller);
+  })(Bolk.PageController);
 
 }).call(this);

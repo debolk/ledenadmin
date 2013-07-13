@@ -1,6 +1,6 @@
 # This is the controller class for the members listing pages. 
 #
-class Bolk.MembersPageController extends Bolk.Controller
+class Bolk.MembersPageController extends Bolk.PageController
 
 	# Creates the controller for the Members Listing Page
 	#
