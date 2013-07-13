@@ -12,15 +12,15 @@
       HomePage.__super__.constructor.call(this, 'Home');
       actions = [];
       actions.push({
-        link: '#/leden',
+        link: '/leden',
         text: 'Ledenlijst'
       });
       actions.push({
-        link: '#/leden/oud',
+        link: '/leden/oud',
         text: 'Oud-leden'
       });
       actions.push({
-        link: '#/leden/kandidaat',
+        link: '/leden/kandidaat',
         text: 'Kandidaatleden'
       });
       this.contents.append(this._createActions(actions));

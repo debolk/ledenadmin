@@ -1,3 +1,5 @@
+# The Application router maps all URLS to controllers
+#
 class Bolk.AppRouter extends Backbone.Router 
 	
 	# Defines the routes for this application
