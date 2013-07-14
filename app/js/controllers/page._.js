@@ -18,7 +18,7 @@
     };
 
     PageController.prototype.navigate = function(event) {
-      document.router.navigate('/' + $(event.target).data('route'), {
+      document.router.navigate('/' + $(event.currentTarget).data('route'), {
         trigger: true
       });
       event.stopPropagation();

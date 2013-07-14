@@ -21,7 +21,7 @@ class Bolk.PageController extends Bolk.Controller
 	#
 	#	
 	navigate: ( event ) ->
-		document.router.navigate '/' + $( event.target ).data( 'route' ), { trigger: true }
+		document.router.navigate '/' + $( event.currentTarget ).data( 'route' ), { trigger: true }
 		event.stopPropagation()
 		event.preventDefault()
 		return false
