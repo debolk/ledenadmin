@@ -13,27 +13,22 @@
     }
 
     AppRouter.prototype.routes = {
-      '': 'home',
-      'home': 'home',
-      'leden': 'members',
-      'leden/:filter': 'members',
-      'lid/:id': 'member'
+      '': 'members',
+      'home': 'members',
+      'members': 'members',
+      'members/:filter': 'members',
+      'member/:id': 'member',
+      'search': 'search',
+      'search/:action': 'search',
+      'logout': 'logout',
+      '?code=:code': 'login'
     };
 
     AppRouter.prototype.initialize = function() {
       this.controller = null;
+      this.session = new Bolk.Session();
       Backbone.history.start();
       return console.debug('Finished initializing router');
-    };
-
-    AppRouter.prototype.home = function() {
-      var _ref1;
-
-      console.debug('Routing home');
-      if ((_ref1 = this.controller) != null) {
-        _ref1.kill();
-      }
-      return this.controller = new Bolk.HomePageController();
     };
 
     AppRouter.prototype.members = function(filter) {
@@ -57,6 +52,31 @@
         _ref1.kill();
       }
       return this.controller = new Bolk.MemberPageController(id);
+    };
+
+    AppRouter.prototype.search = function(action) {
+      var _ref1;
+
+      if (action == null) {
+        action = null;
+      }
+      console.debug("Routing search: " + (action === 'filter' ? 'advanced' : 'normal'));
+      if ((_ref1 = this.controller) != null) {
+        _ref1.kill();
+      }
+      return this.controller = new Bolk.SearchPageController(action === 'filter');
+    };
+
+    AppRouter.prototype.login = function(code) {
+      return this.session.login(code, this.session.token);
+    };
+
+    AppRouter.prototype.logout = function() {
+      this.session.kill();
+      return this.navigate('/home', {
+        trigger: true,
+        replace: true
+      });
     };
 
     return AppRouter;
