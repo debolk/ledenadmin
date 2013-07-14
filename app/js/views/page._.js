@@ -8,17 +8,52 @@
 
     function Page(title) {
       Page.__super__.constructor.call(this, 'body');
-      this.headerTemplate = '<%= title %>';
-      this.header = this.container.find('#masthead');
+      this.headerTemplate = this.header = this.container.find('#masthead');
       this.contents = this.container.find('#content');
       this.footer = this.container.find('#mastfoot');
       this._fillHeader(title);
     }
 
+    Page.prototype._getHeaderTemplate = function() {
+      return '<div id="branding">\
+			<a href="#<%= route_home %>" data-route="<%= route_home %>">\
+				<img src="//placehold.it/100x100.png">\
+			</a>\
+			<h1>Whiting</h1>\
+		</div>\
+		<form class="form-inline" id="search">\
+			<div class="controls">\
+				<input type="text" class="input-big" placeholder="Search...">\
+			</div>\
+			<div class="actions">\
+				<a href="#/search/filter" data-route="/search/filter">Advanced filter</a> |\
+				<a href="#/members/new" data-route="/members/new">Add member</a>\
+			</div>\
+		</form>\
+		<div id="logout">\
+			<a href="#/logout" data-route="/logout">\
+				<img src="//placehold.it/100x100.png&text=logout">\
+			</a>\
+		</div>';
+    };
+
     Page.prototype._fillHeader = function(title) {
-      return this.header.html(_.template(this.headerTemplate, {
-        title: title
-      }));
+      var key,
+        _this = this;
+
+      key = "header-" + (title.toLowerCase());
+      return locache.async.get(key).finished(function(template) {
+        _this.header.hide();
+        if (!template) {
+          template = _.template(_this._getHeaderTemplate(), {
+            route_home: '/home',
+            title: title
+          });
+          locache.async.set(key, template);
+        }
+        _this.header.html(template);
+        return _this.header.fadeIn();
+      });
     };
 
     Page.prototype._createActions = function(actions) {

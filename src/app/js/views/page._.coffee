@@ -9,7 +9,7 @@ class Bolk.Page extends Bolk.ViewCollection
 	#
 	constructor: ( title ) ->
 		super 'body'
-		@headerTemplate = '<%= title %>'
+		@headerTemplate = 
 		
 		@header = @container.find '#masthead'
 		@contents = @container.find '#content'
@@ -17,12 +17,45 @@ class Bolk.Page extends Bolk.ViewCollection
 		
 		@_fillHeader title
 		
+	#
+	#
+	#
+	_getHeaderTemplate: () ->
+		'<div id="branding">
+			<a href="#<%= route_home %>" data-route="<%= route_home %>">
+				<img src="//placehold.it/100x100.png">
+			</a>
+			<h1>Whiting</h1>
+		</div>
+		<form class="form-inline" id="search">
+			<div class="controls">
+				<input type="text" class="input-big" placeholder="Search...">
+			</div>
+			<div class="actions">
+				<a href="#/search/filter" data-route="/search/filter">Advanced filter</a> |
+				<a href="#/members/new" data-route="/members/new">Add member</a>
+			</div>
+		</form>
+		<div id="logout">
+			<a href="#/logout" data-route="/logout">
+				<img src="//placehold.it/100x100.png&text=logout">
+			</a>
+		</div>'
+	
+		
 	# Fills the header template with a title
 	#
 	# @param title [String] the title
 	#
 	_fillHeader: ( title ) ->
-		@header.html _.template( @headerTemplate, { title: title } )
+		key = "header-#{ title.toLowerCase() }"
+		locache.async.get( key ).finished ( template ) =>
+			@header.hide()
+			unless template
+				template = _.template( @_getHeaderTemplate(), { route_home: '/home', title: title } )
+				locache.async.set key, template
+			@header.html( template )
+			@header.fadeIn()
 		
 	# Creates a list of actions
 	#
