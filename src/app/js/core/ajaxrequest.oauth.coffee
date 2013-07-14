@@ -4,5 +4,11 @@ class Bolk.OAuthRequest extends Bolk.AjaxRequest
 	
 	constructor: ->
 		Object.defineProperty( @, 'endpoint', get: -> OAuthRequest.EndPoint )
-		super arguments...
+		super false, arguments...
 	
+	@getAccessToken: ( code ) ->
+		params = {
+			grant_type: 'authorization_code'
+			code: code
+		}
+		return new OAuthRequest 'post', params
