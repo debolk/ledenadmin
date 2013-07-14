@@ -7,9 +7,33 @@
     __extends(MembersPageController, _super);
 
     function MembersPageController(filter) {
+      var _this = this;
+
       this.filter = filter;
       MembersPageController.__super__.constructor.call(this, new Bolk.MembersPage(this._titlefor(this.filter)));
+      locache.async.get('members-page').finished(function(data) {
+        if (!data) {
+          return _this._fetchMembers();
+        } else {
+          return _this._displayMembers(data);
+        }
+      });
     }
+
+    MembersPageController.prototype._fetchMembers = function() {
+      var blip,
+        _this = this;
+
+      blip = new Bolk.BlipRequest('members');
+      return blip.request.always(function(data) {
+        console.log(blip.result);
+        if (blip.result) {
+          return _displayMembers(blip.result);
+        }
+      });
+    };
+
+    MembersPageController.prototype._displayMembers = function(collection) {};
 
     MembersPageController.prototype._titlefor = function(filter) {
       switch (filter) {

@@ -6,12 +6,5 @@ class Bolk.MembersPage extends Bolk.Page
 	#
 	# @param title [String] the title of the page
 	#
-	constructor: ( title = 'Ledenlijst' ) ->
+	constructor: ( title = 'Members' ) ->
 		super title
-		
-		actions = []
-		actions.push { link: '/home', text: 'Home' }
-		actions.push { link: '/leden/oud', text: 'Oud-leden' }
-		actions.push { link: '/leden/kandidaat', text: 'Kandidaatleden' }
-		
-		@contents.append( @_createActions actions )

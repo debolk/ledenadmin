@@ -7,26 +7,10 @@
     __extends(MembersPage, _super);
 
     function MembersPage(title) {
-      var actions;
-
       if (title == null) {
-        title = 'Ledenlijst';
+        title = 'Members';
       }
       MembersPage.__super__.constructor.call(this, title);
-      actions = [];
-      actions.push({
-        link: '/home',
-        text: 'Home'
-      });
-      actions.push({
-        link: '/leden/oud',
-        text: 'Oud-leden'
-      });
-      actions.push({
-        link: '/leden/kandidaat',
-        text: 'Kandidaatleden'
-      });
-      this.contents.append(this._createActions(actions));
     }
 
     return MembersPage;
