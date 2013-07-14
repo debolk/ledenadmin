@@ -1,0 +1,41 @@
+/** HEADER **/
+#masthead {
+	padding: 8px;
+	background: #efefef;
+	border-bottom: 2px solid #ddd;
+	margin-bottom: 16px;
+}
+
+#branding, #search, #logout {
+	display: inline-block;
+}
+
+#branding  {
+	margin: 0;
+}
+
+#branding a {
+	display: inline-block;
+}
+
+#branding h1 {
+	display: inline-block;
+	margin: 0 0 0 16px;
+	vertical-align: middle;
+}
+
+#search .controls, #search .actions {
+	display: inline-block;
+}
+
+#search {
+	margin: 0 0 0 56px;
+}
+
+#search .actions {
+	margin: 0 0 0 8px;
+}
+
+#logout {
+	margin: 0 0 0 56px;
+}
