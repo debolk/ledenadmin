@@ -7,23 +7,7 @@
     __extends(HomePage, _super);
 
     function HomePage() {
-      var actions;
-
       HomePage.__super__.constructor.call(this, 'Home');
-      actions = [];
-      actions.push({
-        link: '/leden',
-        text: 'Ledenlijst'
-      });
-      actions.push({
-        link: '/leden/oud',
-        text: 'Oud-leden'
-      });
-      actions.push({
-        link: '/leden/kandidaat',
-        text: 'Kandidaatleden'
-      });
-      this.contents.append(this._createActions(actions));
     }
 
     return HomePage;
