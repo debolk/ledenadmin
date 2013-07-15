@@ -1,7 +1,7 @@
 ( exports ? this ).Bolk = { 
 	version: '1.0.0' 
-	clientId: 'testclient'
-	clientSecret: 'verysecret'
+	clientId: 'ledenadmin'
+	clientSecret: 'ledenadmin'
 }
 
 locache.cachePrefix += '.bolk.'
