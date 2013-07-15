@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset='UTF-8'>
+  <title>CoffeeScript API Documentation</title>
+  <link rel='stylesheet' href='../../assets/codo.css' type='text/css'>
+  <script src='../../assets/codo.js'></script>
+  <script src='../../assets/search_data.js'></script>
+</head>
+  <body>
+    <div id='base' data-path='../../'></div>
+<div id='header'>
+  <div id='menu'>
+    <a href='../../README.md.html' title='Ledenadmin.i.bolkhuis.nl'>Ledenadmin.i.bolkhuis.nl</a>
+    &raquo;
+    <a href='../../class_index.html' title='Index'>Index</a>
+    &raquo;
+    <span class='title'>Bolk</span>
+    &raquo;
+    <span class='title'>AjaxRequest</span>
+    <nav>
+      <ul>
+        <li class='noframes'>
+          (<a class='noframes' href='#'>no frames</a>)
+        </li>
+      </ul>
+    </nav>
+    <div id='search'>
+      <a id='class_list_link' href='../../class_list.html'>Classes</a>
+      <a id='file_list_link' href='../../file_list.html'>Files</a>
+      <a id='method_list_link' href='../../method_list.html'>Methods</a>
+      <a id='extra_list_link' href='../../extra_list.html'>Extras</a>
+    </div>
+  </div>
+  <iframe id='search_frame'></iframe>
+  <div id='fuzzySearch'>
+    <input type='text'>
+    <ol></ol>
+  </div>
+  <div id='help'>
+    <p>
+      Quickly fuzzy find classes, mixins, methods, file:
+    </p>
+    <ul>
+      <li>
+        <span>Ctrl-T</span>
+        Open fuzzy finder dialog
+      </li>
+    </ul>
+    <p>
+      In frame mode you can toggle the list naviation frame on the left side:
+    </p>
+    <ul>
+      <li>
+        <span>Ctrl-L</span>
+        Toggle list view
+      </li>
+    </ul>
+    <p>
+      You can focus a list in frame mode or toggle a tab in frameless mode:
+    </p>
+    <ul>
+      <li>
+        <span>Ctrl-C</span>
+        Class list
+      </li>
+      <li>
+        <span>Ctrl-I</span>
+        Mixin list
+      </li>
+      <li>
+        <span>Ctrl-F</span>
+        File list
+      </li>
+      <li>
+        <span>Ctrl-M</span>
+        Method list
+      </li>
+      <li>
+        <span>Ctrl-E</span>
+        Extras list
+      </li>
+    </ul>
+    <p>
+      You can focus and blur the search input:
+    </p>
+    <ul>
+      <li>
+        <span>Ctrl-S</span>
+        Focus search input
+      </li>
+      <li>
+        <span>Esc</span>
+        Blur search input
+      </li>
+    </ul>
+    <p>
+      In frameless mode you can close the list tab:
+    </p>
+    <ul>
+      <li>
+        <span>Esc</span>
+        Close list tab
+      </li>
+    </ul>
+  </div>
+</div>
+    <div id='content'>
+      <h1>
+        Class:
+        Bolk.AjaxRequest
+      </h1>
+      <table class='box'>
+        <tr>
+          <td>Defined in:</td>
+          <td>src&#47;app&#47;js&#47;core&#47;ajaxrequest._.coffee</td>
+        </tr>
+      </table>
+      <h2>Overview</h2>
+      <div class='docstring'>
+  <p>Base class for all Ajax Requests</p>
+</div>
+<div class='tags'>
+</div>
+      <h2>Direct Known Subclasses</h2>
+      <p class='children'>
+                <a href='../../classes/Bolk/BlipRequest.html'>Bolk.BlipRequest</a>,
+                <a href='../../classes/Bolk/OAuthRequest.html'>Bolk.OAuthRequest</a>,
+        <a href='../../classes/Bolk/OperculumRequest.html'>Bolk.OperculumRequest</a>
+      </p>
+      <h2>Class Method Summary</h2>
+      <ul class='summary'>
+  <li>
+    <span class='signature'>
+      <a href='#generate-class'>
+        + (Bolk.AjaxRequest) <strong>generate</strong>(state)
+      </a>
+    </span>
+    <span class='desc'>
+      Generates a request from an statified request
+    </span>
+  </li>
+</ul>
+      <h2>Instance Method Summary</h2>
+      <ul class='summary'>
+  <li>
+    <span class='signature'>
+      <a href='#constructor-instance'>
+        - (void) <strong>constructor</strong>(secure = true, api, params = {}, method = 'get')
+      </a>
+    </span>
+    <span class='constructor note title'>Constructor</span>
+    <span class='desc'>
+      Creates a new Ajax Request
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#url-instance'>
+        - (String) <strong>url</strong>()
+      </a>
+    </span>
+    <span class='desc'>
+      Gets the url for this request
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#options-instance'>
+        - (Object) <strong>options</strong>()
+      </a>
+    </span>
+    <span class='desc'>
+      Gets the request options
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#execute-instance'>
+        - (jQuery.Promise) <strong>execute</strong>()
+      </a>
+    </span>
+    <span class='desc'>
+      Executes the rquest
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#onSuccess-instance'>
+        - (void) <strong>onSuccess</strong>(data)
+      </a>
+    </span>
+    <span class='desc'>
+      Runs when the request was successfull
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#onFail-instance'>
+        - (void) <strong>onFail</strong>(error)
+      </a>
+    </span>
+    <span class='desc'>
+      Runs when the request failed
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#onDone-instance'>
+        - (void) <strong>onDone</strong>()
+      </a>
+    </span>
+    <span class='desc'>
+      Runs regardless of the request completion success/fail status
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#statify-instance'>
+        - (Object) <strong>statify</strong>()
+      </a>
+    </span>
+    <span class='desc'>
+      Creates a state object from this ajax request
+    </span>
+  </li>
+</ul>
+      <h2>Class Method Details</h2>
+      <div class='methods'>
+  <div class='method_details'>
+    <p class='signature' id='generate-class'>
+      + (Bolk.AjaxRequest) <strong>generate</strong>(state)
+    </p>
+    <div class='docstring'>
+  <p>Generates a request from an statified request</p>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>state</span>
+      <span class='type'>
+        (<tt>Object</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the statified request</span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (<tt><a href='../../classes/Bolk/AjaxRequest.html'>Bolk.AjaxRequest</a></tt>)
+      &mdash;
+      <span class='desc'>the request</span>
+    </li>
+  </ul>
+</div>
+  </div>
+</div>
+      <h2>Constructor Details</h2>
+      <div class='methods'>
+  <div class='method_details'>
+    <p class='signature' id='constructor-instance'>
+      - (void) <strong>constructor</strong>(secure = true, api, params = {}, method = 'get')
+    </p>
+    <div class='docstring'>
+  <p>Creates a new Ajax Request</p>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>api</span>
+      <span class='type'>
+        (<tt>String</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the api to invoke</span>
+    </li>
+    <li>
+      <span class='name'>method</span>
+      <span class='type'>
+        (<tt>String</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the method to use</span>
+    </li>
+    <li>
+      <span class='name'>params</span>
+      <span class='type'>
+        (<tt>Object</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the parameters</span>
+    </li>
+  </ul>
+</div>
+  </div>
+</div>
+      <h2>Instance Method Details</h2>
+      <div class='methods'>
+  <div class='method_details'>
+    <p class='signature' id='url-instance'>
+      - (String) <strong>url</strong>()
+    </p>
+    <div class='docstring'>
+  <p>Gets the url for this request</p>
+</div>
+<div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (<tt>String</tt>)
+      &mdash;
+      <span class='desc'>the url</span>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='options-instance'>
+      - (Object) <strong>options</strong>()
+    </p>
+    <div class='docstring'>
+  <p>Gets the request options</p>
+</div>
+<div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (<tt>Object</tt>)
+      &mdash;
+      <span class='desc'>the options</span>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='execute-instance'>
+      - (jQuery.Promise) <strong>execute</strong>()
+    </p>
+    <div class='docstring'>
+  <p>Executes the rquest</p>
+</div>
+<div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (<tt>jQuery.Promise</tt>)
+      &mdash;
+      <span class='desc'>the AJAX promise</span>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='onSuccess-instance'>
+      - (void) <strong>onSuccess</strong>(data)
+    </p>
+    <div class='docstring'>
+  <p>Runs when the request was successfull</p>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>data</span>
+      <span class='type'>
+        (<tt>Object</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>result data</span>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='onFail-instance'>
+      - (void) <strong>onFail</strong>(error)
+    </p>
+    <div class='docstring'>
+  <p>Runs when the request failed</p>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>error</span>
+      <span class='type'>
+        (<tt>Object</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>error data</span>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='onDone-instance'>
+      - (void) <strong>onDone</strong>()
+    </p>
+    <div class='docstring'>
+  <p>Runs regardless of the request completion success/fail status</p>
+</div>
+<div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='statify-instance'>
+      - (Object) <strong>statify</strong>()
+    </p>
+    <div class='docstring'>
+  <p>Creates a state object from this ajax request</p>
+</div>
+<div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (<tt>Object</tt>)
+      &mdash;
+      <span class='desc'>the statified request</span>
+    </li>
+  </ul>
+</div>
+  </div>
+</div>
+    </div>
+    <div id='footer'>
+  Generated on
+  Mon Jul 15 2013 17:49:17 GMT+0200 (W. Europe Daylight Time)
+  by
+  <a href='https://github.com/netzpirat/codo' title='CoffeeScript API documentation generator'>Codo</a>
+  v1.5.6
+  (Node.js v0.10.4).
+  &#10034;
+  Press Ctrl-h to see the keyboard shortcuts
+  &#10034;
+  <a href='http://twitter.com/#!/netzpirat'>@netzpirat</a>
+  &#10034;
+  <a href='https://mksoft.ch'>mksoft.ch</a>
+</div>
+  </body>
+</html>
