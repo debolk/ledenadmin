@@ -17,7 +17,7 @@
     Page.prototype._getHeaderTemplate = function() {
       return '<div id="branding">\
 			<a href="#<%= route_home %>" data-route="<%= route_home %>">\
-				<img src="//placehold.it/100x100.png">\
+				<img src="http://placehold.it/100x100.png">\
 			</a>\
 			<h1>Whiting</h1>\
 		</div>\
@@ -32,7 +32,7 @@
 		</form>\
 		<div id="logout">\
 			<a href="#/logout" data-route="/logout">\
-				<img src="//placehold.it/100x100.png&text=logout">\
+				<img src="http://placehold.it/100x100.png&text=logout">\
 			</a>\
 		</div>';
     };
