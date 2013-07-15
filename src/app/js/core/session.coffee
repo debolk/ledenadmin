@@ -4,7 +4,9 @@ class Bolk.Session
 		@token = locache.get 'session_token'
 		
 		Object.defineProperty( @, 'isLoggedIn',
-			get: -> return @token?
+			get: -> 
+				console.log @token, @token? 
+				return @token?
 		)
 	
 	# Authenticate the client

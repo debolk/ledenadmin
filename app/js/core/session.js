@@ -5,6 +5,7 @@
       this.token = locache.get('session_token');
       Object.defineProperty(this, 'isLoggedIn', {
         get: function() {
+          console.log(this.token, this.token != null);
           return this.token != null;
         }
       });
