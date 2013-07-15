@@ -15,6 +15,7 @@
     }).on('unload', function() {
       if ((document.router != null) && (document.router.controller != null) && (document.router.controller.onUnload != null)) {
         console.info('...unloaded this window');
+        document.router.onUnload();
         return document.router.controller.onUnload();
       }
     });

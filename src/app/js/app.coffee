@@ -68,10 +68,10 @@ class Bolk.AppRouter extends Backbone.Router
 	getToken: ( code, state ) ->
 		console.debug "Logging in " + state + " vs " + locache.get 'session_token_state'
 		@session.login( code, state ).done( =>
-			@navigate '//home', { trigger: true, replace: true }
+			@navigate '//home', { trigger: true }
 		).fail( =>
 			console.log arguments
-			@navigate '//error', { trigger: true, replace: true }
+			@navigate '//home', { trigger: true, replace: true }
 		)
 	
 	# Logs out
@@ -82,9 +82,17 @@ class Bolk.AppRouter extends Backbone.Router
 		@session.kill()
 		@navigate '//home', { trigger: true, replace: true }
 		
+	#
+	#
+	#
+	onUnload: ->
+		@session.unload()
+		
 	# Ensures a user to be logged in
 	#
 	ensureSession: () ->
+		if @session.isLoggedIn
+			return true
 		if ( code = @get( 'code' ) ) and ( state = @get( 'state' ) )
 			@getToken code, state
 			return false

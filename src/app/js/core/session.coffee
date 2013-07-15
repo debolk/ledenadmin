@@ -55,10 +55,15 @@ class Bolk.Session
 			)
 		return promise.promise()
 		
+	#
+	#
+	unload: () ->
+		locache.remove 'session_token'
+		locache.remove 'session_refresh_token'
+		
 	# Kill the session
 	#
 	kill: () ->
-		locache.remove 'session_token'
-		locache.remove 'session_refresh_token'
+		@unload()
 		locache.flush()
 	

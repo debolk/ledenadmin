@@ -87,12 +87,11 @@
       console.debug("Logging in " + state + " vs " + locache.get('session_token_state'));
       return this.session.login(code, state).done(function() {
         return _this.navigate('//home', {
-          trigger: true,
-          replace: true
+          trigger: true
         });
       }).fail(function() {
         console.log(arguments);
-        return _this.navigate('//error', {
+        return _this.navigate('//home', {
           trigger: true,
           replace: true
         });
@@ -108,9 +107,16 @@
       });
     };
 
+    AppRouter.prototype.onUnload = function() {
+      return this.session.unload();
+    };
+
     AppRouter.prototype.ensureSession = function() {
       var code, state;
 
+      if (this.session.isLoggedIn) {
+        return true;
+      }
       if ((code = this.get('code')) && (state = this.get('state'))) {
         this.getToken(code, state);
         return false;

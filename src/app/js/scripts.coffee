@@ -13,7 +13,9 @@ jQuery( document ).ready( () ->
 		.on( 'unload', () ->
 			if document.router? and document.router.controller? and document.router.controller.onUnload?
 				console.info '...unloaded this window'
+				document.router.onUnload()
 				document.router.controller.onUnload()
+				
 		)
 		
 		

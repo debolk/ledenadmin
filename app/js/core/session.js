@@ -52,9 +52,13 @@
       return promise.promise();
     };
 
-    Session.prototype.kill = function() {
+    Session.prototype.unload = function() {
       locache.remove('session_token');
-      locache.remove('session_refresh_token');
+      return locache.remove('session_refresh_token');
+    };
+
+    Session.prototype.kill = function() {
+      this.unload();
       return locache.flush();
     };
 
