@@ -8,7 +8,7 @@ class Bolk.MemberPage extends Bolk.Page
 	#
 	constructor: ( title = 'Member', edit = false ) ->
 		super title
-		@content.append ( @el = $ '<form class="form-horizontal"></form>' )
+		@contents.append ( @el = $ '<form class="form-horizontal"></form>' )
 	
 	display: ( person ) ->
 		@personView?.remove()

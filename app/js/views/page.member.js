@@ -14,7 +14,7 @@
         edit = false;
       }
       MemberPage.__super__.constructor.call(this, title);
-      this.content.append((this.el = $('<form class="form-horizontal"></form>')));
+      this.contents.append((this.el = $('<form class="form-horizontal"></form>')));
     }
 
     MemberPage.prototype.display = function(person) {
