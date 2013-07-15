@@ -60,12 +60,14 @@ class Bolk.Session
 	#
 	#
 	unload: () ->
-		locache.remove 'session_token'
-		locache.remove 'session_refresh_token'
+		#locache.remove 'session_token'
+		#locache.remove 'session_refresh_token'
 		
 	# Kill the session
 	#
 	kill: () ->
 		@unload()
+		locache.remove 'session_token'
+		locache.remove 'session_refresh_token'
 		locache.flush()
 	
