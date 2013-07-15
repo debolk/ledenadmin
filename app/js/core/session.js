@@ -22,7 +22,7 @@
       if (redirect == null) {
         redirect = "https://ledenadmin.i.bolkhuis.nl/";
       }
-      state = Math.random();
+      state = Math.random().toString();
       return locache.async.set('session_token_state', state).finished(function() {
         return window.location = "https://login.i.bolkhuis.nl/" + "authorize?response_type=code" + ("&state=" + state) + ("&client_id=" + cid) + ("&client_pass=" + secret) + ("&redirect_uri=" + redirect);
       });
@@ -34,7 +34,8 @@
 
       promise = jQuery.Deferred();
       locache.async.get('session_token_state').finished(function(cached_state) {
-        if (cached_state.toString() !== state.toString()) {
+        locache.remove('session_token_state');
+        if (!cached_state || cached_state !== state) {
           console.error('Wrong state! Did you make this request?', state, cached_state);
           return false;
         }

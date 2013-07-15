@@ -14,7 +14,7 @@ class Bolk.Session
 	# @param redirect [String] Redirect uri
 	#
 	oauth: ( cid = Bolk.clientId, secret = Bolk.clientSecret, redirect = "https://ledenadmin.i.bolkhuis.nl/" ) ->
-		state = Math.random()
+		state = Math.random().toString()
 		locache.async.set( 'session_token_state', state )
 			.finished( () ->
 				window.location = "https://login.i.bolkhuis.nl/" + 
@@ -34,12 +34,13 @@ class Bolk.Session
 		
 		locache.async.get( 'session_token_state' )
 			.finished( ( cached_state ) =>
-			
-				if cached_state.toString() isnt state.toString()
+				
+				locache.remove 'session_token_state' 
+				
+				if not cached_state or cached_state isnt state
 					console.error 'Wrong state! Did you make this request?', state, cached_state
 					return false
 					
-			
 				Bolk.OAuthRequest.getAccessToken( code )
 					.request
 					.done( ( data ) =>
