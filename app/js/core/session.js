@@ -29,12 +29,26 @@
     };
 
     Session.prototype.login = function(code, state) {
-      var _this = this;
+      var promise,
+        _this = this;
 
-      return Bolk.OAuthRequest.getAccessToken(code).execute().done(function(data) {
-        _this.token = data;
-        return locache.async.set('session_token', data, 3500);
+      promise = jQuery.Deferred();
+      locache.async.get('session_token_state').finished(function(cached_state) {
+        if (cached_state.toString() !== state.toString()) {
+          console.error('Wrong state! Did you make this request?', state, cached_state);
+          return false;
+        }
+        return Bolk.OAuthRequest.getAccessToken(code).request.done(function(data) {
+          console.info('token is: ', data);
+          _this.token = data;
+          locache.async.set('session_token', data, 3500);
+          return promise.resolve(_this.token);
+        }).fail(function(error) {
+          console.error('when getting token: ', error);
+          return promise.reject(error);
+        });
       });
+      return promise.promise();
     };
 
     Session.prototype.kill = function() {

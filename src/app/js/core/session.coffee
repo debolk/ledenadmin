@@ -30,12 +30,30 @@ class Bolk.Session
 	# @param code [String] auth code
 	#
 	login: ( code, state ) ->
-		Bolk.OAuthRequest.getAccessToken( code )
-			.execute()
-			.done( ( data ) => 
-				@token = data 
-				locache.async.set 'session_token', data, 3500
+		promise = jQuery.Deferred()
+		
+		locache.async.get( 'session_token_state' )
+			.finished( ( cached_state ) =>
+			
+				if cached_state.toString() isnt state.toString()
+					console.error 'Wrong state! Did you make this request?', state, cached_state
+					return false
+					
+			
+				Bolk.OAuthRequest.getAccessToken( code )
+					.request
+					.done( ( data ) =>
+						console.info 'token is: ', data
+						@token = data 
+						locache.async.set 'session_token', data, 3500
+						
+						promise.resolve @token
+					).fail( ( error ) =>
+						console.error 'when getting token: ', error
+						promise.reject error
+					)
 			)
+		return promise.promise()
 		
 	# Kill the session
 	#

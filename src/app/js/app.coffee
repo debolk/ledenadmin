@@ -95,7 +95,6 @@ class Bolk.AppRouter extends Backbone.Router
 	#
 	get: ( name ) ->
 		name = name.replace( /[\[]/, "\\\[" ).replace( /[\]]/, "\\\]" )
-		console.log name
 		expression = new RegExp( "[\\?&]#{name}=([^&#]*)" )
 		if results = expression.exec( location.search )
 			if results[ 1 ]?
