@@ -56,7 +56,6 @@ ul.members li {
 	margin: 0 5px 5px 0;
 	padding: 5px;
 	width: 150px;
-	height: 150px;
 	text-align: center;
 }
 
@@ -72,9 +71,7 @@ ul.members a {
 }
 
 ul.members .title {
-	width: 148px;
+	width: 150px;
 	display: block;
-	background: #eee;
-	border: 1px solid #ddd;
 	border-top: none;
 }
