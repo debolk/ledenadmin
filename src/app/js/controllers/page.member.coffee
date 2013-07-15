@@ -34,6 +34,12 @@ class Bolk.MemberPageController extends Bolk.PageController
 				data = _.extend( operculumdata, blipdata, { complete : true } )
 				locache.async.set 'member-page-' + @uid, data, MemberPageController.CacheTime
 				@_parseMember data
+				
+			).fail( ( error ) =>
+				console.log error
+				data = _.extend( blipdata, { complete : true } )
+				locache.async.set 'member-page-' + @uid, data, MemberPageController.CacheTime
+				@_parseMember data
 			)
 		)
 		

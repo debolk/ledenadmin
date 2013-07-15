@@ -45,6 +45,15 @@
           });
           locache.async.set('member-page-' + _this.uid, data, MemberPageController.CacheTime);
           return _this._parseMember(data);
+        }).fail(function(error) {
+          var data;
+
+          console.log(error);
+          data = _.extend(blipdata, {
+            complete: true
+          });
+          locache.async.set('member-page-' + _this.uid, data, MemberPageController.CacheTime);
+          return _this._parseMember(data);
         });
       });
     };
