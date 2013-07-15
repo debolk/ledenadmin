@@ -29,6 +29,8 @@ class Bolk.PersonView extends Backbone.View
 			</div>
 		</header>
 		
+		<img src="<%= img %>"/>
+		
 		<div class="control-group">
 			<label class="control-label" for="lidmaatschap">
 				Lidmaatschap
@@ -50,5 +52,6 @@ class Bolk.PersonView extends Backbone.View
 			phone: @model.get 'phone'
 			phone_parents : @model.get 'phone_parents'
 			email: @model.get 'email'
+			img: BlipRequest.EndPoint + BlipRequest.photo_src( @model.get 'uid', 200, 200 )
 		}
 		$( @el ).html _.template( @getTemplate(), data )

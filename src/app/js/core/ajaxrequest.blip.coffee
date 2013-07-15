@@ -14,3 +14,12 @@ class Bolk.BlipRequest extends Bolk.AjaxRequest
 	#
 	onSuccess: ( data ) =>
 		@result = data
+		
+	#
+	#
+	#
+	@photo: ( uid, width, heigth ) ->
+		new BlipRequest BlipRequest.photo_src( uid, width, height )
+		
+	@photo_src: ( uid, width, height ) ->
+		"persons/#{uid}/photo/#{width}/#{height}"

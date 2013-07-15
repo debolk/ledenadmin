@@ -34,6 +34,8 @@
 			</div>\
 		</header>\
 		\
+		<img src="<%= img %>"/>\
+		\
 		<div class="control-group">\
 			<label class="control-label" for="lidmaatschap">\
 				Lidmaatschap\
@@ -55,7 +57,8 @@
         lastname: this.model.get('lastname'),
         phone: this.model.get('phone'),
         phone_parents: this.model.get('phone_parents'),
-        email: this.model.get('email')
+        email: this.model.get('email'),
+        img: BlipRequest.EndPoint + BlipRequest.photo_src(this.model.get('uid', 200, 200))
       };
       return $(this.el).html(_.template(this.getTemplate(), data));
     };

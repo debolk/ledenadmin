@@ -10,6 +10,9 @@ class Bolk.MemberPage extends Bolk.Page
 		super title
 		@contents.append ( @el = $ '<form class="form-horizontal"></form>' )
 	
+	#
+	#
+	#
 	display: ( person ) ->
 		@personView?.remove()
 		@personView = new Bolk.PersonView( { el:  @el, model: person } )

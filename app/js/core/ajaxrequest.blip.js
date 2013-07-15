@@ -23,6 +23,14 @@
       return this.result = data;
     };
 
+    BlipRequest.photo = function(uid, width, heigth) {
+      return new BlipRequest(BlipRequest.photo_src(uid, width, height));
+    };
+
+    BlipRequest.photo_src = function(uid, width, height) {
+      return "persons/" + uid + "/photo/" + width + "/" + height;
+    };
+
     return BlipRequest;
 
   })(Bolk.AjaxRequest);

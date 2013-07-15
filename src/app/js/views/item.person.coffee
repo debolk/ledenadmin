@@ -15,5 +15,8 @@ class Bolk.PersonItemView extends Backbone.View
 	#
 	#
 	render: ->
-		@$el.html "<a data-route='/member/#{ @model.get 'uid' }'>#{ @model.get 'name' }</a>"
+		@$el.html "<a data-route='/member/#{ @model.get 'uid' }'>
+			<img src='#{ BlipRequest.EndPoint + BlipRequest.photo_src( @model.get 'uid', 100, 100 ) }'/>
+			<span>#{ @model.get 'name' }</span>
+		</a>"
 		return this
