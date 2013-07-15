@@ -53,6 +53,23 @@ ul.members {
 
 ul.members li {
 	display: inline-block;
-	margin-right: 12px;
+	margin-right: 5px;
+	width: 150px;
+	height: 150px;
+}
+
+ul.members .box {
 	width: 100px;
+	margin: 0 25px 0 25px;
+	height: 100px;
+	overflow: auto;
+}
+
+ul.members a {
+	cursor: pointer;
+}
+
+ul.members .title {
+	width: 150px;
+	height: 50px;
 }
