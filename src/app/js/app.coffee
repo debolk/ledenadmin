@@ -82,7 +82,7 @@ class Bolk.AppRouter extends Backbone.Router
 	# Ensures a user to be logged in
 	#
 	ensureSession: () ->
-		if code = @get( 'code' ) and state = @get( 'state' )
+		if ( code = @get( 'code' ) ) and ( state = @get( 'state' ) )
 			@getToken code, state
 			return false
 		unless @session.isLoggedIn

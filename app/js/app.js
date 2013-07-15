@@ -105,7 +105,7 @@
     AppRouter.prototype.ensureSession = function() {
       var code, state;
 
-      if (code = this.get('code') && (state = this.get('state'))) {
+      if ((code = this.get('code')) && (state = this.get('state'))) {
         this.getToken(code, state);
         return false;
       }
