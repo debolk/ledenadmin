@@ -22,7 +22,6 @@
         var _ref1, _ref2;
 
         _this.items[(_ref1 = person.get('uid')) != null ? _ref1 : person.cid] = new Bolk.PersonItemView({
-          el: _this.$list,
           model: person
         });
         return _this.$list.append(_this.items[(_ref2 = person.get('uid')) != null ? _ref2 : person.cid].$el);
