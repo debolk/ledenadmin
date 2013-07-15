@@ -35,7 +35,7 @@
     };
 
     AjaxRequest.prototype.onFail = function(error) {
-      return console.error(error);
+      return console.error(error.error());
     };
 
     AjaxRequest.prototype.onDone = function() {};
