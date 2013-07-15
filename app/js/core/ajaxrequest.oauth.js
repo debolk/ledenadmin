@@ -24,8 +24,8 @@
       params = {
         grant_type: 'authorization_code',
         code: code,
-        clientid: Bolk.clientId,
-        clientpass: Bolk.clientSecret
+        client_id: Bolk.clientId,
+        client_pass: Bolk.clientSecret
       };
       return new OAuthRequest('token', params, 'post');
     };
