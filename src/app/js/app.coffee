@@ -69,6 +69,9 @@ class Bolk.AppRouter extends Backbone.Router
 		console.debug "Logging in " + state + " vs " + locache.get 'session_token_state'
 		@session.login( code, state ).done( =>
 			@navigate '//home', { trigger: true, replace: true }
+		).fail( =>
+			console.log arguments
+			@navigate '//error', { trigger: true, replace: true }
 		)
 	
 	# Logs out

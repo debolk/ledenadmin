@@ -90,6 +90,12 @@
           trigger: true,
           replace: true
         });
+      }).fail(function() {
+        console.log(arguments);
+        return _this.navigate('//error', {
+          trigger: true,
+          replace: true
+        });
       });
     };
 
