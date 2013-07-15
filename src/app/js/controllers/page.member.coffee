@@ -21,11 +21,11 @@ class Bolk.MemberPageController extends Bolk.PageController
 	#
 	#
 	_fetchMember: () ->
-		blip = new Bolk.BlipRequest "member/#{@uid}"
+		blip = new Bolk.BlipRequest "persons/#{@uid}"
 		blip.request.done( ( blipdata ) =>
 		
 			# merge with operculum
-			operculum = new Bolk.OperculumRequest "member/#{@uid}"
+			operculum = new Bolk.OperculumRequest "persons/#{@uid}"
 			operculum.request.done( ( operculumdata ) =>
 				console.log data = new Bolk.Person( _.extend( operculumdata, blipdata, { completed: true } ) )
 				@_displayMember data

@@ -24,11 +24,11 @@
       var blip, el, v,
         _this = this;
 
-      blip = new Bolk.BlipRequest("member/" + this.uid);
+      blip = new Bolk.BlipRequest("persons/" + this.uid);
       blip.request.done(function(blipdata) {
         var operculum;
 
-        operculum = new Bolk.OperculumRequest("member/" + _this.uid);
+        operculum = new Bolk.OperculumRequest("persons/" + _this.uid);
         return operculum.request.done(function(operculumdata) {
           var data;
 
