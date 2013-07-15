@@ -38,7 +38,7 @@ class Bolk.Session
 				locache.remove 'session_token_state' 
 				
 				if not cached_state or cached_state isnt state
-					console.error 'Wrong state! Did you make this request?', state, cached_state
+					promise.reject "Wrong state! Did you make this request? #{ state } vs #{ cached_state } "
 					return false
 					
 				Bolk.OAuthRequest.getAccessToken( code )
@@ -50,8 +50,7 @@ class Bolk.Session
 						
 						promise.resolve @token
 					).fail( ( error ) =>
-						console.error 'when getting token: ', error
-						promise.reject error
+						promise.reject "when getting token: #{error}"
 					)
 			)
 		return promise.promise()

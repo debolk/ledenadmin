@@ -36,7 +36,7 @@
       locache.async.get('session_token_state').finished(function(cached_state) {
         locache.remove('session_token_state');
         if (!cached_state || cached_state !== state) {
-          console.error('Wrong state! Did you make this request?', state, cached_state);
+          promise.reject("Wrong state! Did you make this request? " + state + " vs " + cached_state + " ");
           return false;
         }
         return Bolk.OAuthRequest.getAccessToken(code).request.done(function(data) {
@@ -45,8 +45,7 @@
           locache.async.set('session_token', data, 3500);
           return promise.resolve(_this.token);
         }).fail(function(error) {
-          console.error('when getting token: ', error);
-          return promise.reject(error);
+          return promise.reject("when getting token: " + error);
         });
       });
       return promise.promise();
