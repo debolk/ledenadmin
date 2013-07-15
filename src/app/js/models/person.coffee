@@ -14,13 +14,16 @@ class Bolk.Person extends Backbone.Model
 		resignation: null
 		
 		#blip
+		initials: ''
 		firstname: ''
 		lastname: ''
 		email: ''
-		mobile: ''
+		gender: ''
 		phone: ''
+		mobile: ''
 		phone_parents: ''
 		address: ''
+		dateofbirth: ''
 	}
 
 		
