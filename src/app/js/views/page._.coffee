@@ -53,30 +53,17 @@ class Bolk.Page extends Bolk.ViewCollection
 			@header.hide()
 			unless template
 				template = _.template( @_getHeaderTemplate(), { route_home: '/home', title: title } )
-				locache.async.set key, template
+				locache.async.set key, template, 3600
 			@header.html( template )
 			@header.fadeIn()
 		
-	# Creates a list of actions
-	#
-	# @param actions [Array<Object>] a list of actions
-	# @return [String] the ul HTML with all the links
-	#
-	_createActions: ( actions ) ->
-		templ = '<a href="#<%= link %>" data-route="<%= link %>"><%= text %></a>' 
-		result = $ '<ul></ul>'
-		for action in actions
-			result.append( 
-				$( '<li></li>' ).html(
-					_.template( templ, action )
-				)
-			)
-		return result
 		
 	# Clears the page
 	#
+	# @return [self] the chainable self
 	#
 	clear: () ->
 		@header.empty()
 		@contents.empty()
+		return this
 			

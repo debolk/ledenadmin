@@ -49,28 +49,17 @@
             route_home: '/home',
             title: title
           });
-          locache.async.set(key, template);
+          locache.async.set(key, template, 3600);
         }
         _this.header.html(template);
         return _this.header.fadeIn();
       });
     };
 
-    Page.prototype._createActions = function(actions) {
-      var action, result, templ, _i, _len;
-
-      templ = '<a href="#<%= link %>" data-route="<%= link %>"><%= text %></a>';
-      result = $('<ul></ul>');
-      for (_i = 0, _len = actions.length; _i < _len; _i++) {
-        action = actions[_i];
-        result.append($('<li></li>').html(_.template(templ, action)));
-      }
-      return result;
-    };
-
     Page.prototype.clear = function() {
       this.header.empty();
-      return this.contents.empty();
+      this.contents.empty();
+      return this;
     };
 
     return Page;
