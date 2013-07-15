@@ -6,6 +6,8 @@
   Bolk.MembersPageController = (function(_super) {
     __extends(MembersPageController, _super);
 
+    MembersPageController.CacheTime = 120;
+
     function MembersPageController(filter) {
       var _this = this;
 
@@ -29,8 +31,12 @@
       return blip.request.always(function(data) {
         _this.hideLoader();
         if (blip.result) {
-          locache.async.set('members-page', blip.result, 120);
-          return _this._parseMembers(blip.result);
+          data = blip.result;
+          if (typeof data === String) {
+            data = JSON.parse(data);
+          }
+          locache.async.set('members-page', data, MembersPageController.CacheTime);
+          return _this._parseMembers(data);
         }
       });
     };
@@ -38,9 +44,6 @@
     MembersPageController.prototype._parseMembers = function(data) {
       var person, _i, _len;
 
-      if (typeof data === String) {
-        data = JSON.parse(data);
-      }
       this.model = new Bolk.Persons();
       for (_i = 0, _len = data.length; _i < _len; _i++) {
         person = data[_i];

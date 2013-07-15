@@ -2,6 +2,8 @@
 #
 class Bolk.MembersPageController extends Bolk.PageController
 
+	@CacheTime = 120
+
 	# Creates the controller for the Members Listing Page
 	#
 	# @param filter [String] the filter, defines the request type
@@ -26,15 +28,16 @@ class Bolk.MembersPageController extends Bolk.PageController
 		blip.request.always( ( data ) =>
 			@hideLoader()
 			if blip.result
-				locache.async.set 'members-page', blip.result, 120
-				@_parseMembers blip.result 
+				data = blip.result
+				data = JSON.parse data if typeof data is String
+				locache.async.set 'members-page', data, MembersPageController.CacheTime
+				@_parseMembers data 
 		)
 		
 	#
 	#
 	#
 	_parseMembers: ( data ) ->
-		data = JSON.parse data if typeof data is String
 		@model = new Bolk.Persons()
 		for person in data
 			@model.add new Bolk.Person( _.extend( person, { complete : true } ) )
