@@ -58,7 +58,7 @@
         phone: this.model.get('phone'),
         phone_parents: this.model.get('phone_parents'),
         email: this.model.get('email'),
-        img: Bolk.BlipRequest.EndPoint + Bolk.BlipRequest.photo_src(this.model.get('uid'), 200, 200)
+        img: Bolk.BlipRequest.photo_src(this.model.get('uid'), 200, 200)
       };
       return $(this.el).html(_.template(this.getTemplate(), data));
     };

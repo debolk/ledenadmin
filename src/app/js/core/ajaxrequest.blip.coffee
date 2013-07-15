@@ -19,7 +19,10 @@ class Bolk.BlipRequest extends Bolk.AjaxRequest
 	#
 	#
 	@photo: ( uid, width, heigth ) ->
-		new BlipRequest BlipRequest.photo_src( uid, width, height )
+		new BlipRequest BlipRequest.photo_api( uid, width, height )
 		
 	@photo_src: ( uid, width, height ) ->
+		"{Bolk.BlipRequest.EndPoint}#{BlipRequest.photo_api( uid, width, heigth )}?access_token=#{document.router.session.token}"
+		
+	@photo_api: ( uid, width, height ) ->
 		"persons/#{uid}/photo/#{width}/#{height}"
