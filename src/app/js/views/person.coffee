@@ -52,6 +52,6 @@ class Bolk.PersonView extends Backbone.View
 			phone: @model.get 'phone'
 			phone_parents : @model.get 'phone_parents'
 			email: @model.get 'email'
-			img: Bolk.BlipRequest.EndPoint + Bolk.BlipRequest.photo_src( @model.get 'uid', 200, 200 )
+			img: Bolk.BlipRequest.EndPoint + Bolk.BlipRequest.photo_src( @model.get( 'uid' ), 200, 200 )
 		}
 		$( @el ).html _.template( @getTemplate(), data )
