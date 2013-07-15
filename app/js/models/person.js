@@ -20,13 +20,16 @@
       inauguration: null,
       resignation_letter: null,
       resignation: null,
+      initials: '',
       firstname: '',
       lastname: '',
       email: '',
-      mobile: '',
+      gender: '',
       phone: '',
+      mobile: '',
       phone_parents: '',
-      address: ''
+      address: '',
+      dateofbirth: ''
     };
 
     return Person;
