@@ -26,6 +26,10 @@
       return false;
     };
 
+    PageController.prototype.showLoader = function() {};
+
+    PageController.prototype.hideLoader = function() {};
+
     return PageController;
 
   })(Bolk.Controller);
