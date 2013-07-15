@@ -3,7 +3,7 @@
 	padding: 8px;
 	background: #efefef;
 	border-bottom: 2px solid #ddd;
-	margin-bottom: 16px;
+	margin: 0;
 }
 
 #branding, #search, #logout {
@@ -41,8 +41,8 @@
 }
 
 #content {
-	margin-top: 1px solid #bbb;
-	padding: 8px;
+	border-top: 1px solid #bbb;
+	padding: 16px;
 }
 
 ul.members {
@@ -53,7 +53,7 @@ ul.members {
 
 ul.members li {
 	display: inline-block;
-	margin-right: 5px;
+	margin: 0 5px 5px 0;
 	width: 150px;
 	height: 150px;
 }
