@@ -2,10 +2,17 @@
 (function() {
   Bolk.Session = (function() {
     function Session() {
-      this.token = locache.get('token');
+      this.token = locache.get('session_token');
+      Object.defineProperty(this, 'isLoggedIn', {
+        get: function() {
+          return this.token != null;
+        }
+      });
     }
 
     Session.prototype.oauth = function(cid, secret, redirect) {
+      var state;
+
       if (cid == null) {
         cid = Bolk.clientId;
       }
@@ -13,21 +20,25 @@
         secret = Bolk.clientSecret;
       }
       if (redirect == null) {
-        redirect = "http://ledenadmin.i.bolkhuis.nl/#/";
+        redirect = "https://ledenadmin.i.bolkhuis.nl/";
       }
-      return window.location = "https://login.i.bolkhuis.com/" + ("authorize?client_id=" + cid + "&client_pass=" + secret + "&redirect_uri=" + redirect);
+      state = Math.random();
+      return locache.async.set('session_token_state', state).finished(function() {
+        return window.location = "https://login.i.bolkhuis.nl/" + "authorize?response_type=code" + ("&state=" + state) + ("&client_id=" + cid) + ("&client_pass=" + secret) + ("&redirect_uri=" + redirect);
+      });
     };
 
-    Session.prototype.login = function(code) {
+    Session.prototype.login = function(code, state) {
       var _this = this;
 
       return Bolk.OAuthRequest.getAccessToken(code).execute().done(function(data) {
-        return _this.token = data;
+        _this.token = data;
+        return locache.async.set('session_token', data, 3500);
       });
     };
 
     Session.prototype.kill = function() {
-      locache.remove('token');
+      locache.remove('session_token');
       return locache.flush();
     };
 
