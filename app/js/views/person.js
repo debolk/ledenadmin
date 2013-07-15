@@ -13,7 +13,8 @@
     }
 
     PersonView.prototype.initialize = function() {
-      return _.bindAll(this);
+      _.bindAll(this);
+      return this.render();
     };
 
     PersonView.prototype.getTemplate = function() {

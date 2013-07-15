@@ -6,6 +6,7 @@ class Bolk.PersonView extends Backbone.View
 	#
 	initialize: ->
 		_.bindAll @
+		@render()
 		
 	# Gets the person view template
 	#

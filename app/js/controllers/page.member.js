@@ -6,43 +6,52 @@
   Bolk.MemberPageController = (function(_super) {
     __extends(MemberPageController, _super);
 
+    MemberPageController.CacheTime = 120;
+
     function MemberPageController(uid) {
       var _this = this;
 
       this.uid = uid;
-      MemberPageController.__super__.constructor.call(this, new Bolk.MemberPage('member-' + this.id));
-      locache.async.get('member-page').finished(function(data) {
+      MemberPageController.__super__.constructor.call(this, new Bolk.MemberPage('member-' + this.uid));
+      locache.async.get('member-page-' + this.uid).finished(function(data) {
         if (!data) {
           return _this._fetchMember();
         } else {
-          return _this._displayMember(data);
+          return _this._parseMember(data);
         }
       });
     }
 
     MemberPageController.prototype._fetchMember = function() {
-      var blip, el, v,
+      var blip,
         _this = this;
 
       blip = new Bolk.BlipRequest("persons/" + this.uid);
-      blip.request.done(function(blipdata) {
+      return blip.request.done(function(blipdata) {
         var operculum;
 
-        operculum = new Bolk.OperculumRequest("persons/" + _this.uid);
+        if (typeof blipdata === String) {
+          blipdata = JSON.parse(blipdata);
+        }
+        operculum = new Bolk.OperculumRequest("person/" + _this.uid);
         return operculum.request.done(function(operculumdata) {
           var data;
 
-          console.log(data = new Bolk.Person(_.extend(operculumdata, blipdata, {
-            completed: true
-          })));
-          return _this._displayMember(data);
+          if (typeof operculumdata === String) {
+            operculumdata = JSON.parse(operculumdata);
+          }
+          data = _.extend(operculumdata, blipdata, {
+            complete: true
+          });
+          locache.async.set('member-page-' + _this.uid, data, MemberPageController.CacheTime);
+          return _this._parseMember(data);
         });
       });
-      this.view.contents.append((el = $('<form class="form-horizontal"></form>')));
-      return v = new Bolk.PersonView({
-        el: el,
-        model: new Bolk.Person()
-      }).render();
+    };
+
+    MemberPageController.prototype._parseMember = function(data) {
+      this.model = new Bolk.Person(data);
+      return this.view.display(this.model);
     };
 
     MemberPageController.prototype._displayMember = function(model) {};
