@@ -23,12 +23,12 @@
       return this.result = data;
     };
 
-    BlipRequest.photo = function(uid, width, heigth) {
+    BlipRequest.photo = function(uid, width, height) {
       return new BlipRequest(BlipRequest.photo_api(uid, width, height));
     };
 
     BlipRequest.photo_src = function(uid, width, height) {
-      return "{Bolk.BlipRequest.EndPoint}" + (BlipRequest.photo_api(uid, width, heigth)) + "?access_token=" + document.router.session.token;
+      return "{Bolk.BlipRequest.EndPoint}" + (BlipRequest.photo_api(uid, width, height)) + "?access_token=" + document.router.session.token;
     };
 
     BlipRequest.photo_api = function(uid, width, height) {
