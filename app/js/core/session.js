@@ -53,12 +53,13 @@
       return promise.promise();
     };
 
-    Session.prototype.unload = function() {};
+    Session.prototype.unload = function() {
+      locache.remove('session_token');
+      return locache.remove('session_refresh_token');
+    };
 
     Session.prototype.kill = function() {
       this.unload();
-      locache.remove('session_token');
-      locache.remove('session_refresh_token');
       return locache.flush();
     };
 
