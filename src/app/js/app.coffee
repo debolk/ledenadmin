@@ -96,7 +96,7 @@ class Bolk.AppRouter extends Backbone.Router
 	get: ( name ) ->
 		name = name.replace( /[\[]/, "\\\[" ).replace( /[\]]/, "\\\]" )
 		expression = new RegExp( "[\\?&]#{name}=([^&#]*)" )
-		if results = regex.exec( location.search ) and results?
+		if results = expression.exec( location.search ) and results?
 			return decodeURIComponent( results[ 1 ].replace( /\+/g, " ") )
 		return undefined
 			

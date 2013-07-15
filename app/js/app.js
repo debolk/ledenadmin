@@ -121,7 +121,7 @@
 
       name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
       expression = new RegExp("[\\?&]" + name + "=([^&#]*)");
-      if (results = regex.exec(location.search) && (results != null)) {
+      if (results = expression.exec(location.search) && (results != null)) {
         return decodeURIComponent(results[1].replace(/\+/g, " "));
       }
       return void 0;
