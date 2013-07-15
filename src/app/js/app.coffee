@@ -68,10 +68,7 @@ class Bolk.AppRouter extends Backbone.Router
 	getToken: ( code, state ) ->
 		console.debug "Logging in " + state + " vs " + locache.get 'session_token_state'
 		@session.login( code, state ).always( =>
-			window.location = window.location.protocol + "//" + 
-				window.location.host + 
-				window.location.pathname + 
-				window.location.hash
+			@redirectWithoutSearch()
 		)
 	
 	# Logs out
@@ -91,15 +88,30 @@ class Bolk.AppRouter extends Backbone.Router
 	# Ensures a user to be logged in
 	#
 	ensureSession: () ->
+		
+		# Check if logged in
 		if @session.isLoggedIn
+			if ( code = @get( 'code' ) and ( state = @get( 'state' ) ) )
+				@redirectWithoutSearch()
+				return false
 			return true
+			
+		# Check if code avilable
 		if ( code = @get( 'code' ) ) and ( state = @get( 'state' ) )
 			@getToken code, state
 			return false
-		unless @session.isLoggedIn
-			@session.oauth()
-			return false
-		return true
+			
+		# Try to find a code
+		@session.oauth()
+		return false
+		
+	#
+	#
+	redirectWithoutSearch: ->
+		window.location = window.location.protocol + "//" + 
+			window.location.host + 
+			window.location.pathname + 
+			window.location.hash
 		
 	#
 	#

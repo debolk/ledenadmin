@@ -86,7 +86,7 @@
 
       console.debug("Logging in " + state + " vs " + locache.get('session_token_state'));
       return this.session.login(code, state).always(function() {
-        return window.location = window.location.protocol + "//" + window.location.host + window.location.pathname + window.location.hash;
+        return _this.redirectWithoutSearch();
       });
     };
 
@@ -107,17 +107,22 @@
       var code, state;
 
       if (this.session.isLoggedIn) {
+        if ((code = this.get('code') && (state = this.get('state')))) {
+          this.redirectWithoutSearch();
+          return false;
+        }
         return true;
       }
       if ((code = this.get('code')) && (state = this.get('state'))) {
         this.getToken(code, state);
         return false;
       }
-      if (!this.session.isLoggedIn) {
-        this.session.oauth();
-        return false;
-      }
-      return true;
+      this.session.oauth();
+      return false;
+    };
+
+    AppRouter.prototype.redirectWithoutSearch = function() {
+      return window.location = window.location.protocol + "//" + window.location.host + window.location.pathname + window.location.hash;
     };
 
     AppRouter.prototype.get = function(name) {
