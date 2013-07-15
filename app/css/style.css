@@ -41,8 +41,8 @@
 }
 
 #content {
-	border-top: 1px solid #bbb;
-	padding: 16px;
+	border-top: 2px solid #bbb;
+	padding: 8px;
 }
 
 ul.members {
@@ -54,8 +54,10 @@ ul.members {
 ul.members li {
 	display: inline-block;
 	margin: 0 5px 5px 0;
+	padding: 5px;
 	width: 150px;
 	height: 150px;
+	text-align: center;
 }
 
 ul.members .box {
@@ -63,7 +65,6 @@ ul.members .box {
 	margin: 0;
 	height: 150px;
 	overflow: auto;
-	text-align: center;
 }
 
 ul.members a {
@@ -73,5 +74,8 @@ ul.members a {
 ul.members .title {
 	width: 150px;
 	height: 50px;
-	text-align: center;
+	display: block;
+	background: #eee;
+	border: 1px solid #ddd;
+	border-top: none;
 }
