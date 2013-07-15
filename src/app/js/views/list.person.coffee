@@ -11,11 +11,11 @@ class Bolk.PersonListView extends Backbone.View
 		@items = {}
 		
 		@model.forEach ( person ) =>
-			@items[ person.get( 'uid' ) ? person.cid ] = new Bolk.PersonItemView( { el: @model.el, model: person } )
-			@$el.append @items[ person.get( 'uid' ) ? person.cid ].$el
+			@items[ person.get( 'uid' ) ? person.cid ] = new Bolk.PersonItemView( { el: @$list, model: person } )
+			@$list.append @items[ person.get( 'uid' ) ? person.cid ].$el
 	  
 	#
 	#
 	render: ->
-		$( @el ).append '<ul class="members"></ul>'
+		@$el.append ( @$list = $ '<ul class="members"></ul>' )
 		return this

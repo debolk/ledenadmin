@@ -22,15 +22,15 @@
         var _ref1, _ref2;
 
         _this.items[(_ref1 = person.get('uid')) != null ? _ref1 : person.cid] = new Bolk.PersonItemView({
-          el: _this.model.el,
+          el: _this.$list,
           model: person
         });
-        return _this.$el.append(_this.items[(_ref2 = person.get('uid')) != null ? _ref2 : person.cid].$el);
+        return _this.$list.append(_this.items[(_ref2 = person.get('uid')) != null ? _ref2 : person.cid].$el);
       });
     };
 
     PersonListView.prototype.render = function() {
-      $(this.el).append('<ul class="members"></ul>');
+      this.$el.append((this.$list = $('<ul class="members"></ul>')));
       return this;
     };
 
