@@ -34,22 +34,16 @@
           blipdata = JSON.parse(blipdata);
         }
         operculum = new Bolk.OperculumRequest("person/" + _this.uid);
-        return operculum.request.done(function(operculumdata) {
+        return operculum.request.always(function(operculumdata) {
           var data;
 
+          if ((operculumdata.error != null) && (operculumdata.statusText != null) && operculumdata === "error") {
+            operculumdata = {};
+          }
           if (typeof operculumdata === String) {
             operculumdata = JSON.parse(operculumdata);
           }
           data = _.extend(operculumdata, blipdata, {
-            complete: true
-          });
-          locache.async.set('member-page-' + _this.uid, data, MemberPageController.CacheTime);
-          return _this._parseMember(data);
-        }).fail(function(error) {
-          var data;
-
-          console.log(error);
-          data = _.extend(blipdata, {
             complete: true
           });
           locache.async.set('member-page-' + _this.uid, data, MemberPageController.CacheTime);

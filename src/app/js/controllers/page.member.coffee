@@ -29,15 +29,11 @@ class Bolk.MemberPageController extends Bolk.PageController
 			
 			# merge with operculum
 			operculum = new Bolk.OperculumRequest "person/#{@uid}"
-			operculum.request.done( ( operculumdata ) =>
+			operculum.request.always( ( operculumdata ) =>
+				if operculumdata.error? and operculumdata.statusText? and operculumdata is "error"
+					operculumdata = {}
 				operculumdata = JSON.parse operculumdata if typeof operculumdata is String
 				data = _.extend( operculumdata, blipdata, { complete : true } )
-				locache.async.set 'member-page-' + @uid, data, MemberPageController.CacheTime
-				@_parseMember data
-				
-			).fail( ( error ) =>
-				console.log error
-				data = _.extend( blipdata, { complete : true } )
 				locache.async.set 'member-page-' + @uid, data, MemberPageController.CacheTime
 				@_parseMember data
 			)
