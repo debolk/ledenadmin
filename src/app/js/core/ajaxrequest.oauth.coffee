@@ -1,6 +1,6 @@
 class Bolk.OAuthRequest extends Bolk.AjaxRequest
 	
-	@EndPoint = '//login.i.bolkhuis.nl/'
+	@EndPoint = 'https://#{Bolk.ClientId}:#{Bolk.ClientSecret}@login.i.bolkhuis.nl/'
 	
 	constructor: ->
 		Object.defineProperty( @, 'endpoint', get: -> OAuthRequest.EndPoint )
