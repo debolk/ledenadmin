@@ -33,7 +33,7 @@ class Bolk.AppRouter extends Backbone.Router
 	members: ( filter = 'actief' ) ->
 		console.debug 'Routing members - ' + filter
 		@controller?.kill()
-		@ensureSession()
+		return unless @ensureSession()
 		@controller = new Bolk.MembersPageController filter
 	
 	# Routes the member page
@@ -43,7 +43,7 @@ class Bolk.AppRouter extends Backbone.Router
 	member: ( id ) ->
 		console.debug 'Routing member:' + id
 		@controller?.kill()
-		@ensureSession()
+		return unless @ensureSession()
 		@controller = new Bolk.MemberPageController id
 		
 	# Routes the search page
@@ -53,7 +53,7 @@ class Bolk.AppRouter extends Backbone.Router
 	search: ( action = null ) ->
 		console.debug "Routing search: #{ if action is 'filter' then 'advanced' else 'normal'}"
 		@controller?.kill()
-		@ensureSession()
+		return unless @ensureSession()
 		@controller = new Bolk.SearchPageController action is 'filter'
 	
 	# Routes to the oauth login page
@@ -82,6 +82,21 @@ class Bolk.AppRouter extends Backbone.Router
 	# Ensures a user to be logged in
 	#
 	ensureSession: () ->
+		if code = @get( 'code' ) and state = @get( 'state' )
+			@getToken code, state
+			return false
 		unless @session.isLoggedIn
 			@session.oauth()
+			return false
+		return true
+		
+	#
+	#
+	#
+	get: ( name ) ->
+		name = name.replace( /[\[]/, "\\\[" ).replace( /[\]]/, "\\\]" )
+		expression = new RegExp( "[\\?&]#{name}=([^&#]*)" )
+		if results = regex.exec( location.search ) and results?
+			return decodeURIComponent( results[ 1 ].replace( /\+/g, " ") )
+		return undefined
 			

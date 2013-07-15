@@ -42,7 +42,9 @@
       if ((_ref1 = this.controller) != null) {
         _ref1.kill();
       }
-      this.ensureSession();
+      if (!this.ensureSession()) {
+        return;
+      }
       return this.controller = new Bolk.MembersPageController(filter);
     };
 
@@ -53,7 +55,9 @@
       if ((_ref1 = this.controller) != null) {
         _ref1.kill();
       }
-      this.ensureSession();
+      if (!this.ensureSession()) {
+        return;
+      }
       return this.controller = new Bolk.MemberPageController(id);
     };
 
@@ -67,7 +71,9 @@
       if ((_ref1 = this.controller) != null) {
         _ref1.kill();
       }
-      this.ensureSession();
+      if (!this.ensureSession()) {
+        return;
+      }
       return this.controller = new Bolk.SearchPageController(action === 'filter');
     };
 
@@ -97,9 +103,28 @@
     };
 
     AppRouter.prototype.ensureSession = function() {
-      if (!this.session.isLoggedIn) {
-        return this.session.oauth();
+      var code, state;
+
+      if (code = this.get('code') && (state = this.get('state'))) {
+        this.getToken(code, state);
+        return false;
       }
+      if (!this.session.isLoggedIn) {
+        this.session.oauth();
+        return false;
+      }
+      return true;
+    };
+
+    AppRouter.prototype.get = function(name) {
+      var expression, results;
+
+      name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+      expression = new RegExp("[\\?&]" + name + "=([^&#]*)");
+      if (results = regex.exec(location.search) && (results != null)) {
+        return decodeURIComponent(results[1].replace(/\+/g, " "));
+      }
+      return void 0;
     };
 
     return AppRouter;
