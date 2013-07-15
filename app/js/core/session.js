@@ -40,12 +40,13 @@
           return false;
         }
         return Bolk.OAuthRequest.getAccessToken(code).request.done(function(data) {
-          console.info('token is: ', data);
-          _this.token = data;
-          locache.async.set('session_token', data, 3500);
+          console.info("token data: " + (JSON.stringify(data)));
+          _this.token = data.access_token;
+          locache.set('session_token', data.access_token, data.expires_in - 60);
+          locache.set('session_refresh_token', data.refresh_token, data.expires_in - 60);
           return promise.resolve(_this.token);
         }).fail(function(error) {
-          return promise.reject("when getting token: " + error);
+          return promise.reject(error);
         });
       });
       return promise.promise();
@@ -53,6 +54,7 @@
 
     Session.prototype.kill = function() {
       locache.remove('session_token');
+      locache.remove('session_refresh_token');
       return locache.flush();
     };
 

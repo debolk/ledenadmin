@@ -44,13 +44,13 @@ class Bolk.Session
 				Bolk.OAuthRequest.getAccessToken( code )
 					.request
 					.done( ( data ) =>
-						console.info 'token is: ', data
-						@token = data 
-						locache.async.set 'session_token', data, 3500
-						
+						console.info "token data: #{JSON.stringify(data)}"
+						@token = data.access_token 
+						locache.set 'session_token', data.access_token, data.expires_in - 60
+						locache.set 'session_refresh_token', data.refresh_token, data.expires_in - 60
 						promise.resolve @token
 					).fail( ( error ) =>
-						promise.reject "when getting token: #{error}"
+						promise.reject error
 					)
 			)
 		return promise.promise()
@@ -59,5 +59,6 @@ class Bolk.Session
 	#
 	kill: () ->
 		locache.remove 'session_token'
+		locache.remove 'session_refresh_token'
 		locache.flush()
 	
