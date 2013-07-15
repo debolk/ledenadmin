@@ -21,7 +21,8 @@
       'search': 'search',
       'search/:action': 'search',
       'logout': 'logout',
-      '?code=:code': 'login'
+      '?code=:code&state=:state': 'getToken',
+      'login': 'oauth'
     };
 
     AppRouter.prototype.initialize = function() {
@@ -41,6 +42,7 @@
       if ((_ref1 = this.controller) != null) {
         _ref1.kill();
       }
+      this.ensureSession();
       return this.controller = new Bolk.MembersPageController(filter);
     };
 
@@ -51,6 +53,7 @@
       if ((_ref1 = this.controller) != null) {
         _ref1.kill();
       }
+      this.ensureSession();
       return this.controller = new Bolk.MemberPageController(id);
     };
 
@@ -64,19 +67,39 @@
       if ((_ref1 = this.controller) != null) {
         _ref1.kill();
       }
+      this.ensureSession();
       return this.controller = new Bolk.SearchPageController(action === 'filter');
     };
 
-    AppRouter.prototype.login = function(code) {
-      return this.session.login(code, this.session.token);
+    AppRouter.prototype.oauth = function() {
+      return this.session.oauth();
+    };
+
+    AppRouter.prototype.getToken = function(code, state) {
+      var _this = this;
+
+      console.debug("Logging in " + state(" vs " + locache.get('session_token_state')));
+      return this.session.login(code, state).done(function() {
+        return _this.navigate('//home', {
+          trigger: true,
+          replace: true
+        });
+      });
     };
 
     AppRouter.prototype.logout = function() {
+      console.debug("Logging out");
       this.session.kill();
-      return this.navigate('/home', {
+      return this.navigate('//home', {
         trigger: true,
         replace: true
       });
+    };
+
+    AppRouter.prototype.ensureSession = function() {
+      if (!this.session.isLoggedIn) {
+        return this.session.oauth();
+      }
     };
 
     return AppRouter;

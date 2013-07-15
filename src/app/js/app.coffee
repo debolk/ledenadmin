@@ -13,7 +13,8 @@ class Bolk.AppRouter extends Backbone.Router
 		'search'			: 'search'
 		'search/:action'	: 'search'
 		'logout'			: 'logout'
-		'?code=:code'		: 'login'
+		'?code=:code&state=:state' : 'getToken'
+		'login'			: 'oauth'
 	}
 	
 	# Initializes the router
@@ -24,17 +25,15 @@ class Bolk.AppRouter extends Backbone.Router
 		Backbone.history.start()
 		#Backbone.history.start({pushState: true, root: "/public/search/"}
 		console.debug 'Finished initializing router'
-		
-		# TODO: check for session
-		# if needed @session.oauth()
-		
+
 	# Routes the members pages
 	#
 	# @param filter [String] the filter to use for the members
 	#
-	members: ( filter = 'actief' ) ->	
+	members: ( filter = 'actief' ) ->
 		console.debug 'Routing members - ' + filter
 		@controller?.kill()
+		@ensureSession()
 		@controller = new Bolk.MembersPageController filter
 	
 	# Routes the member page
@@ -44,27 +43,45 @@ class Bolk.AppRouter extends Backbone.Router
 	member: ( id ) ->
 		console.debug 'Routing member:' + id
 		@controller?.kill()
+		@ensureSession()
 		@controller = new Bolk.MemberPageController id
 		
+	# Routes the search page
 	#
-	#
-	#
+	# @param action [String] the action for the search page
 	#
 	search: ( action = null ) ->
 		console.debug "Routing search: #{ if action is 'filter' then 'advanced' else 'normal'}"
 		@controller?.kill()
+		@ensureSession()
 		@controller = new Bolk.SearchPageController action is 'filter'
 	
+	# Routes to the oauth login page
 	#
+	oauth: ->
+		@session.oauth()
+
+	# Logs in after receiving a code
+	# 
+	# @param code [String] the authentication code
 	#
-	#
-	login: ( code ) ->
-		@session.login code, @session.token
+	getToken: ( code, state ) ->
+		console.debug "Logging in " + state " vs " + locache.get 'session_token_state'
+		@session.login( code, state ).done( =>
+			@navigate '//home', { trigger: true, replace: true }
+		)
 	
-	#
+	# Logs out
 	#
 	#
 	logout: ->
+		console.debug "Logging out"
 		@session.kill()
-		@navigate '/home', { trigger: true, replace: true }
+		@navigate '//home', { trigger: true, replace: true }
+		
+	# Ensures a user to be logged in
+	#
+	ensureSession: () ->
+		unless @session.isLoggedIn
+			@session.oauth()
 			
