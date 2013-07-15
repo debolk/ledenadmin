@@ -25,7 +25,8 @@
         grant_type: 'authorization_code',
         code: code,
         client_id: Bolk.clientId,
-        client_pass: Bolk.clientSecret
+        client_pass: Bolk.clientSecret,
+        redirect_uri: "https://ledenadmin.i.bolkhuis.nl/"
       };
       return new OAuthRequest('token', params, 'post');
     };
