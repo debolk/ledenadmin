@@ -7,7 +7,7 @@
   Bolk.OAuthRequest = (function(_super) {
     __extends(OAuthRequest, _super);
 
-    OAuthRequest.EndPoint = 'https://#{Bolk.ClientId}:#{Bolk.ClientSecret}@login.i.bolkhuis.nl/';
+    OAuthRequest.EndPoint = "https://" + Bolk.clientId + ":" + Bolk.clientSecret + "@login.i.bolkhuis.nl/";
 
     function OAuthRequest() {
       Object.defineProperty(this, 'endpoint', {
@@ -25,7 +25,7 @@
         grant_type: 'authorization_code',
         code: code
       };
-      return new OAuthRequest('post', params);
+      return new OAuthRequest('token', params, 'post');
     };
 
     return OAuthRequest;
