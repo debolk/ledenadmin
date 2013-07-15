@@ -84,7 +84,7 @@
     AppRouter.prototype.getToken = function(code, state) {
       var _this = this;
 
-      console.debug("Logging in " + state(" vs " + locache.get('session_token_state')));
+      console.debug("Logging in " + state + " vs " + locache.get('session_token_state'));
       return this.session.login(code, state).done(function() {
         return _this.navigate('//home', {
           trigger: true,
@@ -120,9 +120,12 @@
       var expression, results;
 
       name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+      console.log(name);
       expression = new RegExp("[\\?&]" + name + "=([^&#]*)");
-      if (results = expression.exec(location.search) && (results != null)) {
-        return decodeURIComponent(results[1].replace(/\+/g, " "));
+      if (results = expression.exec(location.search)) {
+        if (results[1] != null) {
+          return decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
       }
       return void 0;
     };

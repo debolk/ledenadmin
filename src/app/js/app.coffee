@@ -66,7 +66,7 @@ class Bolk.AppRouter extends Backbone.Router
 	# @param code [String] the authentication code
 	#
 	getToken: ( code, state ) ->
-		console.debug "Logging in " + state " vs " + locache.get 'session_token_state'
+		console.debug "Logging in " + state + " vs " + locache.get 'session_token_state'
 		@session.login( code, state ).done( =>
 			@navigate '//home', { trigger: true, replace: true }
 		)
@@ -95,8 +95,10 @@ class Bolk.AppRouter extends Backbone.Router
 	#
 	get: ( name ) ->
 		name = name.replace( /[\[]/, "\\\[" ).replace( /[\]]/, "\\\]" )
+		console.log name
 		expression = new RegExp( "[\\?&]#{name}=([^&#]*)" )
-		if results = expression.exec( location.search ) and results?
-			return decodeURIComponent( results[ 1 ].replace( /\+/g, " ") )
+		if results = expression.exec( location.search )
+			if results[ 1 ]?
+				return decodeURIComponent( results[ 1 ].replace( /\+/g, " ") )
 		return undefined
 			
