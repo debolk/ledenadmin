@@ -20,26 +20,7 @@
     }
 
     BlipRequest.prototype.onSuccess = function(data) {
-      var person, _i, _len, _results;
-
-      switch (this.api) {
-        case 'members':
-          if (typeof data === String) {
-            data = JSON.parse(data);
-          }
-          this.result = new Bolk.Persons();
-          _results = [];
-          for (_i = 0, _len = data.length; _i < _len; _i++) {
-            person = data[_i];
-            _results.push(this.result.add(new Bolk.Person(_.extend(person, {
-              complete: true
-            }))));
-          }
-          return _results;
-          break;
-        default:
-          return this.result = data;
-      }
+      return this.result = data;
     };
 
     return BlipRequest;

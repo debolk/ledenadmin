@@ -9,8 +9,7 @@ class Bolk.Page extends Bolk.ViewCollection
 	#
 	constructor: ( title ) ->
 		super 'body'
-		@headerTemplate = 
-		
+
 		@header = @container.find '#masthead'
 		@contents = @container.find '#content'
 		@footer = @container.find '#mastfoot'
@@ -22,7 +21,7 @@ class Bolk.Page extends Bolk.ViewCollection
 	#
 	_getHeaderTemplate: () ->
 		'<div id="branding">
-			<a href="#<%= route_home %>" data-route="<%= route_home %>">
+			<a name="home" data-route="<%= route_home %>">
 				<img src="http://placehold.it/100x100.png">
 			</a>
 			<h1>Whiting</h1>
@@ -32,12 +31,12 @@ class Bolk.Page extends Bolk.ViewCollection
 				<input type="text" class="input-big" placeholder="Search...">
 			</div>
 			<div class="actions">
-				<a href="#/search/filter" data-route="/search/filter">Advanced filter</a> |
-				<a href="#/members/new" data-route="/members/new">Add member</a>
+				<a data-route="/search/filter">Advanced filter</a> |
+				<a data-route="/members/new">Add member</a>
 			</div>
 		</form>
 		<div id="logout">
-			<a href="#/logout" data-route="/logout">
+			<a data-route="/logout">
 				<img src="http://placehold.it/100x100.png&text=logout">
 			</a>
 		</div>'
@@ -66,4 +65,9 @@ class Bolk.Page extends Bolk.ViewCollection
 		@header.empty()
 		@contents.empty()
 		return this
+		
+			
+	showLoader: () ->
+		
+	hideLoader: () ->
 			

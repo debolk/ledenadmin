@@ -2,11 +2,15 @@
 #
 class Bolk.PersonView extends Backbone.View
 	
-	#
+	# Initializes a person view
 	#
 	initialize: ->
 		_.bindAll @
 		
+	# Gets the person view template
+	#
+	# @return [String] the template
+	#
 	getTemplate: ->
 		'<header>
 			<div class="control-group">
@@ -36,7 +40,7 @@ class Bolk.PersonView extends Backbone.View
 		</div>
 		<!-- etc -->'
 		
-	#
+	# Renders the person
 	#
 	render: ->
 		data = {

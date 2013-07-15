@@ -6,5 +6,8 @@ class Bolk.MemberPage extends Bolk.Page
 	#
 	# @param title [String] the title of the page
 	#
-	constructor: ( title = 'Members', edit = false ) ->
+	constructor: ( title = 'Member', edit = false ) ->
 		super title
+
+	
+	

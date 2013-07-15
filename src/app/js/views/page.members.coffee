@@ -8,3 +8,7 @@ class Bolk.MembersPage extends Bolk.Page
 	#
 	constructor: ( title = 'Members' ) ->
 		super title
+	
+	display: ( list ) ->
+		@collectionView?.remove()
+		@collectionView = new Bolk.PersonListView( { el: @contents, model: list } )

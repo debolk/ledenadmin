@@ -13,11 +13,4 @@ class Bolk.BlipRequest extends Bolk.AjaxRequest
 	#
 	#
 	onSuccess: ( data ) =>
-		switch @api
-			when 'members'
-				data = JSON.parse data if typeof data is String
-				@result = new Bolk.Persons()
-				for person in data
-					@result.add new Bolk.Person( _.extend( person, { complete : true } ) )
-			else
-				@result = data
+		@result = data

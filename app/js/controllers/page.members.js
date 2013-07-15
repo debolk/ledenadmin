@@ -15,7 +15,7 @@
         if (!data) {
           return _this._fetchMembers();
         } else {
-          return _this._displayMembers(data);
+          return _this._parseMembers(data);
         }
       });
     }
@@ -24,16 +24,32 @@
       var blip,
         _this = this;
 
+      this.showLoader();
       blip = new Bolk.BlipRequest('members');
       return blip.request.always(function(data) {
-        console.log(blip.result);
+        _this.hideLoader();
         if (blip.result) {
-          return _displayMembers(blip.result);
+          locache.async.set('members-page', blip.result, 120);
+          return _this._parseMembers(blip.result);
         }
       });
     };
 
-    MembersPageController.prototype._displayMembers = function(collection) {};
+    MembersPageController.prototype._parseMembers = function(data) {
+      var person, _i, _len;
+
+      if (typeof data === String) {
+        data = JSON.parse(data);
+      }
+      this.model = new Bolk.Persons();
+      for (_i = 0, _len = data.length; _i < _len; _i++) {
+        person = data[_i];
+        this.model.add(new Bolk.Person(_.extend(person, {
+          complete: true
+        })));
+      }
+      return this.view.display(this.model);
+    };
 
     MembersPageController.prototype._titlefor = function(filter) {
       switch (filter) {

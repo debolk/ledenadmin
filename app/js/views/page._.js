@@ -8,7 +8,7 @@
 
     function Page(title) {
       Page.__super__.constructor.call(this, 'body');
-      this.headerTemplate = this.header = this.container.find('#masthead');
+      this.header = this.container.find('#masthead');
       this.contents = this.container.find('#content');
       this.footer = this.container.find('#mastfoot');
       this._fillHeader(title);
@@ -16,7 +16,7 @@
 
     Page.prototype._getHeaderTemplate = function() {
       return '<div id="branding">\
-			<a href="#<%= route_home %>" data-route="<%= route_home %>">\
+			<a name="home" data-route="<%= route_home %>">\
 				<img src="http://placehold.it/100x100.png">\
 			</a>\
 			<h1>Whiting</h1>\
@@ -26,12 +26,12 @@
 				<input type="text" class="input-big" placeholder="Search...">\
 			</div>\
 			<div class="actions">\
-				<a href="#/search/filter" data-route="/search/filter">Advanced filter</a> |\
-				<a href="#/members/new" data-route="/members/new">Add member</a>\
+				<a data-route="/search/filter">Advanced filter</a> |\
+				<a data-route="/members/new">Add member</a>\
 			</div>\
 		</form>\
 		<div id="logout">\
-			<a href="#/logout" data-route="/logout">\
+			<a data-route="/logout">\
 				<img src="http://placehold.it/100x100.png&text=logout">\
 			</a>\
 		</div>';
@@ -61,6 +61,10 @@
       this.contents.empty();
       return this;
     };
+
+    Page.prototype.showLoader = function() {};
+
+    Page.prototype.hideLoader = function() {};
 
     return Page;
 

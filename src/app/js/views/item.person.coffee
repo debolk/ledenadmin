@@ -10,8 +10,10 @@ class Bolk.PersonItemView extends Backbone.View
 	#
 	initialize: ->
 		_.bindAll @
+		@render()
 		
 	#
 	#
 	render: ->
-      $( @el ).html "<a href='#{ @model.get 'href' }'>#{ @model.get 'name' }</a>"
+		@$el.html "<a data-route='/member/#{ @model.get 'uid' }'>#{ @model.get 'name' }</a>"
+		return this

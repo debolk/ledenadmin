@@ -13,6 +13,18 @@
       MembersPage.__super__.constructor.call(this, title);
     }
 
+    MembersPage.prototype.display = function(list) {
+      var _ref;
+
+      if ((_ref = this.collectionView) != null) {
+        _ref.remove();
+      }
+      return this.collectionView = new Bolk.PersonListView({
+        el: this.contents,
+        model: list
+      });
+    };
+
     return MembersPage;
 
   })(Bolk.Page);

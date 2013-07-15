@@ -15,11 +15,13 @@
     PersonItemView.prototype.tagName = 'li';
 
     PersonItemView.prototype.initialize = function() {
-      return _.bindAll(this);
+      _.bindAll(this);
+      return this.render();
     };
 
     PersonItemView.prototype.render = function() {
-      return $(this.el).html("<a href='" + (this.model.get('href')) + "'>" + (this.model.get('name')) + "</a>");
+      this.$el.html("<a data-route='/member/" + (this.model.get('uid')) + "'>" + (this.model.get('name')) + "</a>");
+      return this;
     };
 
     return PersonItemView;

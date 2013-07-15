@@ -8,7 +8,7 @@
 
     function MemberPage(title, edit) {
       if (title == null) {
-        title = 'Members';
+        title = 'Member';
       }
       if (edit == null) {
         edit = false;

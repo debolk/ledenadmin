@@ -2,18 +2,20 @@
 #
 class Bolk.PersonListView extends Backbone.View
 
-	constructor: ( @el ) ->
-		super
-    
 	#
 	#
-    initialize: ->
-      _.bindAll @
-      
-      @collection = new Bolk.Persons
-      @render()
-    
+	initialize: ->
+		_.bindAll @
+		@render()
+		
+		@items = {}
+		
+		@model.forEach ( person ) =>
+			@items[ person.get( 'uid' ) ? person.cid ] = new Bolk.PersonItemView( { el: @model.el, model: person } )
+			@$el.append @items[ person.get( 'uid' ) ? person.cid ].$el
+	  
 	#
 	#
-    render: ->
-      $( @el ).append '<ul></ul>'
+	render: ->
+		$( @el ).append '<ul class="members"></ul>'
+		return this
