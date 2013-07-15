@@ -59,10 +59,11 @@ ul.members li {
 }
 
 ul.members .box {
-	width: 100px;
-	margin: 0 25px 0 25px;
-	height: 100px;
+	width: 150px;
+	margin: 0;
+	height: 150px;
 	overflow: auto;
+	text-align: center;
 }
 
 ul.members a {
@@ -72,4 +73,5 @@ ul.members a {
 ul.members .title {
 	width: 150px;
 	height: 50px;
+	text-align: center;
 }

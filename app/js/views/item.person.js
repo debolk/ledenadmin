@@ -20,7 +20,7 @@
     };
 
     PersonItemView.prototype.render = function() {
-      this.$el.html("			<div class='box'>				<a data-route='/member/" + (this.model.get('uid')) + "'>					<img src='" + (Bolk.BlipRequest.photo_src(this.model.get('uid'), 100, 100)) + "' title='" + (this.model.get('name')) + "'/>				</a>			</div>			<a class='title' data-route='/member/" + (this.model.get('uid')) + "'>" + (this.model.get('name')) + "</a>		");
+      this.$el.html("			<div class='box'>				<a data-route='/member/" + (this.model.get('uid')) + "'>					<img src='" + (Bolk.BlipRequest.photo_src(this.model.get('uid'), 150, 150)) + "' title='" + (this.model.get('name')) + "'/>				</a>			</div>			<a class='title' data-route='/member/" + (this.model.get('uid')) + "'>" + (this.model.get('name')) + "</a>		");
       return this;
     };
 
