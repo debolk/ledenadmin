@@ -1,6 +1,6 @@
 class Bolk.BlipRequest extends Bolk.AjaxRequest
 
-	@EndPoint = '//blip.i.bolkhuis.nl/'
+	@EndPoint = 'http://blip.i.bolkhuis.nl/'
 	
 	#
 	#

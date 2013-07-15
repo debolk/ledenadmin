@@ -7,7 +7,7 @@
   Bolk.BlipRequest = (function(_super) {
     __extends(BlipRequest, _super);
 
-    BlipRequest.EndPoint = '//blip.i.bolkhuis.nl/';
+    BlipRequest.EndPoint = 'http://blip.i.bolkhuis.nl/';
 
     function BlipRequest() {
       Object.defineProperty(this, 'endpoint', {

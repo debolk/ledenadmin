@@ -7,7 +7,7 @@
   Bolk.OperculumRequest = (function(_super) {
     __extends(OperculumRequest, _super);
 
-    OperculumRequest.EndPoint = '//operculum.i.bolkhuis.nl/';
+    OperculumRequest.EndPoint = 'http://operculum.i.bolkhuis.nl/';
 
     function OperculumRequest() {
       Object.defineProperty(this, 'endpoint', {
