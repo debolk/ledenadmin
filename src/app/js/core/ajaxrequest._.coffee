@@ -8,7 +8,7 @@ class Bolk.AjaxRequest
 	# @param method [String] the method to use
 	# @param params [Object] the parameters
 	#
-	constructor: ( @secure = true, @api , @params = {}, @method = 'get', @output ) ->
+	constructor: ( @secure = true, @api , @params = {}, @method = 'get' ) ->
 		console.debug "#{ @method } #{ @url() }"
 		if not @params[ 'access_token' ] and @secure
 			@params[ 'access_token' ] = document.router.session.token
