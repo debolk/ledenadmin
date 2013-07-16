@@ -1,6 +1,6 @@
 class Bolk.OperculumRequest extends Bolk.AjaxRequest
 	
-	@EndPoint = 'http://operculum.i.bolkhuis.nl/'
+	@EndPoint = 'https://operculum.i.bolkhuis.nl/'
 	
 	#
 	#

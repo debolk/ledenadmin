@@ -9,7 +9,7 @@
 
     __extends(OperculumRequest, _super);
 
-    OperculumRequest.EndPoint = 'http://operculum.i.bolkhuis.nl/';
+    OperculumRequest.EndPoint = 'https://operculum.i.bolkhuis.nl/';
 
     function OperculumRequest() {
       this.onSuccess = __bind(this.onSuccess, this);

@@ -9,7 +9,7 @@
 
     __extends(BlipRequest, _super);
 
-    BlipRequest.EndPoint = 'http://blip.i.bolkhuis.nl/';
+    BlipRequest.EndPoint = 'https://people.i.bolkhuis.nl/';
 
     function BlipRequest() {
       this.onSuccess = __bind(this.onSuccess, this);
