@@ -18,6 +18,6 @@ class Bolk.OAuthRequest extends Bolk.AjaxRequest
 			code: code
 			client_id: Bolk.clientId
 			client_secret: Bolk.clientSecret
-			redirect_uri: "https://ledenadmin.i.bolkhuis.nl/" 
+			redirect_uri: Bolk.baseUrl
 		}
 		return new OAuthRequest 'token', params, 'post'
