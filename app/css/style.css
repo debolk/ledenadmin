@@ -3,7 +3,7 @@
 	padding: 8px;
 	background: #efefef;
 	border-bottom: 2px solid #ddd;
-	margin-bottom: 16px;
+	margin: 0;
 }
 
 #branding, #search, #logout {
@@ -41,7 +41,7 @@
 }
 
 #content {
-	margin-top: 1px solid #bbb;
+	border-top: 2px solid #bbb;
 	padding: 8px;
 }
 
@@ -53,6 +53,25 @@ ul.members {
 
 ul.members li {
 	display: inline-block;
-	margin-right: 12px;
-	width: 100px;
+	margin: 0 5px 5px 0;
+	padding: 5px;
+	width: 150px;
+	text-align: center;
+}
+
+ul.members .box {
+	width: 150px;
+	margin: 0;
+	height: 150px;
+	overflow: auto;
+}
+
+a[data-route] {
+	cursor: pointer;
+}
+
+ul.members .title {
+	width: 150px;
+	display: block;
+	border-top: none;
 }

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset='UTF-8'>
+  <title>CoffeeScript API Documentation</title>
+  <link rel='stylesheet' href='../../assets/codo.css' type='text/css'>
+  <script src='../../assets/codo.js'></script>
+  <script src='../../assets/search_data.js'></script>
+</head>
+  <body>
+    <div id='base' data-path='../../'></div>
+<div id='header'>
+  <div id='menu'>
+    <a href='../../README.md.html' title='Ledenadmin.i.bolkhuis.nl'>Ledenadmin.i.bolkhuis.nl</a>
+    &raquo;
+    <a href='../../class_index.html' title='Index'>Index</a>
+    &raquo;
+    <span class='title'>Bolk</span>
+    &raquo;
+    <span class='title'>Controller</span>
+    <nav>
+      <ul>
+        <li class='noframes'>
+          (<a class='noframes' href='#'>no frames</a>)
+        </li>
+      </ul>
+    </nav>
+    <div id='search'>
+      <a id='class_list_link' href='../../class_list.html'>Classes</a>
+      <a id='file_list_link' href='../../file_list.html'>Files</a>
+      <a id='method_list_link' href='../../method_list.html'>Methods</a>
+      <a id='extra_list_link' href='../../extra_list.html'>Extras</a>
+    </div>
+  </div>
+  <iframe id='search_frame'></iframe>
+  <div id='fuzzySearch'>
+    <input type='text'>
+    <ol></ol>
+  </div>
+  <div id='help'>
+    <p>
+      Quickly fuzzy find classes, mixins, methods, file:
+    </p>
+    <ul>
+      <li>
+        <span>Ctrl-T</span>
+        Open fuzzy finder dialog
+      </li>
+    </ul>
+    <p>
+      In frame mode you can toggle the list naviation frame on the left side:
+    </p>
+    <ul>
+      <li>
+        <span>Ctrl-L</span>
+        Toggle list view
+      </li>
+    </ul>
+    <p>
+      You can focus a list in frame mode or toggle a tab in frameless mode:
+    </p>
+    <ul>
+      <li>
+        <span>Ctrl-C</span>
+        Class list
+      </li>
+      <li>
+        <span>Ctrl-I</span>
+        Mixin list
+      </li>
+      <li>
+        <span>Ctrl-F</span>
+        File list
+      </li>
+      <li>
+        <span>Ctrl-M</span>
+        Method list
+      </li>
+      <li>
+        <span>Ctrl-E</span>
+        Extras list
+      </li>
+    </ul>
+    <p>
+      You can focus and blur the search input:
+    </p>
+    <ul>
+      <li>
+        <span>Ctrl-S</span>
+        Focus search input
+      </li>
+      <li>
+        <span>Esc</span>
+        Blur search input
+      </li>
+    </ul>
+    <p>
+      In frameless mode you can close the list tab:
+    </p>
+    <ul>
+      <li>
+        <span>Esc</span>
+        Close list tab
+      </li>
+    </ul>
+  </div>
+</div>
+    <div id='content'>
+      <h1>
+        Class:
+        Bolk.Controller
+      </h1>
+      <table class='box'>
+        <tr>
+          <td>Defined in:</td>
+          <td>src&#47;app&#47;js&#47;controllers&#47;_.coffee</td>
+        </tr>
+      </table>
+      <h2>Overview</h2>
+      <div class='docstring'>
+  <p>The base of all controllers</p>
+</div>
+<div class='tags'>
+</div>
+      <h2>Direct Known Subclasses</h2>
+      <p class='children'>
+        <a href='../../classes/Bolk/PageController.html'>Bolk.PageController</a>
+      </p>
+      <h2>Instance Method Summary</h2>
+      <ul class='summary'>
+  <li>
+    <span class='signature'>
+      <a href='#constructor-instance'>
+        - (void) <strong>constructor</strong>(view)
+      </a>
+    </span>
+    <span class='constructor note title'>Constructor</span>
+    <span class='desc'>
+      Creates the controller
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#addChild-instance'>
+        - (self) <strong>addChild</strong>(id, controller)
+      </a>
+    </span>
+    <span class='desc'>
+      Adds a child controller
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#removeChild-instance'>
+        - (self) <strong>removeChild</strong>(id, kill = true)
+      </a>
+    </span>
+    <span class='desc'>
+      Remove a child controller
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#each-instance'>
+        - (void) <strong>each</strong>(func)
+      </a>
+    </span>
+    <span class='desc'>
+      
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#controller-instance'>
+        - (Controller.*) <strong>controller</strong>(id)
+      </a>
+    </span>
+    <span class='desc'>
+      Gets the controller with the id
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#controllers-instance'>
+        - (Array&lt;Controller.Base&gt;) <strong>controllers</strong>()
+      </a>
+    </span>
+    <span class='desc'>
+      Returns all the controllers
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#findKey-instance'>
+        - (String) <strong>findKey</strong>(func)
+      </a>
+    </span>
+    <span class='desc'>
+      Finds the key of a controller
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#kill-instance'>
+        - (self) <strong>kill</strong>()
+      </a>
+    </span>
+    <span class='desc'>
+      Kills the controler and all subsequent views
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#beforeUnload-instance'>
+        - (void) <strong>beforeUnload</strong>()
+      </a>
+    </span>
+    <span class='desc'>
+      Runs when the user tries to unload the page
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#onUnload-instance'>
+        - (void) <strong>onUnload</strong>()
+      </a>
+    </span>
+    <span class='desc'>
+      Runs when the user has unloaded the page
+    </span>
+  </li>
+</ul>
+      <h2>Constructor Details</h2>
+      <div class='methods'>
+  <div class='method_details'>
+    <p class='signature' id='constructor-instance'>
+      - (void) <strong>constructor</strong>(view)
+    </p>
+    <div class='docstring'>
+  <p>Creates the controller</p>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>view</span>
+      <span class='type'>
+        (<tt>View.*</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the view</span>
+    </li>
+  </ul>
+</div>
+  </div>
+</div>
+      <h2>Instance Method Details</h2>
+      <div class='methods'>
+  <div class='method_details'>
+    <p class='signature' id='addChild-instance'>
+      - (self) <strong>addChild</strong>(id, controller)
+    </p>
+    <div class='docstring'>
+  <p>Adds a child controller</p>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>id</span>
+      <span class='type'>
+        (<tt>String</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the id of the controller</span>
+    </li>
+    <li>
+      <span class='name'>controller</span>
+      <span class='type'>
+        (<tt>Controller.*</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the controller</span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (<tt>self</tt>)
+      &mdash;
+      <span class='desc'>the chainable self</span>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='removeChild-instance'>
+      - (self) <strong>removeChild</strong>(id, kill = true)
+    </p>
+    <div class='docstring'>
+  <p>Remove a child controller</p>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>id</span>
+      <span class='type'>
+        (<tt>String</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the id of the controller to remove</span>
+    </li>
+    <li>
+      <span class='name'>kill</span>
+      <span class='type'>
+        (<tt>Boolean</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>kill on remove</span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (<tt>self</tt>)
+      &mdash;
+      <span class='desc'>the chainable self</span>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='each-instance'>
+      - (void) <strong>each</strong>(func)
+    </p>
+    <div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='controller-instance'>
+      - (Controller.*) <strong>controller</strong>(id)
+    </p>
+    <div class='docstring'>
+  <p>Gets the controller with the id</p>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>id</span>
+      <span class='type'>
+        (<tt>String</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the id to get</span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (<tt>Controller.*</tt>)
+      &mdash;
+      <span class='desc'>the controller</span>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='controllers-instance'>
+      - (Array&lt;Controller.Base&gt;) <strong>controllers</strong>()
+    </p>
+    <div class='docstring'>
+  <p>Returns all the controllers</p>
+</div>
+<div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (<tt>Array&lt;Controller.Base&gt;</tt>)
+      &mdash;
+      <span class='desc'>The controllers</span>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='findKey-instance'>
+      - (String) <strong>findKey</strong>(func)
+    </p>
+    <div class='docstring'>
+  <p>Finds the key of a controller</p>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>func</span>
+      <span class='type'>
+        (<tt>Function</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>function to evaluate a value</span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (<tt>String</tt>)
+      &mdash;
+      <span class='desc'>the key</span>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='kill-instance'>
+      - (self) <strong>kill</strong>()
+    </p>
+    <div class='docstring'>
+  <p>Kills the controler and all subsequent views</p>
+</div>
+<div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (<tt>self</tt>)
+      &mdash;
+      <span class='desc'>the chainable self</span>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='beforeUnload-instance'>
+      - (void) <strong>beforeUnload</strong>()
+    </p>
+    <div class='docstring'>
+  <p>Runs when the user tries to unload the page</p>
+</div>
+<div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='onUnload-instance'>
+      - (void) <strong>onUnload</strong>()
+    </p>
+    <div class='docstring'>
+  <p>Runs when the user has unloaded the page</p>
+</div>
+<div class='tags'>
+</div>
+  </div>
+</div>
+    </div>
+    <div id='footer'>
+  Generated on
+  Mon Jul 15 2013 17:49:17 GMT+0200 (W. Europe Daylight Time)
+  by
+  <a href='https://github.com/netzpirat/codo' title='CoffeeScript API documentation generator'>Codo</a>
+  v1.5.6
+  (Node.js v0.10.4).
+  &#10034;
+  Press Ctrl-h to see the keyboard shortcuts
+  &#10034;
+  <a href='http://twitter.com/#!/netzpirat'>@netzpirat</a>
+  &#10034;
+  <a href='https://mksoft.ch'>mksoft.ch</a>
+</div>
+  </body>
+</html>
