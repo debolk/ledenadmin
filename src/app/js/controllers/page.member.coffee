@@ -4,9 +4,8 @@ class Bolk.MemberPageController extends Bolk.PageController
 
 	@CacheTime: 120
 
-	# Creates the controller for the Members Listing Page
 	#
-	# @param filter [String] the filter, defines the request type
+	#
 	#
 	constructor: ( @uid ) ->
 		super new Bolk.MemberPage( 'member-' + @uid )
