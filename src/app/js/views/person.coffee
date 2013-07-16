@@ -159,6 +159,6 @@ class Bolk.PersonView extends Backbone.View
 			alive : @model.get 'alive'
 			inauguration : @model.get 'inauguration'
 			resignation_letter : @model.get 'inauguration'
-			resignation : @mode.get 'resignation'
+			resignation : @model.get 'resignation'
 		}
 		$( @el ).html _.template( @getTemplate(), data )
