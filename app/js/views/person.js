@@ -41,7 +41,11 @@
 			</label>\
 			<div class="controls">\
 				<select id="lidmaatschap">\
-					\
+					<option <%= membership == "geen lid"?"selected ":"" %>value="geen lid">Geen lid</option>\
+					<option <%= membership == "kandidaatlid"?"selected ":"" %>value="kandidaatlid">Kandidaatlid</option>\
+					<option <%= membership == "lid"?"selected ":"" %>value="lid">Lid</option>\
+					<option <%= membership == "oudlid"?"selected ":"" %>value="oudlid">Oud-lid</option>\
+					<option <%= membership == "lidvanverdienste"?"selected ":"" %>value="lidvanverdienste">Lid van verdienste</option>\
 				</select>\
 			</div>\
 		</div>\
@@ -59,8 +63,8 @@
 			</label>\
 			<div class="controls">\
 				<select id="gender" name="input[blip][gender]">\
-					<option value="M">Man</option>\
-					<option value="F">Vrouw</option>\
+					<option <%= gender == "M"?"selected ":"" %> value="M">Man</option>\
+					<option <%= gender == "F"?"selected ":"" %> value="F">Vrouw</option>\
 				</select>\
 			</div>\
 		</div>\
@@ -157,6 +161,7 @@
         initials: this.model.get('initials'),
         gender: this.model.get('gender'),
         img: Bolk.BlipRequest.photo_src(this.model.get('uid'), 200, 200),
+        membership: this.model.get('membership'),
         nickname: this.model.get('nickname'),
         study: this.model.get('study'),
         alive: this.model.get('alive'),

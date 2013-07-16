@@ -37,7 +37,11 @@ class Bolk.PersonView extends Backbone.View
 			</label>
 			<div class="controls">
 				<select id="lidmaatschap">
-					
+					<option <%= membership == "geen lid"?"selected ":"" %>value="geen lid">Geen lid</option>
+					<option <%= membership == "kandidaatlid"?"selected ":"" %>value="kandidaatlid">Kandidaatlid</option>
+					<option <%= membership == "lid"?"selected ":"" %>value="lid">Lid</option>
+					<option <%= membership == "oudlid"?"selected ":"" %>value="oudlid">Oud-lid</option>
+					<option <%= membership == "lidvanverdienste"?"selected ":"" %>value="lidvanverdienste">Lid van verdienste</option>
 				</select>
 			</div>
 		</div>
@@ -55,8 +59,8 @@ class Bolk.PersonView extends Backbone.View
 			</label>
 			<div class="controls">
 				<select id="gender" name="input[blip][gender]">
-					<option value="M">Man</option>
-					<option value="F">Vrouw</option>
+					<option <%= gender == "M"?"selected ":"" %> value="M">Man</option>
+					<option <%= gender == "F"?"selected ":"" %> value="F">Vrouw</option>
 				</select>
 			</div>
 		</div>
@@ -153,6 +157,7 @@ class Bolk.PersonView extends Backbone.View
 			initials: @model.get 'initials'
 			gender: @model.get 'gender'
 			img: Bolk.BlipRequest.photo_src( @model.get( 'uid' ), 200, 200 )
+			membership: @model.get 'membership'
 			
 			nickname : @model.get 'nickname'
 			study : @model.get 'study'
