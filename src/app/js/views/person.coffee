@@ -77,7 +77,7 @@ class Bolk.PersonView extends Backbone.View
 				Adres
 			</label>
 			<div class="controls">
-				<textarea id="address" name="input[blip][address]" maxlength="20" type="text"><%= address %></textarea>
+				<textarea id="address" name="input[blip][address]" maxlength="2000" type="text"><%= address %></textarea>
 			</div>
 		</div>
 		<div class="control-group">
