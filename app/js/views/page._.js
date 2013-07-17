@@ -30,10 +30,6 @@
 				<a data-route="/new">Add member</a>\
 			</div>\
 		</form>\
-		<div id="logout">\
-			<a data-route="/logout">\
-				<img src="http://placehold.it/100x100.png&text=logout">\
-			</a>\
 		</div>';
     };
 
