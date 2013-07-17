@@ -55,9 +55,17 @@ class Bolk.MemberPageController extends Bolk.PageController
 		blipdata = JSON.stringify data['input']['blip']
 		blip = new Bolk.BlipRequest api, blipdata, 'PATCH'
 		console.log blipdata
+		progress = 0
+		$('#errors').children().remove()
+
 		blip.request.done (result) ->
-			console.log result
+			progress++
+			if(progress == 2)
+				$('#errors').append controller.view.createSucces("Opslaan gelukt")
 			controller._fetchMember false
+		blip.request.fail (error) ->
+			console.log error
+			$('#errors').append controller.view.createError(error.responseText)
 
 		api = "person/#{@uid}"
 		operdata = data['input']['operculum']
@@ -69,8 +77,15 @@ class Bolk.MemberPageController extends Bolk.PageController
 		operdata = JSON.stringify operdata
 		oper = new Bolk.OperculumRequest api, operdata, 'PUT'
 		oper.request.done (result) ->
-			console.log result
+			progress++
+			if(progress == 2)
+				$('#errors').append controller.view.createSucces("Opslaan gelukt")
 			controller._fetchMember false
+		oper.request.fail (error) ->
+			errors = error.responseJSON.error_description
+			console.log errors
+			for message in errors
+				$('#errors').append controller.view.createError(message)
 
 	#
 	#

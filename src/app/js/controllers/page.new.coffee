@@ -27,7 +27,13 @@ class Bolk.NewPageController extends Bolk.PageController
 		api = "persons"
 		blipdata = JSON.stringify data['input']['blip']
 		blip = new Bolk.BlipRequest api, blipdata, 'POST'
-		console.log blipdata
+
+		$('#errors').children().remove()
+
+		blip.request.fail (error) ->
+			console.log error
+			$('#errors').append controller.view.createError(error.responseText)
+			
 		blip.request.done (result) ->
 			uid = result['uid']
 
@@ -39,8 +45,14 @@ class Bolk.NewPageController extends Bolk.PageController
 
 			operdata = JSON.stringify operdata
 			oper = new Bolk.OperculumRequest api, operdata, 'PUT'
+			oper.request.fail (error) ->
+				errors = error.responseJSON.error_description
+				console.log errors
+				for message in errors
+					$('#errors').append controller.view.createError(message)
+				
 			oper.request.done (result) ->
-				console.log result
+				$('#errors').append controller.view.createSucces("Opslaan gelukt")
 				window.location.hash = "/member/" + uid
 
 

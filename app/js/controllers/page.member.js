@@ -64,15 +64,24 @@
     };
 
     MemberPageController.prototype.saveMember = function(data) {
-      var api, blip, blipdata, controller, oper, operdata;
+      var api, blip, blipdata, controller, oper, operdata, progress;
       controller = this;
       api = "persons/" + this.uid;
       blipdata = JSON.stringify(data['input']['blip']);
       blip = new Bolk.BlipRequest(api, blipdata, 'PATCH');
       console.log(blipdata);
+      progress = 0;
+      $('#errors').children().remove();
       blip.request.done(function(result) {
-        console.log(result);
+        progress++;
+        if (progress === 2) {
+          $('#errors').append(controller.view.createSucces("Opslaan gelukt"));
+        }
         return controller._fetchMember(false);
+      });
+      blip.request.fail(function(error) {
+        console.log(error);
+        return $('#errors').append(controller.view.createError(error.responseText));
       });
       api = "person/" + this.uid;
       operdata = data['input']['operculum'];
@@ -81,9 +90,23 @@
       console.log(operdata);
       operdata = JSON.stringify(operdata);
       oper = new Bolk.OperculumRequest(api, operdata, 'PUT');
-      return oper.request.done(function(result) {
-        console.log(result);
+      oper.request.done(function(result) {
+        progress++;
+        if (progress === 2) {
+          $('#errors').append(controller.view.createSucces("Opslaan gelukt"));
+        }
         return controller._fetchMember(false);
+      });
+      return oper.request.fail(function(error) {
+        var errors, message, _i, _len, _results;
+        errors = error.responseJSON.error_description;
+        console.log(errors);
+        _results = [];
+        for (_i = 0, _len = errors.length; _i < _len; _i++) {
+          message = errors[_i];
+          _results.push($('#errors').append(controller.view.createError(message)));
+        }
+        return _results;
       });
     };
 

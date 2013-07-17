@@ -33,6 +33,27 @@
 		</div>';
     };
 
+    Page.prototype.createDialog = function(description, title, style) {
+      if (title == null) {
+        title = "Warning!";
+      }
+      if (style == null) {
+        style = "";
+      }
+      return '<div class="alert ' + style + '">\
+		<button type="button" class="close" data-dismiss="alert">&times</button>\
+		<strong>' + title + '</strong> ' + description + '\
+		</div>';
+    };
+
+    Page.prototype.createError = function(description) {
+      return this.createDialog(description, "Error!", "alert-error");
+    };
+
+    Page.prototype.createSucces = function(description) {
+      return this.createDialog(description, "Succes!", "alert-success");
+    };
+
     Page.prototype._fillHeader = function(title) {
       var key, template;
       key = "header-" + (title.toLowerCase());

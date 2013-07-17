@@ -35,7 +35,27 @@ class Bolk.Page extends Bolk.ViewCollection
 			</div>
 		</form>
 		</div>'
-	
+
+	#
+	# Creates a dialog div
+	#
+	createDialog: ( description, title = "Warning!", style = "") ->
+		return '<div class="alert ' + style + '">
+		<button type="button" class="close" data-dismiss="alert">&times</button>
+		<strong>' + title + '</strong> ' + description + '
+		</div>'
+
+	#
+	# Creates an error div
+	#
+	createError: ( description ) ->
+		@createDialog description, "Error!", "alert-error"
+
+	#
+	# Creates an error div
+	#
+	createSucces: ( description ) ->
+		@createDialog description, "Succes!", "alert-success"
 		
 	# Fills the header template with a title
 	#

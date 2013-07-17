@@ -30,7 +30,11 @@
       api = "persons";
       blipdata = JSON.stringify(data['input']['blip']);
       blip = new Bolk.BlipRequest(api, blipdata, 'POST');
-      console.log(blipdata);
+      $('#errors').children().remove();
+      blip.request.fail(function(error) {
+        console.log(error);
+        return $('#errors').append(controller.view.createError(error.responseText));
+      });
       return blip.request.done(function(result) {
         var oper, operdata, uid;
         uid = result['uid'];
@@ -40,8 +44,19 @@
         operdata['alive'] = operdata['alive'] === "true";
         operdata = JSON.stringify(operdata);
         oper = new Bolk.OperculumRequest(api, operdata, 'PUT');
+        oper.request.fail(function(error) {
+          var errors, message, _i, _len, _results;
+          errors = error.responseJSON.error_description;
+          console.log(errors);
+          _results = [];
+          for (_i = 0, _len = errors.length; _i < _len; _i++) {
+            message = errors[_i];
+            _results.push($('#errors').append(controller.view.createError(message)));
+          }
+          return _results;
+        });
         return oper.request.done(function(result) {
-          console.log(result);
+          $('#errors').append(controller.view.createSucces("Opslaan gelukt"));
           return window.location.hash = "/member/" + uid;
         });
       });
