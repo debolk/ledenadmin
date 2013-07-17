@@ -52,7 +52,7 @@
       var blip,
         _this = this;
       this.showLoader();
-      blip = new Bolk.BlipRequest('members');
+      blip = new Bolk.BlipRequest('persons');
       return blip.request.always(function(data) {
         _this.hideLoader();
         if (blip.result) {

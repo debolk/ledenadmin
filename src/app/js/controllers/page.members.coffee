@@ -45,7 +45,7 @@ class Bolk.MembersPageController extends Bolk.PageController
 	#
 	_fetchMembers: () ->
 		@showLoader()
-		blip = new Bolk.BlipRequest 'members'
+		blip = new Bolk.BlipRequest 'persons'
 		blip.request.always( ( data ) =>
 			@hideLoader()
 			if blip.result
