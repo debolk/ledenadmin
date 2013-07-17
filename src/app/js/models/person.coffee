@@ -4,8 +4,9 @@ class Bolk.Person extends Backbone.Model
 	
 	constructor: (data) ->
 		super data
+		regex = new RegExp '"', 'g'
 		@index = JSON.stringify data
-		@index = @index.replace '"', '', 'g'
+		@index = @index.replace regex, ''
 		@index = @index.toLowerCase()
 
 	matches: (filter) ->

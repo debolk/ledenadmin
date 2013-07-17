@@ -8,9 +8,11 @@
     __extends(Person, _super);
 
     function Person(data) {
+      var regex;
       Person.__super__.constructor.call(this, data);
+      regex = new RegExp('"', 'g');
       this.index = JSON.stringify(data);
-      this.index = this.index.replace('"', '', 'g');
+      this.index = this.index.replace(regex, '');
       this.index = this.index.toLowerCase();
     }
 

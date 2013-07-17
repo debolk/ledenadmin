@@ -19,8 +19,8 @@
       return '<div id="branding">\
 			<a name="home" data-route="<%= route_home %>">\
 				<img src="http://placehold.it/100x100.png">\
-			</a>\
 			<h1>Whiting</h1>\
+			</a>\
 		</div>\
 		<form class="form-inline" id="search">\
 			<div class="controls">\
