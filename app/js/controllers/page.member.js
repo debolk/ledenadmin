@@ -30,9 +30,12 @@
       });
     }
 
-    MemberPageController.prototype._fetchMember = function() {
+    MemberPageController.prototype._fetchMember = function(display) {
       var blip,
         _this = this;
+      if (display == null) {
+        display = true;
+      }
       blip = new Bolk.BlipRequest("persons/" + this.uid);
       return blip.request.done(function(blipdata) {
         var operculum;
@@ -52,19 +55,23 @@
             complete: true
           });
           locache.async.set('member-page-' + _this.uid, data, MemberPageController.CacheTime);
-          return _this._parseMember(data);
+          if (display) {
+            return _this._parseMember(data);
+          }
         });
       });
     };
 
     MemberPageController.prototype.saveMember = function(data) {
-      var api, blip, blipdata, oper, operdata;
+      var api, blip, blipdata, controller, oper, operdata;
+      controller = this;
       api = "persons/" + this.uid;
       blipdata = JSON.stringify(data['input']['blip']);
       blip = new Bolk.BlipRequest(api, blipdata, 'PATCH');
       console.log(blipdata);
       blip.request.done(function(result) {
-        return console.log(result);
+        console.log(result);
+        return controller._fetchMember(false);
       });
       api = "person/" + this.uid;
       operdata = data['input']['operculum'];
@@ -74,7 +81,8 @@
       operdata = JSON.stringify(operdata);
       oper = new Bolk.OperculumRequest(api, operdata, 'PUT');
       return oper.request.done(function(result) {
-        return console.log(result);
+        console.log(result);
+        return controller._fetchMember(false);
       });
     };
 
