@@ -140,6 +140,14 @@ class Bolk.PersonView extends Backbone.View
 				<input id="resignation" name="input[operculum][resignation]" maxlength="20" value="<%= resignation %>" type="date">
 			</div>
 		</div>
+		<div class="control-group">
+			<label class="control-label" for="submit">
+				Opslaan
+			</label>
+			<div class="controls">
+				<input id="submit" name="input[submit]" value="Opslaan" type="submit">
+			</div>
+		</div>
 		<!-- etc -->'
 		
 	# Renders the person

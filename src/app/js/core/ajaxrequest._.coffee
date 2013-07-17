@@ -11,8 +11,9 @@ class Bolk.AjaxRequest
 	constructor: ( @secure = true, @api , @params = {}, @method = 'get' ) ->
 		console.debug "#{ @method } #{ @url() }"
 		if not @params[ 'access_token' ] and @secure
-			@params[ 'access_token' ] = document.router.session.token
+			@api = @api + '?access_token=' + document.router.session.token
 		@result = undefined
+		console.log @method
 		@request = @execute()
 		
 	# Gets the url for this request

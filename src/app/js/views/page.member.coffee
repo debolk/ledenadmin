@@ -6,10 +6,12 @@ class Bolk.MemberPage extends Bolk.Page
 	#
 	# @param title [String] the title of the page
 	#
-	constructor: ( title = 'Member', edit = false ) ->
+	constructor: ( title = 'Member', uid, edit = false ) ->
 		super title
-		@contents.append ( @el = $ '<form class="form-horizontal"></form>' )
-	
+		@uid = uid
+		@el = $ '<form id="edit-member-' + uid + '" class="form-horizontal"></form>' 
+		@contents.append @el
+
 	#
 	#
 	#

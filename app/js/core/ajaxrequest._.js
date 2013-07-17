@@ -10,9 +10,10 @@
       this.method = method != null ? method : 'get';
       console.debug("" + this.method + " " + (this.url()));
       if (!this.params['access_token'] && this.secure) {
-        this.params['access_token'] = document.router.session.token;
+        this.api = this.api + '?access_token=' + document.router.session.token;
       }
       this.result = void 0;
+      console.log(this.method);
       this.request = this.execute();
     }
 

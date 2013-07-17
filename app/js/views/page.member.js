@@ -7,7 +7,7 @@
 
     __extends(MemberPage, _super);
 
-    function MemberPage(title, edit) {
+    function MemberPage(title, uid, edit) {
       if (title == null) {
         title = 'Member';
       }
@@ -15,7 +15,9 @@
         edit = false;
       }
       MemberPage.__super__.constructor.call(this, title);
-      this.contents.append((this.el = $('<form class="form-horizontal"></form>')));
+      this.uid = uid;
+      this.el = $('<form id="edit-member-' + uid + '" class="form-horizontal"></form>');
+      this.contents.append(this.el);
     }
 
     MemberPage.prototype.display = function(person) {

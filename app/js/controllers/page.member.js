@@ -10,9 +10,17 @@
     MemberPageController.CacheTime = 120;
 
     function MemberPageController(uid) {
-      var _this = this;
+      var controller,
+        _this = this;
       this.uid = uid;
-      MemberPageController.__super__.constructor.call(this, new Bolk.MemberPage('member-' + this.uid));
+      MemberPageController.__super__.constructor.call(this, new Bolk.MemberPage('member-' + this.uid, this.uid));
+      controller = this;
+      this.view.el.submit(function() {
+        var data;
+        data = controller.view.el.serializeObject();
+        controller.saveMember(data);
+        return false;
+      });
       locache.async.get('member-page-' + this.uid).finished(function(data) {
         if (!data) {
           return _this._fetchMember();
@@ -46,6 +54,27 @@
           locache.async.set('member-page-' + _this.uid, data, MemberPageController.CacheTime);
           return _this._parseMember(data);
         });
+      });
+    };
+
+    MemberPageController.prototype.saveMember = function(data) {
+      var api, blip, blipdata, oper, operdata;
+      api = "persons/" + this.uid;
+      blipdata = JSON.stringify(data['input']['blip']);
+      blip = new Bolk.BlipRequest(api, blipdata, 'PATCH');
+      console.log(blipdata);
+      blip.request.done(function(result) {
+        return console.log(result);
+      });
+      api = "person/" + this.uid;
+      operdata = data['input']['operculum'];
+      operdata['uid'] = this.uid;
+      operdata['alive'] = operdata['alive'] === "true";
+      console.log(operdata);
+      operdata = JSON.stringify(operdata);
+      oper = new Bolk.OperculumRequest(api, operdata, 'PUT');
+      return oper.request.done(function(result) {
+        return console.log(result);
       });
     };
 

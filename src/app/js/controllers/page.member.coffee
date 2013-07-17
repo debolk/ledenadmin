@@ -8,7 +8,14 @@ class Bolk.MemberPageController extends Bolk.PageController
 	#
 	#
 	constructor: ( @uid ) ->
-		super new Bolk.MemberPage( 'member-' + @uid )
+		super new Bolk.MemberPage( 'member-' + @uid, @uid )
+
+		# Define onSubmit callback
+		controller = this
+		@view.el.submit ->
+			data = controller.view.el.serializeObject()
+			controller.saveMember data
+			false
 		
 		# Lets see if we have members data
 		locache.async.get( 'member-page-' + @uid ).finished( ( data ) =>
@@ -38,6 +45,25 @@ class Bolk.MemberPageController extends Bolk.PageController
 			)
 		)
 		
+	saveMember: (data) ->
+		api = "persons/#{@uid}"
+		blipdata = JSON.stringify data['input']['blip']
+		blip = new Bolk.BlipRequest api, blipdata, 'PATCH'
+		console.log blipdata
+		blip.request.done (result) ->
+			console.log result
+
+		api = "person/#{@uid}"
+		operdata = data['input']['operculum']
+
+		operdata['uid'] = @uid
+		operdata['alive'] = operdata['alive'] == "true";
+
+		console.log operdata
+		operdata = JSON.stringify operdata
+		oper = new Bolk.OperculumRequest api, operdata, 'PUT'
+		oper.request.done (result) ->
+			console.log result
 	#
 	#
 	#
