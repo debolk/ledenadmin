@@ -31,8 +31,7 @@ class Bolk.Page extends Bolk.ViewCollection
 				<input id="search" type="text" class="input-big" placeholder="Search...">
 			</div>
 			<div class="actions">
-				<a data-route="/search/filter">Advanced filter</a> |
-				<a data-route="/members/new">Add member</a>
+				<a data-route="/new">Add member</a>
 			</div>
 		</form>
 		<div id="logout">

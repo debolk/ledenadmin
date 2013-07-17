@@ -24,6 +24,8 @@ class Bolk.MemberPageController extends Bolk.PageController
 			else
 				@_parseMember data
 		)
+
+		$('input#search').attr('disabled','disabled')
 		
 	#
 	#

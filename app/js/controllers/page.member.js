@@ -28,6 +28,7 @@
           return _this._parseMember(data);
         }
       });
+      $('input#search').attr('disabled', 'disabled');
     }
 
     MemberPageController.prototype._fetchMember = function(display) {

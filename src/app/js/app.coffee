@@ -8,10 +8,9 @@ class Bolk.AppRouter extends Backbone.Router
 		''				: 'members'
 		'home'			: 'members'
 		'members'		: 'members'
+		'new'				: 'newmember'
 		'members/:filter' : 'members'
 		'member/:id' 		: 'member'
-		'search'			: 'search'
-		'search/:action'	: 'search'
 		'logout'			: 'logout'
 		'?code=:code&state=:state' : 'getToken'
 		'login'			: 'oauth'
@@ -35,6 +34,14 @@ class Bolk.AppRouter extends Backbone.Router
 		@controller?.kill()
 		return unless @ensureSession()
 		@controller = new Bolk.MembersPageController filter
+
+	# Routes the NewMember page
+	#
+	newmember: ->
+		console.debug 'New member'
+		@controller?.kill()
+		return unless @ensureSession()
+		@controller = new Bolk.NewPageController
 	
 	# Routes the member page
 	#

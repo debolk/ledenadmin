@@ -15,10 +15,9 @@
       '': 'members',
       'home': 'members',
       'members': 'members',
+      'new': 'newmember',
       'members/:filter': 'members',
       'member/:id': 'member',
-      'search': 'search',
-      'search/:action': 'search',
       'logout': 'logout',
       '?code=:code&state=:state': 'getToken',
       'login': 'oauth'
@@ -44,6 +43,18 @@
         return;
       }
       return this.controller = new Bolk.MembersPageController(filter);
+    };
+
+    AppRouter.prototype.newmember = function() {
+      var _ref;
+      console.debug('New member');
+      if ((_ref = this.controller) != null) {
+        _ref.kill();
+      }
+      if (!this.ensureSession()) {
+        return;
+      }
+      return this.controller = new Bolk.NewPageController;
     };
 
     AppRouter.prototype.member = function(id) {

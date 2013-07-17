@@ -36,7 +36,7 @@ class Bolk.PersonView extends Backbone.View
 				Lidmaatschap
 			</label>
 			<div class="controls">
-				<select id="lidmaatschap">
+				<select id="lidmaatschap" name="input[blip][membership]">
 					<option <%= membership == "geen lid"?"selected ":"" %>value="geen lid">Geen lid</option>
 					<option <%= membership == "kandidaatlid"?"selected ":"" %>value="kandidaatlid">Kandidaatlid</option>
 					<option <%= membership == "lid"?"selected ":"" %>value="lid">Lid</option>
