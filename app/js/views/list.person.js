@@ -30,6 +30,10 @@
       return this;
     };
 
+    PersonListView.prototype.remove = function() {
+      return this.$el.children().remove();
+    };
+
     return PersonListView;
 
   })(Backbone.View);

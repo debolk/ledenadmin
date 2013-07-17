@@ -1,6 +1,12 @@
 #
 #
 class Bolk.Person extends Backbone.Model
+	
+	constructor: (data) ->
+		super data
+		@index = JSON.stringify data
+		@index = @index.replace '"', '', 'g'
+		@index = @index.toLowerCase()
 
 	defaults: {
 		uid: ''

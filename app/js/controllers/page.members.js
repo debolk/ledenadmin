@@ -10,15 +10,41 @@
     MembersPageController.CacheTime = 120;
 
     function MembersPageController(filter) {
-      var _this = this;
+      var controller,
+        _this = this;
       this.filter = filter;
       MembersPageController.__super__.constructor.call(this, new Bolk.MembersPage(this._titlefor(this.filter)));
+      console.log(this.filter);
       locache.async.get('members-page').finished(function(data) {
         if (!data) {
           return _this._fetchMembers();
         } else {
           return _this._parseMembers(data);
         }
+      });
+      controller = this;
+      this.search = $('input#search');
+      this.search.keyup(function() {
+        var person, _i, _len, _ref;
+        controller.filter = controller.search.val().toLowerCase();
+        if (controller.filter.length < 3) {
+          console.log(controller.model);
+          if (controller.view.collectionView.model !== controller.model) {
+            controller.view.display(controller.model);
+          }
+          return;
+        }
+        controller.selection = new Bolk.Persons();
+        console.log(controller.filter);
+        _ref = controller.model.models;
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          person = _ref[_i];
+          console.debug(person.index.indexOf(controller.filter));
+          if (person.index.indexOf(controller.filter) !== -1) {
+            controller.selection.add(person);
+          }
+        }
+        return controller.view.display(controller.selection);
       });
     }
 

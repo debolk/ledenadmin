@@ -19,3 +19,8 @@ class Bolk.PersonListView extends Backbone.View
 	render: ->
 		@$el.append ( @$list = $ '<ul class="members"></ul>' )
 		return this
+
+	#
+	#
+	remove: ->
+		@$el.children().remove()

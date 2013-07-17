@@ -28,7 +28,7 @@ class Bolk.Page extends Bolk.ViewCollection
 		</div>
 		<form class="form-inline" id="search">
 			<div class="controls">
-				<input type="text" class="input-big" placeholder="Search...">
+				<input id="search" type="text" class="input-big" placeholder="Search...">
 			</div>
 			<div class="actions">
 				<a data-route="/search/filter">Advanced filter</a> |
@@ -48,13 +48,14 @@ class Bolk.Page extends Bolk.ViewCollection
 	#
 	_fillHeader: ( title ) ->
 		key = "header-#{ title.toLowerCase() }"
-		locache.async.get( key ).finished ( template ) =>
-			@header.hide()
-			unless template
-				template = _.template( @_getHeaderTemplate(), { route_home: '/home', title: title } )
-				locache.async.set key, template, 3600
-			@header.html( template )
-			@header.fadeIn()
+		template = locache.get( key )
+		
+		@header.hide()
+		unless template
+			template = _.template( @_getHeaderTemplate(), { route_home: '/home', title: title } )
+			locache.async.set key, template, 3600
+		@header.html( template )
+		@header.fadeIn()
 		
 		
 	# Clears the page

@@ -10,6 +10,8 @@ class Bolk.MembersPageController extends Bolk.PageController
 	#
 	constructor: ( @filter ) ->
 		super new Bolk.MembersPage( @_titlefor @filter )
+
+		console.log @filter
 		
 		# Lets see if we have members data
 		locache.async.get( 'members-page' ).finished( ( data ) =>
@@ -18,7 +20,26 @@ class Bolk.MembersPageController extends Bolk.PageController
 			else
 				@_parseMembers data
 		)
-		
+
+		# Bind to search form
+		controller = this
+		@search = $ 'input#search'
+		@search.keyup ->
+			controller.filter = controller.search.val().toLowerCase()
+			if(controller.filter.length < 3)
+				console.log controller.model
+				if controller.view.collectionView.model != controller.model
+					controller.view.display controller.model
+				return
+
+			controller.selection = new Bolk.Persons()
+			console.log controller.filter
+			for person in controller.model.models
+				console.debug person.index.indexOf(controller.filter)
+				if person.index.indexOf(controller.filter) != -1
+					controller.selection.add person
+
+			controller.view.display controller.selection
 	#
 	#
 	#

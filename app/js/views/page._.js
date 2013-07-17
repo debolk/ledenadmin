@@ -24,7 +24,7 @@
 		</div>\
 		<form class="form-inline" id="search">\
 			<div class="controls">\
-				<input type="text" class="input-big" placeholder="Search...">\
+				<input id="search" type="text" class="input-big" placeholder="Search...">\
 			</div>\
 			<div class="actions">\
 				<a data-route="/search/filter">Advanced filter</a> |\
@@ -39,21 +39,19 @@
     };
 
     Page.prototype._fillHeader = function(title) {
-      var key,
-        _this = this;
+      var key, template;
       key = "header-" + (title.toLowerCase());
-      return locache.async.get(key).finished(function(template) {
-        _this.header.hide();
-        if (!template) {
-          template = _.template(_this._getHeaderTemplate(), {
-            route_home: '/home',
-            title: title
-          });
-          locache.async.set(key, template, 3600);
-        }
-        _this.header.html(template);
-        return _this.header.fadeIn();
-      });
+      template = locache.get(key);
+      this.header.hide();
+      if (!template) {
+        template = _.template(this._getHeaderTemplate(), {
+          route_home: '/home',
+          title: title
+        });
+        locache.async.set(key, template, 3600);
+      }
+      this.header.html(template);
+      return this.header.fadeIn();
     };
 
     Page.prototype.clear = function() {

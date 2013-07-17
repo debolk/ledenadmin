@@ -7,8 +7,11 @@
 
     __extends(Person, _super);
 
-    function Person() {
-      return Person.__super__.constructor.apply(this, arguments);
+    function Person(data) {
+      Person.__super__.constructor.call(this, data);
+      this.index = JSON.stringify(data);
+      this.index = this.index.replace('"', '', 'g');
+      this.index = this.index.toLowerCase();
     }
 
     Person.prototype.defaults = {
