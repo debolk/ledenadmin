@@ -176,7 +176,7 @@
         study: this.model.get('study'),
         alive: this.model.get('alive'),
         inauguration: this.model.get('inauguration'),
-        resignation_letter: this.model.get('inauguration'),
+        resignation_letter: this.model.get('resignation_letter'),
         resignation: this.model.get('resignation')
       };
       return $(this.el).html(_.template(this.getTemplate(), data));

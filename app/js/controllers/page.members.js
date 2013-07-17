@@ -29,6 +29,16 @@
         filter = controller.search.val().toLowerCase();
         return controller._filter(filter);
       });
+      this.search.keypress(function(event) {
+        var model, uid;
+        if (event.keyCode = 13) {
+          event.preventDefault();
+          model = controller.selection.models[0];
+          console.log(model);
+          uid = model.attributes.uid;
+          return window.location.hash = "/member/" + uid;
+        }
+      });
     }
 
     MembersPageController.prototype._filter = function(query) {

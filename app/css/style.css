@@ -75,3 +75,18 @@ ul.members .title {
 	display: block;
 	border-top: none;
 }
+
+header .controls {
+	margin: 0 !important;
+}
+
+header .control-group input {
+	font-size: 36pt;
+	font-weight: bold;
+	height: auto;
+	display: inline;
+}
+
+header .control-group input#name_last {
+	width: auto;
+}

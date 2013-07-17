@@ -27,6 +27,14 @@ class Bolk.MembersPageController extends Bolk.PageController
 		@search.keyup ->
 			filter = controller.search.val().toLowerCase()
 			controller._filter filter
+		@search.keypress ( event ) ->
+			if event.keyCode = 13
+				event.preventDefault()
+				# Select first
+				model = controller.selection.models[0];
+				console.log model
+				uid = model.attributes.uid
+				window.location.hash = "/member/" + uid
 
 	#
 	#
