@@ -10,8 +10,7 @@ class Bolk.MembersPageController extends Bolk.PageController
 	#
 	constructor: ( @filter ) ->
 		super new Bolk.MembersPage( @_titlefor @filter )
-
-		console.log @filter
+		@query = "membership:lid"
 		
 		# Lets see if we have members data
 		locache.async.get( 'members-page' ).finished( ( data ) =>
@@ -24,22 +23,27 @@ class Bolk.MembersPageController extends Bolk.PageController
 		# Bind to search form
 		controller = this
 		@search = $ 'input#search'
+		@search.val @query
 		@search.keyup ->
-			controller.filter = controller.search.val().toLowerCase()
-			if(controller.filter.length < 3)
-				console.log controller.model
-				if controller.view.collectionView.model != controller.model
-					controller.view.display controller.model
-				return
+			filter = controller.search.val().toLowerCase()
+			controller._filter filter
 
-			controller.selection = new Bolk.Persons()
-			console.log controller.filter
-			for person in controller.model.models
-				console.debug person.index.indexOf(controller.filter)
-				if person.index.indexOf(controller.filter) != -1
-					controller.selection.add person
+	#
+	#
+	#
+	_filter: (@query) ->
+		if @query.length < 3
+			@query = ""
+			@view.display @model
+			return
 
-			controller.view.display controller.selection
+		@selection = new Bolk.Persons
+		console.log @query
+		for person in @model.models
+			if person.matches @query
+				@selection.add person
+
+		@view.display @selection
 	#
 	#
 	#
@@ -63,7 +67,7 @@ class Bolk.MembersPageController extends Bolk.PageController
 		for person in data
 			@model.add new Bolk.Person( _.extend( person, { complete : true } ) )
 
-		@view.display @model
+		@_filter @query
 		
 	# Gets the title for a filter
 	#

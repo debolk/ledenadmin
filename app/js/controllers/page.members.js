@@ -14,7 +14,7 @@
         _this = this;
       this.filter = filter;
       MembersPageController.__super__.constructor.call(this, new Bolk.MembersPage(this._titlefor(this.filter)));
-      console.log(this.filter);
+      this.query = "membership:lid";
       locache.async.get('members-page').finished(function(data) {
         if (!data) {
           return _this._fetchMembers();
@@ -24,29 +24,32 @@
       });
       controller = this;
       this.search = $('input#search');
+      this.search.val(this.query);
       this.search.keyup(function() {
-        var person, _i, _len, _ref;
-        controller.filter = controller.search.val().toLowerCase();
-        if (controller.filter.length < 3) {
-          console.log(controller.model);
-          if (controller.view.collectionView.model !== controller.model) {
-            controller.view.display(controller.model);
-          }
-          return;
-        }
-        controller.selection = new Bolk.Persons();
-        console.log(controller.filter);
-        _ref = controller.model.models;
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          person = _ref[_i];
-          console.debug(person.index.indexOf(controller.filter));
-          if (person.index.indexOf(controller.filter) !== -1) {
-            controller.selection.add(person);
-          }
-        }
-        return controller.view.display(controller.selection);
+        filter = controller.search.val().toLowerCase();
+        return controller._filter(filter);
       });
     }
+
+    MembersPageController.prototype._filter = function(query) {
+      var person, _i, _len, _ref;
+      this.query = query;
+      if (this.query.length < 3) {
+        this.query = "";
+        this.view.display(this.model);
+        return;
+      }
+      this.selection = new Bolk.Persons;
+      console.log(this.query);
+      _ref = this.model.models;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        person = _ref[_i];
+        if (person.matches(this.query)) {
+          this.selection.add(person);
+        }
+      }
+      return this.view.display(this.selection);
+    };
 
     MembersPageController.prototype._fetchMembers = function() {
       var blip,
@@ -75,7 +78,7 @@
           complete: true
         })));
       }
-      return this.view.display(this.model);
+      return this._filter(this.query);
     };
 
     MembersPageController.prototype._titlefor = function(filter) {

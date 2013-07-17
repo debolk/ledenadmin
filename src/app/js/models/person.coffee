@@ -8,6 +8,9 @@ class Bolk.Person extends Backbone.Model
 		@index = @index.replace '"', '', 'g'
 		@index = @index.toLowerCase()
 
+	matches: (filter) ->
+		return @index.indexOf(filter) != -1
+
 	defaults: {
 		uid: ''
 		

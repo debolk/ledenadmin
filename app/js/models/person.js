@@ -14,6 +14,10 @@
       this.index = this.index.toLowerCase();
     }
 
+    Person.prototype.matches = function(filter) {
+      return this.index.indexOf(filter) !== -1;
+    };
+
     Person.prototype.defaults = {
       uid: '',
       nickname: '',
