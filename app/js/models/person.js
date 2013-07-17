@@ -20,6 +20,55 @@
       return this.index.indexOf(filter) !== -1;
     };
 
+    Person.prototype.merge_operculum = function(finish) {
+      var model, operculum;
+      if (finish == null) {
+        finish = function() {
+          return {};
+        };
+      }
+      if (this.complete) {
+        finish();
+        return;
+      }
+      operculum = new Bolk.OperculumRequest("person/" + this.attributes.uid);
+      model = this;
+      operculum.request.done(function(data) {
+        model.set(data);
+        model.complete = true;
+        locache.async.set('member-page-' + model.attributes.uid, model.attributes);
+        return finish();
+      });
+      return operculum.request.fail(function() {
+        model.complete = true;
+        return finish();
+      });
+    };
+
+    Person.prototype.to_csv = function() {
+      var escaped, first, key, line, r, value, _ref;
+      line = "";
+      first = true;
+      r = new RegExp('"', 'g');
+      _ref = this.attributes;
+      for (key in _ref) {
+        value = _ref[key];
+        value = value != null ? value : "";
+        escaped = value;
+        if (typeof escaped === 'string') {
+          escaped = escaped.replace(r, '""');
+        }
+        if (!first) {
+          line += ',';
+        }
+        first = false;
+        if (escaped) {
+          line += '"' + escaped + '"';
+        }
+      }
+      return line;
+    };
+
     Person.prototype.defaults = {
       uid: '',
       nickname: '',

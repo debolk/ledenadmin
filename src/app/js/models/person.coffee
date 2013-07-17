@@ -12,6 +12,39 @@ class Bolk.Person extends Backbone.Model
 	matches: (filter) ->
 		return @index.indexOf(filter) != -1
 
+	merge_operculum: ( finish = -> {} ) ->
+		if @complete
+			finish()
+			return
+		operculum = new Bolk.OperculumRequest "person/#{@attributes.uid}"
+		model = this
+		operculum.request.done ( data ) ->
+			model.set(data)
+			model.complete = true
+			locache.async.set( 'member-page-' + model.attributes.uid, model.attributes )
+			finish()
+		operculum.request.fail ->
+			model.complete = true
+			finish()
+
+	to_csv: ->
+		line = ""
+		first = true
+		r = new RegExp '"', 'g'
+		for key, value of @attributes
+			value = value ? ""
+
+			escaped = value
+			if typeof(escaped) == 'string'
+				escaped = escaped.replace r, '""' 
+
+			line += ',' unless first
+			first = false
+
+			if escaped
+				line += '"' + escaped + '"'
+		line
+
 	defaults: {
 		uid: ''
 		

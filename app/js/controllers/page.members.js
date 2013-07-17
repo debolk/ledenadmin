@@ -14,7 +14,11 @@
         _this = this;
       this.filter = filter;
       MembersPageController.__super__.constructor.call(this, new Bolk.MembersPage(this._titlefor(this.filter)));
-      this.query = "membership:lid";
+      if (window.search_query === void 0) {
+        this.query = "membership:lid";
+      } else {
+        this.query = window.search_query;
+      }
       locache.async.get('members-page').finished(function(data) {
         if (!data) {
           return _this._fetchMembers();
@@ -27,17 +31,58 @@
       this.search.val(this.query);
       this.search.keyup(function() {
         filter = controller.search.val().toLowerCase();
+        window.search_query = filter;
         return controller._filter(filter);
       });
       this.search.keypress(function(event) {
         var model, uid;
-        if (event.keyCode = 13) {
+        if (event.keyCode === 13) {
           event.preventDefault();
           model = controller.selection.models[0];
-          console.log(model);
           uid = model.attributes.uid;
           return window.location.hash = "/member/" + uid;
         }
+      });
+      this["export"] = $('<a>export</a>');
+      $('.actions').append(' | ');
+      $('.actions').append(this["export"]);
+      this["export"].click(function() {
+        var model, _i, _len, _ref, _results;
+        _ref = controller.selection.models;
+        _results = [];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          model = _ref[_i];
+          _results.push(model.merge_operculum(function() {
+            var data, first, header, key, person, result, value, _j, _k, _len1, _len2, _ref1, _ref2, _ref3;
+            _ref1 = controller.selection.models;
+            for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+              model = _ref1[_j];
+              if (!model.complete) {
+                return;
+              }
+            }
+            header = "";
+            first = true;
+            _ref2 = controller.model.models[0].attributes;
+            for (key in _ref2) {
+              value = _ref2[key];
+              if (!first) {
+                header += ",";
+              }
+              first = false;
+              header += key;
+            }
+            result = header + "\n";
+            _ref3 = controller.selection.models;
+            for (_k = 0, _len2 = _ref3.length; _k < _len2; _k++) {
+              person = _ref3[_k];
+              result += person.to_csv() + "\n";
+            }
+            data = 'data:text/csv,' + encodeURIComponent(result);
+            return window.location = data;
+          }));
+        }
+        return _results;
       });
     }
 
@@ -46,6 +91,7 @@
       this.query = query;
       if (this.query.length < 3) {
         this.query = "";
+        this.selection = this.model;
         this.view.display(this.model);
         return;
       }
@@ -84,9 +130,10 @@
       this.model = new Bolk.Persons();
       for (_i = 0, _len = data.length; _i < _len; _i++) {
         person = data[_i];
-        this.model.add(new Bolk.Person(_.extend(person, {
-          complete: true
-        })));
+        person = new Bolk.Person(_.extend(person, {
+          complete: false
+        }));
+        this.model.add(person);
       }
       return this._filter(this.query);
     };
