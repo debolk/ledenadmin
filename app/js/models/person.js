@@ -17,22 +17,32 @@
     }
 
     Person.prototype.matches = function(filter) {
-      var matching, options, part, _i, _j, _len, _len1;
+      var andclause, orclause, satisfied, satisfies, _i, _j, _len, _len1;
+      satisfies = function(heap, words) {
+        var word, _i, _len;
+        for (_i = 0, _len = words.length; _i < _len; _i++) {
+          word = words[_i];
+          if (heap.indexOf(word) === -1) {
+            return false;
+          }
+        }
+        return true;
+      };
       for (_i = 0, _len = filter.length; _i < _len; _i++) {
-        options = filter[_i];
-        matching = true;
-        for (_j = 0, _len1 = options.length; _j < _len1; _j++) {
-          part = options[_j];
-          if (this.index.indexOf(part) === -1) {
-            matching = false;
+        andclause = filter[_i];
+        satisfied = false;
+        for (_j = 0, _len1 = andclause.length; _j < _len1; _j++) {
+          orclause = andclause[_j];
+          if (satisfies(this.index, orclause)) {
+            satisfied = true;
             break;
           }
         }
-        if (matching) {
-          return true;
+        if (!satisfied) {
+          return false;
         }
       }
-      return false;
+      return true;
     };
 
     Person.prototype.merge_operculum = function(finish) {

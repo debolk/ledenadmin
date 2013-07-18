@@ -83,7 +83,7 @@
     }
 
     MembersPageController.prototype._filter = function(query) {
-      var part, person, tree, _i, _len, _ref;
+      var branch, branches, leaf, part, person, tree, _i, _j, _len, _len1, _ref;
       this.query = query;
       if (this.query.length < 3) {
         this.query = "";
@@ -91,21 +91,38 @@
         this.view.display(this.model);
         return;
       }
-      tree = this.query.split(' or ');
-      tree = (function() {
+      branches = this.query.split(' and ');
+      tree = [];
+      branches = (function() {
         var _i, _len, _results;
         _results = [];
-        for (_i = 0, _len = tree.length; _i < _len; _i++) {
-          part = tree[_i];
-          _results.push(part.split(' and '));
+        for (_i = 0, _len = branches.length; _i < _len; _i++) {
+          part = branches[_i];
+          if (part.trim().length !== 0) {
+            _results.push(part);
+          }
         }
         return _results;
       })();
+      for (_i = 0, _len = branches.length; _i < _len; _i++) {
+        branch = branches[_i];
+        tree.push((function() {
+          var _j, _len1, _ref, _results;
+          _ref = branch.split(' or ');
+          _results = [];
+          for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+            leaf = _ref[_j];
+            if (leaf.trim().length !== 0) {
+              _results.push(leaf.trim().split(' '));
+            }
+          }
+          return _results;
+        })());
+      }
       this.selection = new Bolk.Persons;
-      console.log(tree);
       _ref = this.model.models;
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        person = _ref[_i];
+      for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+        person = _ref[_j];
         if (person.matches(tree)) {
           this.selection.add(person);
         }

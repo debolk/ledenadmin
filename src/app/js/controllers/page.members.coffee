@@ -75,11 +75,15 @@ class Bolk.MembersPageController extends Bolk.PageController
 			@view.display @model
 			return
 
-		tree = @query.split(' or ');
-		tree = (part.split(' and ') for part in tree)
+		branches = @query.split(' and ')
+		tree = []
+		
+		branches = (part for part in branches when part.trim().length != 0)
+
+		for branch in branches
+			tree.push (leaf.trim().split(' ') for leaf in branch.split(' or ') when leaf.trim().length != 0)
 
 		@selection = new Bolk.Persons
-		console.log tree
 		for person in @model.models
 			if person.matches tree
 				@selection.add person

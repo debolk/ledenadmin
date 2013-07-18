@@ -10,15 +10,21 @@ class Bolk.Person extends Backbone.Model
 		@index = @index.toLowerCase()
 
 	matches: (filter) ->
-		for options in filter
-			matching = true
-			for part in options
-				if @index.indexOf(part) == -1
-					matching = false
+		satisfies = (heap, words) ->
+			for word in words
+				if heap.indexOf(word) == -1
+					return false
+			return true
+
+		for andclause in filter
+			satisfied = false
+			for orclause in andclause
+				if satisfies @index, orclause
+					satisfied = true
 					break
-			if matching
-				return true
-		return false
+			if not satisfied
+				return false
+		return true
 
 	merge_operculum: ( finish = -> {} ) ->
 		if @complete
