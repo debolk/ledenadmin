@@ -26,7 +26,7 @@
 		</div>\
 		<form class="form-inline" id="search">\
 			<div class="controls">\
-				<input id="search" type="text" class="input-big" placeholder="Search...">\
+				<input id="search-field" type="text" class="input-big" placeholder="Search...">\
 			</div>\
 			<div class="actions">\
 				<a data-route="/new">Add member</a>\

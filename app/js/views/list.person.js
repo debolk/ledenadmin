@@ -19,12 +19,13 @@
       this.render();
       this.items = {};
       return this.model.forEach(function(person) {
-        var _ref1, _ref2;
+        var li, _ref1, _ref2, _ref3;
 
         _this.items[(_ref1 = person.get('uid')) != null ? _ref1 : person.cid] = new Bolk.PersonItemView({
           model: person
         });
-        return _this.$list.append(_this.items[(_ref2 = person.get('uid')) != null ? _ref2 : person.cid].$el);
+        _this.$list.append((li = _this.items[(_ref2 = person.get('uid')) != null ? _ref2 : person.cid].$el));
+        return li.attr('id', 'person-' + ((_ref3 = person.get('uid')) != null ? _ref3 : person.cid));
       });
     };
 

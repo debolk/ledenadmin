@@ -10,34 +10,18 @@ class Bolk.MembersPageController extends Bolk.PageController
 	#
 	constructor: ( @filter ) ->
 		super new Bolk.MembersPage( @_titlefor @filter )
-		if window.search_query == undefined
-			@query = "membership:lid"
-		else
-			@query = window.search_query
-		
+		@query = window.search_query ? "membership:lid"
+				
 		# Lets see if we have members data
 		locache.async.get( 'members-page' ).finished( ( data ) =>
-			#unless data
-			@_fetchMembers()
-			#else
-			#	@_parseMembers data
+			unless data
+				@_fetchMembers()
+			else
+				@_parseMembers data
 		)
 
 		# Bind to search form
-		controller = this
-		@search = $ 'input#search'
-		@search.val @query
-		@search.keyup ->
-			filter = controller.search.val().toLowerCase()
-			window.search_query = filter
-			controller._filter filter
-		@search.keypress ( event ) ->
-			if event.keyCode == 13
-				event.preventDefault()
-				# Select first
-				model = controller.selection.models[0];
-				uid = model.attributes.uid
-				window.location.hash = "/member/" + uid
+		@_bindSearch()
 
 		@export = $ '<a>export</a>';
 		$('.actions').append(' | ');
@@ -65,30 +49,72 @@ class Bolk.MembersPageController extends Bolk.PageController
 					data = 'data:text/csv,' + encodeURIComponent(result)
 					window.location =data;
 
+	# Binds the search field
 	#
+	_bindSearch: () ->
+		@search = $ '#search-field'
+		@search.val @query
+		
+		@search.keyup =>
+			filter = @search.val().toLowerCase()
+			window.search_query = filter
+			@_filter filter
+			
+		$( '#search' ).submit ( event ) =>
+			event.preventDefault()
+			model = @selection.models[0]
+			document.router.navigate "//member/#{ model.attributes.uid }", { trigger: true }
+			return false
+					
+	# Filters on a query
 	#
+	# @param query [String] the query
 	#
-	_filter: (@query) ->
+	_filter: ( @query ) ->
+		@selection = []
+		@hideAllPersons()
 		if @query.length < 3
 			@query = ""
-			@selection = @model
-			@view.display @model
-			return
+			@showAllPersons()
+			return this
+		
+		for person in @model.models when person.matches( @query )
+			@selection.push person
+			@showPerson person.get 'uid' 
+			
+		return this
+		
+	#
+	#
+	#
+	showAllPersons: () ->
+		$( '#members' ).children().css( 'display', 'inline-block' )
+		return this
+		
+	hideAllPersons: () ->
+		$( '#members' ).children().css( 'display', 'none' )
+		return this
+	
+	#
+	#
+	#	
+	hidePerson: ( uid ) ->
+		console.log 'hide ' + uid
+		$( "#person-#{ uid }" ).css( 'display', 'none' )
+		return this
+		
+	showPerson: ( uid ) ->
+		console.log 'show ' + uid
+		$( "#person-#{ uid }" ).css( 'display', 'inline-block' )
+		return this
 
-		@selection = new Bolk.Persons
-		console.log @query
-		for person in @model.models
-			if person.matches @query
-				@selection.add person
-
-		@view.display @selection
+	
 	#
 	#
 	#
 	_fetchMembers: () ->
-		console.log 'HALLOO'
 		@showLoader()
-		blip = new Bolk.BlipRequest 'persons'
+		blip = new Bolk.BlipRequest 'persons' 
 		blip.request.always( ( data ) =>
 			@hideLoader()
 			if blip.result
@@ -107,6 +133,7 @@ class Bolk.MembersPageController extends Bolk.PageController
 			person = new Bolk.Person( _.extend( person, { complete : false } ) )
 			@model.add person
 
+		@view.display @model
 		@_filter @query
 		
 	# Gets the title for a filter
