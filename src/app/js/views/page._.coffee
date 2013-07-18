@@ -11,12 +11,15 @@ class Bolk.Page extends Bolk.ViewCollection
 		super 'body'
 
 		@header = @container.find '#masthead'
-		@contents = @container.find '#content'
+		@container = @container.find '#content'
+		@container.append ( @errors = $ '<div id="errors"></div>' )
+		@container.append ( @loading = $ '<div id="loader"></div>' )
+		@container.append ( @contents = $ '<div id="contents"></div>' )
 		@footer = @container.find '#mastfoot'
 		
 		@_fillHeader title
 		
-	#
+	# Gets the header template
 	#
 	#
 	_getHeaderTemplate: () ->
@@ -34,28 +37,77 @@ class Bolk.Page extends Bolk.ViewCollection
 				<a data-route="/new">Add member</a>
 			</div>
 		</form>
-		</div>'
+		'
+			
+	# Shows the loader
+	#
+	# @return [self] the chainable self
+	#
+	showLoader: () ->
+		@loading.html( $ "<div>LOADINGGGG</div>" )
+		
+		return this
+		
+	# Hides the loader
+	#
+	# @return [self] the chainable self
+	#
+	hideLoader: () ->	
+		@loading.empty()
+		
+	# Creates a alert div
+	#
+	# @param description [String] the alert message
+	# @param title [String] the title message
+	# @param style [String] the style
+	# @return [jQuery.Elem] the element 
+	#
+	createAlert: ( description, title = "Warning!", style = "") ->
+		$ "<div class='alert #{ style }'>
+			<button type='button' class='close' data-dismiss='alert'>&times</button>
+			<strong>#{ title }</strong> #{ description }
+		</div>"
 
-	#
-	# Creates a dialog div
-	#
-	createDialog: ( description, title = "Warning!", style = "") ->
-		return '<div class="alert ' + style + '">
-		<button type="button" class="close" data-dismiss="alert">&times</button>
-		<strong>' + title + '</strong> ' + description + '
-		</div>'
-
-	#
 	# Creates an error div
+	#
+	# @param description [String] the error message
+	# @return [jQuery.Elem] the element 
 	#
 	createError: ( description ) ->
-		@createDialog description, "Error!", "alert-error"
+		@createAlert description, "Error!", "alert-error"
 
+	# Creates a success div
 	#
-	# Creates an error div
+	# @param description [String] the success message
+	# @return [jQuery.Elem] the element 
 	#
-	createSucces: ( description ) ->
-		@createDialog description, "Succes!", "alert-success"
+	createSuccess: ( description ) ->
+		@createAlert description, "Succes!", "alert-success"
+		
+	# Clears all errors
+	#
+	# @return [self] the chainable self
+	#
+	clearErrors: ->
+		@errors.empty()
+		return this
+	
+	# Show a success message
+	#
+	# @param description [String] the success message
+	# @return [self] the chainable self
+	#
+	showSuccess: ->
+		@errors.append( @createSuccess arguments... )
+		return this
+		
+	# Show an error message
+	#
+	# @param description [String] the error message
+	# @return [self] the chainable self
+	#
+	showError: ->
+		@errors.append( @createError arguments... )
 		
 	# Fills the header template with a title
 	#
@@ -79,11 +131,6 @@ class Bolk.Page extends Bolk.ViewCollection
 	#
 	clear: () ->
 		@header.empty()
-		@contents.empty()
+		@container.empty()
 		return this
-		
-			
-	showLoader: () ->
-		
-	hideLoader: () ->
 			

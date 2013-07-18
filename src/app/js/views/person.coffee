@@ -30,8 +30,6 @@ class Bolk.PersonView extends Backbone.View
 		</header>
 		
 		<img src="<%= img %>"/>
-
-		<div id="errors"></div>
 		
 		<div class="control-group">
 			<label class="control-label" for="lidmaatschap">

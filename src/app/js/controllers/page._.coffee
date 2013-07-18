@@ -30,7 +30,18 @@ class Bolk.PageController extends Bolk.Controller
 		event.preventDefault()
 		return false
 		
-	showLoader: ->
+	# Shows the loader
+	#
+	# @return [self] the chainable self
+	#
+	showLoader: () ->
+		@view.showLoader()
+		return this
 		
-	
-	hideLoader: ->
+	# Hides the loader
+	#
+	# @return [self] the chainable self
+	#
+	hideLoader: () ->	
+		@view.hideLoader()
+		return this
