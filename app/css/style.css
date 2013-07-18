@@ -64,6 +64,8 @@ ul.members .box {
 	margin: 0;
 	height: 150px;
 	overflow: auto;
+	background: #eee;
+	display: block;
 }
 
 a[data-route] {
