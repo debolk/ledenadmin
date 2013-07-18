@@ -27,18 +27,23 @@ class Bolk.Person extends Backbone.Model
 		return true
 
 	merge_operculum: ( finish = -> {} ) ->
+		
+		promise = $.Deferred()
+		
 		if @complete
 			finish()
-			return
+			return promise.resolve( @ ).promise()
+			
 		operculum = new Bolk.OperculumRequest "person/#{@attributes.uid}"
 		operculum.request.done ( data ) =>
-			@set(data)
-			@complete = true
+			@set data
 			locache.async.set( 'member-page-' + @attributes.uid, @attributes )
-			finish()
-		operculum.request.fail =>
+		operculum.request.always =>
 			@complete = true
 			finish()
+			promise.resolve @
+			
+		return promise.promise()
 
 	to_csv: ->
 		line = ""
