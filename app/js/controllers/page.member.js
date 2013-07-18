@@ -25,7 +25,7 @@
           return _this._parseMember(data);
         }
       });
-      $('input#search').prop('disabled', true);
+      $('input#search-field').prop('disabled', true);
     }
 
     MemberPageController.prototype._fetchMember = function(display) {

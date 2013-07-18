@@ -25,7 +25,7 @@ class Bolk.MemberPageController extends Bolk.PageController
 				@_parseMember data
 		)
 
-		$('input#search').prop( 'disabled', true )
+		$('input#search-field').prop( 'disabled', true )
 		
 	# Fetch member
 	#

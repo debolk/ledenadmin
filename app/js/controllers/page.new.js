@@ -21,11 +21,12 @@
         return false;
       });
       this._parseMember({});
-      $('input#search').attr('disabled', 'disabled');
+      $('input#search-field').attr('disabled', 'disabled');
     }
 
     NewPageController.prototype.createMember = function(data) {
-      var api, blip, blipdata, controller;
+      var api, blip, blipdata, controller,
+        _this = this;
       controller = this;
       api = "persons";
       blipdata = JSON.stringify(data['input']['blip']);
@@ -33,7 +34,7 @@
       $('#errors').children().remove();
       blip.request.fail(function(error) {
         console.log(error);
-        return $('#errors').append(controller.view.createError(error.responseText));
+        return _this.view.showError(error.responseText);
       });
       return blip.request.done(function(result) {
         var oper, operdata, uid;
@@ -51,12 +52,12 @@
           _results = [];
           for (_i = 0, _len = errors.length; _i < _len; _i++) {
             message = errors[_i];
-            _results.push($('#errors').append(controller.view.createError(message)));
+            _results.push(_this.view.showError(message));
           }
           return _results;
         });
         return oper.request.done(function(result) {
-          $('#errors').append(controller.view.createSucces("Opslaan gelukt"));
+          _this.view.showSuccess('Opslaan gelukt');
           return window.location.hash = "/member/" + uid;
         });
       });
