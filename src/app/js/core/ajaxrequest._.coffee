@@ -5,8 +5,8 @@ class Bolk.AjaxRequest
 	# Creates a new Ajax Request
 	# 
 	# @param api [String] the api to invoke
-	# @param method [String] the method to use
 	# @param params [Object] the parameters
+	# @param method [String] the method to use
 	#
 	constructor: ( @secure = true, @api , @params = {}, @method = 'get' ) ->
 		console.debug "#{ @method } #{ @url() }"
