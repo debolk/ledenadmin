@@ -193,12 +193,28 @@
     };
 
     PersonView.prototype.disable = function() {
-      this.$el.find('input, textarea, select, button').prop('disabled', true);
+      this.$el.find('input, textarea').each(function(i, el) {
+        var display;
+
+        el = $(el).prop('disabled', true).css('display', 'none');
+        return display = $("<div id='" + (el.attr('id')) + "-display' } ' class='input-display " + (el.attr('class')) + "'></div>").html(el.val()).insertAfter(el);
+      });
+      this.$el.find('select').each(function(i, el) {
+        var display;
+
+        el = $(el).prop('disabled', true).css('display', 'none');
+        return display = $("<div id='" + (el.attr('id')) + "-display' } ' class='input-display " + (el.attr('class')) + "'></div>").html(el.children(':selected').text()).insertAfter(el);
+      });
+      this.$el.find('button').prop('disabled', true).css('display', 'none');
       return $('[data-action="toggleEdit"]').data('state', 'disabled');
     };
 
     PersonView.prototype.enabled = function() {
-      $(this.el).find('input, textarea, select, button').prop('disabled', false);
+      this.$el.find('input, textarea, select').each(function(i, el) {
+        el = $(el).prop('disabled', false).css('display', 'inline-block');
+        return $("#" + (el.attr('id')) + "-display").remove();
+      });
+      this.$el.find('button').prop('disabled', false).css('display', 'inline-block');
       return $('[data-action="toggleEdit"]').data('state', 'enabled');
     };
 

@@ -119,3 +119,15 @@ header .control-group input#name_last, input#name_first {
 	box-shadow: none;
 	border: none;
 }
+
+.input-display {
+	display: inline-block;
+}
+
+.input-display.input-big {
+	font-size: 36pt;
+	font-weight: bold;
+	height: auto;
+	margin-right: 12px;
+	line-height: 0;
+}

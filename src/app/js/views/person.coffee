@@ -190,19 +190,26 @@ class Bolk.PersonView extends Backbone.View
 	#
 	#
 	disable: ->
-		#elements = $( @el ).find( 'input, textarea, select, button' )
-		#@$el.find( 'input' ).each ( i, el ) ->
-		#	el = $( el )
-		#	console.log el
-		#	$( "<div id='#{ el.attr( 'id' ) + '-display' } ' class='input-big'></div>" ).html( el.value() ).insertAfter el
-		@$el.find( 'input, textarea, select, button' ).prop( 'disabled', true )
+		@$el.find( 'input, textarea' ).each ( i, el ) ->
+			el = $( el ).prop( 'disabled', true ).css( 'display', 'none' )
+			display = $( "<div id='#{ el.attr( 'id' ) }-display' } ' class='input-display #{ el.attr 'class' }'></div>" ).html( el.val() ).insertAfter el
+			
+		@$el.find( 'select' ).each ( i, el ) ->
+			el = $( el ).prop( 'disabled', true ).css( 'display', 'none' )
+			display = $( "<div id='#{ el.attr( 'id' ) }-display' } ' class='input-display #{ el.attr 'class' }'></div>" ).html( el.children( ':selected' ).text() ).insertAfter el
+			
+		@$el.find( 'button' ).prop( 'disabled', true ).css( 'display', 'none' )
 		$( '[data-action="toggleEdit"]' ).data( 'state', 'disabled' )
 	
 	#
 	#
 	#
 	enabled: ->
-		$( @el ).find( 'input, textarea, select, button' ).prop( 'disabled', false )
+		@$el.find( 'input, textarea, select' ).each ( i, el ) ->
+			el = $( el ).prop( 'disabled', false ).css( 'display', 'inline-block' )
+			$( "##{ el.attr( 'id' ) }-display" ).remove()
+			
+		@$el.find( 'button' ).prop( 'disabled', false ).css( 'display', 'inline-block' )
 		$( '[data-action="toggleEdit"]' ).data( 'state', 'enabled' )
 		
 	_bindToggle: ->
