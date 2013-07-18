@@ -54,7 +54,7 @@
 				Initialen\
 			</label>\
 			<div class="controls">\
-				<input id="initials" name="input[blip][initials]" maxlength="20" value="<%= initials %>" type="text">\
+				<input id="initials" name="input[blip][initials]" maxlength="20" value="<%= initials %>" type="text" pattern="[a-zA-Z]*" title="Alleen letters">\
 			</div>\
 		</div>\
 		<div class="control-group">\
