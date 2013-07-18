@@ -33,11 +33,11 @@
 				<label title="Mobile Phone Number">\
 					<i class="icon-user"></i> <input class="" id="contact_mobile" name="input[blip][mobile]" placeholder="" maxlength="20" value="<%= mobile %>" type="tel">\
 				</label>\
-				<label title="Parents Phone Number">\
+				<label title="Home Phone Number">\
 					<i class="icon-home"></i> <input class="" id="contact_phone" name="input[blip][phone]" placeholder="" maxlength="20" value="<%= phone %>" type="tel">\
 				</label>\
 				<label title="E-Mail Address">\
-					<i class="icon-envelope"></i> <input class="" id="contact_email" name="input[blip][email]" placeholder="" maxlength="20" value="<%= email %>" type="email" required>\
+					<i class="icon-envelope"></i> <input class="" id="contact_email" name="input[blip][email]" placeholder="" maxlength="254" value="<%= email %>" type="email" required>\
 				</label>\
 			</div>\
 		</header>\
@@ -136,7 +136,7 @@
 				Inauguratiedatum\
 			</label>\
 			<div class="controls">\
-				<input id="inauguration" name="input[operculum][inauguration]" maxlength="20" value="<%= inauguration %>" type="date">\
+				<input id="inauguration" name="input[operculum][inauguration]" maxlength="20" value="<%= inauguration %>" type="date" placeholder="yyyy-mm-dd">\
 			</div>\
 		</div>\
 		<div class="control-group">\
@@ -144,7 +144,7 @@
 				Lid-afbrief datum\
 			</label>\
 			<div class="controls">\
-				<input id="resignation_letter" name="input[operculum][resignation_letter]" maxlength="20" value="<%= resignation_letter %>" type="date">\
+				<input id="resignation_letter" name="input[operculum][resignation_letter]" maxlength="20" value="<%= resignation_letter %>" type="date" placeholder="yyyy-mm-dd">\
 			</div>\
 		</div>\
 		<div class="control-group">\
@@ -152,7 +152,7 @@
 				Lid-af\
 			</label>\
 			<div class="controls">\
-				<input id="resignation" name="input[operculum][resignation]" maxlength="20" value="<%= resignation %>" type="date">\
+				<input id="resignation" name="input[operculum][resignation]" maxlength="20" value="<%= resignation %>" type="date"  placeholder="yyyy-mm-dd">\
 			</div>\
 		</div>\
 		<div class="control-group">\
@@ -197,13 +197,13 @@
         var display;
 
         el = $(el).prop('disabled', true).css('display', 'none');
-        return display = $("<div id='" + (el.attr('id')) + "-display' } ' class='input-display " + (el.attr('class')) + "'></div>").html(el.val()).insertAfter(el);
+        return display = $("<div id='" + (el.attr('id')) + "-display' class='input-display " + (el.attr('class')) + "'></div>").html(el.val()).insertAfter(el);
       });
       this.$el.find('select').each(function(i, el) {
         var display;
 
         el = $(el).prop('disabled', true).css('display', 'none');
-        return display = $("<div id='" + (el.attr('id')) + "-display' } ' class='input-display " + (el.attr('class')) + "'></div>").html(el.children(':selected').text()).insertAfter(el);
+        return display = $("<div id='" + (el.attr('id')) + "-display' class='input-display " + (el.attr('class')) + "'></div>").html(el.children(':selected').text()).insertAfter(el);
       });
       this.$el.find('button').prop('disabled', true).css('display', 'none');
       return $('[data-action="toggleEdit"]').data('state', 'disabled');

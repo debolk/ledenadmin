@@ -8,7 +8,7 @@ class Bolk.AppRouter extends Backbone.Router
 		''				: 'members'
 		'home'			: 'members'
 		'members'		: 'members'
-		'new'				: 'newmember'
+		'new'			: 'newmember'
 		'members/:filter' : 'members'
 		'member/:id' 		: 'member'
 		'member/:id/:succes'		: 'member'
