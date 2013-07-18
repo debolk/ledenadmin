@@ -22,32 +22,7 @@ class Bolk.MembersPageController extends Bolk.PageController
 
 		# Bind to search form
 		@_bindSearch()
-
-		@export = $ '<a>export</a>';
-		$('.actions').append(' | ');
-		$('.actions').append(@export);
-		@export.click ->
-			for model in controller.selection.models
-				model.merge_operculum () ->
-					for model in controller.selection.models
-						if !model.complete
-							return
-
-					header = ""
-					first = true
-
-					for key, value of controller.model.models[0].attributes
-						header += "," unless first
-						first = false
-
-						header += key
-
-					result = header + "\n"
-					for person in controller.selection.models
-						result += person.to_csv() + "\n"
-						
-					data = 'data:text/csv,' + encodeURIComponent(result)
-					window.location =data;
+		@_createExport()
 
 	# Binds the search field
 	#
@@ -55,16 +30,46 @@ class Bolk.MembersPageController extends Bolk.PageController
 		@search = $ '#search-field'
 		@search.val @query
 		
-		@search.keyup =>
-			filter = @search.val().toLowerCase()
-			window.search_query = filter
-			@_filter filter
+		@search.keyup _.debounce( =>
+				filter = @search.val().toLowerCase()
+				window.search_query = filter
+				@_filter filter
+			, 400 )
 			
 		$( '#search' ).submit ( event ) =>
 			event.preventDefault()
-			model = @selection.models[0]
-			document.router.navigate "//member/#{ model.attributes.uid }", { trigger: true }
+			model = @selection?[0]
+			document.router.navigate "//member/#{ model.attributes.uid }", { trigger: true } if model?
 			return false
+			
+	_createExport: () ->
+		
+		@exporter = $ '<a>export</a>'
+		$('.actions').append ' | '
+		$('.actions').append @exporter
+		
+		@exporter.click =>
+			return if @selection.length is 0
+			
+			@showLoader()
+			
+			actions = []
+			for model in @selection
+				action = model.merge_operculum() 
+				actions.push action if action?
+			
+			$.when( actions... ).then () =>
+				headers = []
+				headers.push key for key, value of @selection[ 0 ].attributes
+				
+				result = headers.join( ',' ) + "\n"
+				result += person.to_csv() + "\n" for person in @selection
+				
+				@hideLoader()
+				
+				data = 'data:text/csv,' + encodeURIComponent(result)
+				window.location = data
+			, () => console.error arguments
 					
 	# Filters on a query
 	#
