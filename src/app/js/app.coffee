@@ -74,7 +74,7 @@ class Bolk.AppRouter extends Backbone.Router
 	# @param code [String] the authentication code
 	#
 	getToken: ( code, state ) ->
-		console.debug "Logging in " + state + " vs " + locache.get 'session_token_state'
+		console.debug "Logging in #{ state } : #{ typeof state } vs #{ locache.get 'session_token_state' } : #{ typeof ( locache.get 'session_token_state'  ) }"
 		@session.login( code, state ).always( =>
 			@redirectWithoutSearch()
 		)

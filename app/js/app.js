@@ -100,7 +100,7 @@
     AppRouter.prototype.getToken = function(code, state) {
       var _this = this;
 
-      console.debug("Logging in " + state + " vs " + locache.get('session_token_state'));
+      console.debug("Logging in " + state + " : " + (typeof state) + " vs " + (locache.get('session_token_state')) + " : " + (typeof (locache.get('session_token_state'))));
       return this.session.login(code, state).always(function() {
         return _this.redirectWithoutSearch();
       });
