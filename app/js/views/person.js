@@ -100,7 +100,7 @@
 				Geboortedatum\
 			</label>\
 			<div class="controls">\
-				<input id="dateofbirth" name="input[blip][dateofbirth]" maxlength="20" value="<%= dateofbirth %>" type="date">\
+				<input id="dateofbirth" name="input[blip][dateofbirth]" maxlength="100" value="<%= dateofbirth %>" type="date">\
 			</div>\
 		</div>\
 		\
@@ -136,7 +136,7 @@
 				Inauguratiedatum\
 			</label>\
 			<div class="controls">\
-				<input id="inauguration" name="input[operculum][inauguration]" maxlength="20" value="<%= inauguration %>" type="date" placeholder="yyyy-mm-dd">\
+				<input id="inauguration" name="input[operculum][inauguration]" maxlength="100" value="<%= inauguration %>" type="date" placeholder="yyyy-mm-dd">\
 			</div>\
 		</div>\
 		<div class="control-group">\
@@ -144,7 +144,7 @@
 				Lid-afbrief datum\
 			</label>\
 			<div class="controls">\
-				<input id="resignation_letter" name="input[operculum][resignation_letter]" maxlength="20" value="<%= resignation_letter %>" type="date" placeholder="yyyy-mm-dd">\
+				<input id="resignation_letter" name="input[operculum][resignation_letter]" maxlength="100" value="<%= resignation_letter %>" type="date" placeholder="yyyy-mm-dd">\
 			</div>\
 		</div>\
 		<div class="control-group">\
@@ -152,7 +152,7 @@
 				Lid-af\
 			</label>\
 			<div class="controls">\
-				<input id="resignation" name="input[operculum][resignation]" maxlength="20" value="<%= resignation %>" type="date"  placeholder="yyyy-mm-dd">\
+				<input id="resignation" name="input[operculum][resignation]" maxlength="100" value="<%= resignation %>" type="date"  placeholder="yyyy-mm-dd">\
 			</div>\
 		</div>\
 		<div class="control-group">\
@@ -189,6 +189,7 @@
         resignation_letter: this.model.get('resignation_letter'),
         resignation: this.model.get('resignation')
       };
+      console.info(data);
       return this.$el.html(_.template(this.getTemplate(), data));
     };
 
