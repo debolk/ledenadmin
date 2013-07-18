@@ -30,18 +30,24 @@ class Bolk.MembersPageController extends Bolk.PageController
 		@search = $ '#search-field'
 		@search.val @query
 		
-		@search.keyup _.debounce( =>
-				filter = @search.val().toLowerCase()
-				window.search_query = filter
-				@_filter filter
-			, 400 )
+		@search.keyup _.debounce( ( => @processFilter() ), 400 )
 			
 		$( '#search' ).submit ( event ) =>
 			event.preventDefault()
+			@processFilter()
 			model = @selection?[0]
 			document.router.navigate "//member/#{ model.attributes.uid }", { trigger: true } if model?
 			return false
 			
+	#
+	#
+	processFilter: ->
+		filter = @search.val().toLowerCase()
+		window.search_query = filter
+		@_filter filter
+		
+	#
+	#
 	_createExport: () ->
 		
 		@exporter = $ '<a>export</a>'
