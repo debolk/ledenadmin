@@ -39,7 +39,7 @@ class Bolk.BlipRequest extends Bolk.AjaxRequest
 	# @return [Bolk.BlipRequest] the request
 	#
 	@photo_src: ( uid, width, height ) ->
-		"#{Bolk.BlipRequest.EndPoint}#{BlipRequest.photo_api( uid, width, height )}?access_token=#{document.router.session.token}"
+		"#{Bolk.BlipRequest.EndPoint}#{BlipRequest.photo_api( uid, width, height )}?access_token=#{document.router?.session?.token}"
 		
 	# Gets the photo api url for a person with uid
 	#

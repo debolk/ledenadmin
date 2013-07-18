@@ -7,29 +7,39 @@ class Bolk.PersonView extends Backbone.View
 	initialize: ->
 		_.bindAll @
 		@render()
+		@_bindToggle()
+		@disable()
 		
 	# Gets the person view template
 	#
 	# @return [String] the template
 	#
 	getTemplate: ->
-		'<header>
+		'<header id="person-header">
 			<div class="control-group">
 				<div class="controls">
 					<input class="input-big" id="name_first" name="input[blip][firstname]" placeholder="First name" maxlength="100" value="<%= firstname %>" required type="text">
 					<input class="input-big" id="name_last" name="input[blip][lastname]" placeholder="Last name" maxlength="100" value="<%= lastname %>" required type="text">
-					<button data-action="toggleEdit"><i class="icon-pencil"></i></button>
+					<a class="btn btn-primary btn-large" data-action="toggleEdit"><i class="icon-pencil icon-white"></i></a>
 				</div>
 			</div>
 			
 			<div class="contact">
-				<img src="http://placehold.it/32x32.png&text=M"/> <input class="" id="contact_mobile" name="input[blip][mobile]" placeholder="" maxlength="20" value="<%= mobile %>" type="tel">
-				<img src="http://placehold.it/32x32.png&text=P"/> <input class="" id="contact_phone" name="input[blip][phone]" placeholder="" maxlength="20" value="<%= phone %>" type="tel">
-				<img src="http://placehold.it/32x32.png&text=E"/> <input class="" id="contact_email" name="input[blip][email]" placeholder="" maxlength="20" value="<%= email %>" type="email" required>
+				<label title="Mobile Phone Number">
+					<i class="icon-user"></i> <input class="" id="contact_mobile" name="input[blip][mobile]" placeholder="" maxlength="20" value="<%= mobile %>" type="tel">
+				</label>
+				<label title="Parents Phone Number">
+					<i class="icon-home"></i> <input class="" id="contact_phone" name="input[blip][phone]" placeholder="" maxlength="20" value="<%= phone %>" type="tel">
+				</label>
+				<label title="E-Mail Address">
+					<i class="icon-envelope"></i> <input class="" id="contact_email" name="input[blip][email]" placeholder="" maxlength="20" value="<%= email %>" type="email" required>
+				</label>
 			</div>
 		</header>
 		
-		<img src="<%= img %>"/>
+		<div id="photo-box">
+			<img src="<%= img %>"/ id="photo">
+		</div>
 		
 		<div class="control-group">
 			<label class="control-label" for="lidmaatschap">
@@ -145,7 +155,7 @@ class Bolk.PersonView extends Backbone.View
 				Opslaan
 			</label>
 			<div class="controls">
-				<input id="submit" name="input[submit]" value="Opslaan" type="submit">
+				<button id="submit" class="btn btn-primary" name="input[submit]" value="Opslaan" type="submit"><i class="icon-ok icon-white"></i> Opslaan</button>
 			</div>
 		</div>
 		<!-- etc -->'
@@ -174,4 +184,32 @@ class Bolk.PersonView extends Backbone.View
 			resignation_letter : @model.get 'resignation_letter'
 			resignation : @model.get 'resignation'
 		}
-		$( @el ).html _.template( @getTemplate(), data )
+		@$el.html _.template( @getTemplate(), data )
+	
+	#
+	#
+	#
+	disable: ->
+		#elements = $( @el ).find( 'input, textarea, select, button' )
+		#@$el.find( 'input' ).each ( i, el ) ->
+		#	el = $( el )
+		#	console.log el
+		#	$( "<div id='#{ el.attr( 'id' ) + '-display' } ' class='input-big'></div>" ).html( el.value() ).insertAfter el
+		@$el.find( 'input, textarea, select, button' ).prop( 'disabled', true )
+		$( '[data-action="toggleEdit"]' ).data( 'state', 'disabled' )
+	
+	#
+	#
+	#
+	enabled: ->
+		$( @el ).find( 'input, textarea, select, button' ).prop( 'disabled', false )
+		$( '[data-action="toggleEdit"]' ).data( 'state', 'enabled' )
+		
+	_bindToggle: ->
+		$( @el ).on( 'click', '[data-action="toggleEdit"]', ( event ) => 
+			
+			if $( event.currentTarget ).data( 'state' ) is 'enabled'
+				@disable()
+			else
+				@enabled()
+		)

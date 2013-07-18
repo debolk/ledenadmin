@@ -87,6 +87,35 @@ header .control-group input {
 	display: inline;
 }
 
-header .control-group input#name_last {
+header .control-group input#name_last, input#name_first {
 	width: auto;
+}
+
+/* MEMBERS */
+
+#person-header {
+	margin-bottom: 32px;
+}
+
+.contact label {
+	display: inline-block;
+}
+
+.contact label  i {
+	margin: 0 8px 0 8px;
+}
+
+#photo-box {
+	position:absolute;
+	left: 500px;
+	background: #ddd;
+	border: 1px #333 solid;
+	width: 200px;
+	height: 200px;
+}
+	
+.person-form input[disabled], .person-form select[disabled], .person-form textarea[disabled] {
+	background: white;
+	box-shadow: none;
+	border: none;
 }

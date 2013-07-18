@@ -9,7 +9,7 @@ class Bolk.MemberPage extends Bolk.Page
 	constructor: ( title = 'Member', uid, edit = false ) ->
 		super title
 		@uid = uid
-		@el = $ '<form id="edit-member-' + uid + '" class="form-horizontal"></form>' 
+		@el = $ '<form id="edit-member-' + uid + '" class="form-horizontal person-form"></form>' 
 		@contents.append @el
 
 	#
