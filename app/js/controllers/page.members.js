@@ -15,6 +15,7 @@
       this.filter = filter;
       MembersPageController.__super__.constructor.call(this, new Bolk.MembersPage(this._titlefor(this.filter)));
       this.query = (_ref = window.search_query) != null ? _ref : "membership:lid";
+      this.sortfield = "firstname";
       locache.async.get('members-page').finished(function(data) {
         if (!data) {
           return _this._fetchMembers();
@@ -208,8 +209,19 @@
         }));
         this.model.add(person);
       }
+      this.sort();
       this.view.display(this.model);
       return this._filter(this.query);
+    };
+
+    MembersPageController.prototype.sort = function(sortfield) {
+      var _this = this;
+
+      this.sortfield = sortfield != null ? sortfield : this.sortfield;
+      this.model.comparator = function(model) {
+        return model.get(_this.sortfield).toLowerCase();
+      };
+      return this.model.sort();
     };
 
     MembersPageController.prototype._titlefor = function(filter) {

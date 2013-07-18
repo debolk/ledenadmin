@@ -11,6 +11,7 @@ class Bolk.MembersPageController extends Bolk.PageController
 	constructor: ( @filter ) ->
 		super new Bolk.MembersPage( @_titlefor @filter )
 		@query = window.search_query ? "membership:lid"
+		@sortfield = "firstname"
 				
 		# Lets see if we have members data
 		locache.async.get( 'members-page' ).finished( ( data ) =>
@@ -151,9 +152,17 @@ class Bolk.MembersPageController extends Bolk.PageController
 		for person in data
 			person = new Bolk.Person( _.extend( person, { complete : false } ) )
 			@model.add person
-
+		
+		@sort()
 		@view.display @model
 		@_filter @query
+		
+	#
+	#
+	#
+	sort: ( @sortfield = @sortfield ) ->
+		@model.comparator = ( model ) => model.get( @sortfield ).toLowerCase()
+		@model.sort()
 		
 	# Gets the title for a filter
 	#
