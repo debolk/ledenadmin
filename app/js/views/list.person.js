@@ -17,11 +17,12 @@
       this.render();
       this.items = {};
       return this.model.forEach(function(person) {
-        var _ref, _ref1;
+        var li, _ref, _ref1, _ref2;
         _this.items[(_ref = person.get('uid')) != null ? _ref : person.cid] = new Bolk.PersonItemView({
           model: person
         });
-        return _this.$list.append(_this.items[(_ref1 = person.get('uid')) != null ? _ref1 : person.cid].$el);
+        _this.$list.append((li = _this.items[(_ref1 = person.get('uid')) != null ? _ref1 : person.cid].$el));
+        return li.attr('id', 'person-' + ((_ref2 = person.get('uid')) != null ? _ref2 : person.cid));
       });
     };
 

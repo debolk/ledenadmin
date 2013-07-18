@@ -10,58 +10,42 @@
     MembersPageController.CacheTime = 120;
 
     function MembersPageController(filter) {
-      var controller,
+      var _ref,
         _this = this;
       this.filter = filter;
       MembersPageController.__super__.constructor.call(this, new Bolk.MembersPage(this._titlefor(this.filter)));
-      if (window.search_query === void 0) {
-        this.query = "membership:lid";
-      } else {
-        this.query = window.search_query;
-      }
+      this.query = (_ref = window.search_query) != null ? _ref : "membership:lid";
       locache.async.get('members-page').finished(function(data) {
-        return _this._fetchMembers();
-      });
-      controller = this;
-      this.search = $('input#search');
-      this.search.val(this.query);
-      this.search.keyup(function() {
-        filter = controller.search.val().toLowerCase();
-        window.search_query = filter;
-        return controller._filter(filter);
-      });
-      this.search.keypress(function(event) {
-        var model, uid;
-        if (event.keyCode === 13) {
-          event.preventDefault();
-          model = controller.selection.models[0];
-          uid = model.attributes.uid;
-          return window.location.hash = "/member/" + uid;
+        if (!data) {
+          return _this._fetchMembers();
+        } else {
+          return _this._parseMembers(data);
         }
       });
+      this._bindSearch();
       this["export"] = $('<a>export</a>');
       $('.actions').append(' | ');
       $('.actions').append(this["export"]);
       this["export"].click(function() {
-        var model, _i, _len, _ref, _results;
-        _ref = controller.selection.models;
+        var model, _i, _len, _ref1, _results;
+        _ref1 = controller.selection.models;
         _results = [];
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          model = _ref[_i];
+        for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+          model = _ref1[_i];
           _results.push(model.merge_operculum(function() {
-            var data, first, header, key, person, result, value, _j, _k, _len1, _len2, _ref1, _ref2, _ref3;
-            _ref1 = controller.selection.models;
-            for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
-              model = _ref1[_j];
+            var data, first, header, key, person, result, value, _j, _k, _len1, _len2, _ref2, _ref3, _ref4;
+            _ref2 = controller.selection.models;
+            for (_j = 0, _len1 = _ref2.length; _j < _len1; _j++) {
+              model = _ref2[_j];
               if (!model.complete) {
                 return;
               }
             }
             header = "";
             first = true;
-            _ref2 = controller.model.models[0].attributes;
-            for (key in _ref2) {
-              value = _ref2[key];
+            _ref3 = controller.model.models[0].attributes;
+            for (key in _ref3) {
+              value = _ref3[key];
               if (!first) {
                 header += ",";
               }
@@ -69,9 +53,9 @@
               header += key;
             }
             result = header + "\n";
-            _ref3 = controller.selection.models;
-            for (_k = 0, _len2 = _ref3.length; _k < _len2; _k++) {
-              person = _ref3[_k];
+            _ref4 = controller.selection.models;
+            for (_k = 0, _len2 = _ref4.length; _k < _len2; _k++) {
+              person = _ref4[_k];
               result += person.to_csv() + "\n";
             }
             data = 'data:text/csv,' + encodeURIComponent(result);
@@ -82,14 +66,38 @@
       });
     }
 
+    MembersPageController.prototype._bindSearch = function() {
+      var _this = this;
+      this.search = $('#search-field');
+      this.search.val(this.query);
+      this.search.keyup(function() {
+        var filter;
+        filter = _this.search.val().toLowerCase();
+        window.search_query = filter;
+        return _this._filter(filter);
+      });
+      return $('#search').submit(function(event) {
+        var model;
+        event.preventDefault();
+        model = _this.selection.models[0];
+        document.router.navigate("//member/" + model.attributes.uid, {
+          trigger: true
+        });
+        return false;
+      });
+    };
+
     MembersPageController.prototype._filter = function(query) {
       var branch, branches, leaf, part, person, tree, _i, _j, _len, _len1, _ref;
       this.query = query;
+      this.selection = [];
+      this.hideAllPersons();
       if (this.query.length < 3) {
         this.query = "";
         this.selection = this.model;
         this.view.display(this.model);
-        return;
+        this.showAllPersons();
+        return this;
       }
       branches = this.query.split(' and ');
       tree = [];
@@ -119,21 +127,43 @@
           return _results;
         })());
       }
-      this.selection = new Bolk.Persons;
       _ref = this.model.models;
       for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
         person = _ref[_j];
-        if (person.matches(tree)) {
-          this.selection.add(person);
+        if (!(person.matches(this.tree))) {
+          continue;
         }
+        this.selection.push(person);
+        this.showPerson(person.get('uid'));
       }
-      return this.view.display(this.selection);
+      return this;
+    };
+
+    MembersPageController.prototype.showAllPersons = function() {
+      $('#members').children().css('display', 'inline-block');
+      return this;
+    };
+
+    MembersPageController.prototype.hideAllPersons = function() {
+      $('#members').children().css('display', 'none');
+      return this;
+    };
+
+    MembersPageController.prototype.hidePerson = function(uid) {
+      console.log('hide ' + uid);
+      $("#person-" + uid).css('display', 'none');
+      return this;
+    };
+
+    MembersPageController.prototype.showPerson = function(uid) {
+      console.log('show ' + uid);
+      $("#person-" + uid).css('display', 'inline-block');
+      return this;
     };
 
     MembersPageController.prototype._fetchMembers = function() {
       var blip,
         _this = this;
-      console.log('HALLOO');
       this.showLoader();
       blip = new Bolk.BlipRequest('persons');
       return blip.request.always(function(data) {
@@ -159,6 +189,7 @@
         }));
         this.model.add(person);
       }
+      this.view.display(this.model);
       return this._filter(this.query);
     };
 

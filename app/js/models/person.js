@@ -46,7 +46,8 @@
     };
 
     Person.prototype.merge_operculum = function(finish) {
-      var model, operculum;
+      var operculum,
+        _this = this;
       if (finish == null) {
         finish = function() {
           return {};
@@ -57,15 +58,14 @@
         return;
       }
       operculum = new Bolk.OperculumRequest("person/" + this.attributes.uid);
-      model = this;
       operculum.request.done(function(data) {
-        model.set(data);
-        model.complete = true;
-        locache.async.set('member-page-' + model.attributes.uid, model.attributes);
+        _this.set(data);
+        _this.complete = true;
+        locache.async.set('member-page-' + _this.attributes.uid, _this.attributes);
         return finish();
       });
       return operculum.request.fail(function() {
-        model.complete = true;
+        _this.complete = true;
         return finish();
       });
     };

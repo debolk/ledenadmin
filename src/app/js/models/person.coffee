@@ -31,14 +31,13 @@ class Bolk.Person extends Backbone.Model
 			finish()
 			return
 		operculum = new Bolk.OperculumRequest "person/#{@attributes.uid}"
-		model = this
-		operculum.request.done ( data ) ->
-			model.set(data)
-			model.complete = true
-			locache.async.set( 'member-page-' + model.attributes.uid, model.attributes )
+		operculum.request.done ( data ) =>
+			@set(data)
+			@complete = true
+			locache.async.set( 'member-page-' + @attributes.uid, @attributes )
 			finish()
-		operculum.request.fail ->
-			model.complete = true
+		operculum.request.fail =>
+			@complete = true
 			finish()
 
 	to_csv: ->
