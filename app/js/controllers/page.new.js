@@ -9,20 +9,17 @@
     NewPageController.CacheTime = 120;
 
     function NewPageController(uid) {
-      var controller;
+      var _this = this;
 
       this.uid = uid;
       NewPageController.__super__.constructor.call(this, new Bolk.MemberPage('member-' + this.uid, this.uid));
-      controller = this;
-      this.view.el.submit(function() {
-        var data;
-
-        data = controller.view.el.serializeObject();
-        controller.createMember(data);
+      this.view.el.submit(function(event) {
+        event.preventDefault();
+        _this.createMember(_this.view.el.serializeObject());
         return false;
       });
       this._parseMember({});
-      $('input#search-field').attr('disabled', 'disabled');
+      $('input#search-field').prop('disabled', true);
     }
 
     NewPageController.prototype.createMember = function(data) {
@@ -68,8 +65,11 @@
     };
 
     NewPageController.prototype._parseMember = function(data) {
+      var _ref;
+
       this.model = new Bolk.Person(data);
-      return this.view.display(this.model);
+      this.view.display(this.model);
+      return (_ref = this.view.personView) != null ? _ref.enable() : void 0;
     };
 
     NewPageController.prototype._displayMember = function(model) {};

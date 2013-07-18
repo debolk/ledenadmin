@@ -96,13 +96,13 @@ class Bolk.MembersPageController extends Bolk.PageController
 		tree = []
 		
 		branches = (part for part in branches when part.trim().length != 0)
-
 		for branch in branches
 			tree.push (leaf.trim().split(' ') for leaf in branch.split(' or ') when leaf.trim().length != 0)
-
-		for person in @model.models when person.matches( tree )
-			@selection.push person
-			@showPerson person.get 'uid' 
+		
+		if @model?.models?
+			for person in @model.models when person.matches( tree )
+				@selection.push person
+				@showPerson person.get 'uid' 
 			
 		return this
 		

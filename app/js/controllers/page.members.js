@@ -105,7 +105,7 @@
     };
 
     MembersPageController.prototype._filter = function(query) {
-      var branch, branches, leaf, part, person, tree, _i, _j, _len, _len1, _ref;
+      var branch, branches, leaf, part, person, tree, _i, _j, _len, _len1, _ref, _ref1;
 
       this.query = query;
       this.selection = [];
@@ -147,14 +147,16 @@
           return _results;
         })());
       }
-      _ref = this.model.models;
-      for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
-        person = _ref[_j];
-        if (!(person.matches(tree))) {
-          continue;
+      if (((_ref = this.model) != null ? _ref.models : void 0) != null) {
+        _ref1 = this.model.models;
+        for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+          person = _ref1[_j];
+          if (!(person.matches(tree))) {
+            continue;
+          }
+          this.selection.push(person);
+          this.showPerson(person.get('uid'));
         }
-        this.selection.push(person);
-        this.showPerson(person.get('uid'));
       }
       return this;
     };

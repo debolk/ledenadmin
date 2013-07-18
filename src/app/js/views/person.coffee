@@ -206,7 +206,7 @@ class Bolk.PersonView extends Backbone.View
 	#
 	#
 	#
-	enabled: ->
+	enable: ->
 		@$el.find( 'input, textarea, select' ).each ( i, el ) ->
 			el = $( el ).prop( 'disabled', false ).css( 'display', 'inline-block' )
 			$( "##{ el.attr( 'id' ) }-display" ).remove()
@@ -220,5 +220,5 @@ class Bolk.PersonView extends Backbone.View
 			if $( event.currentTarget ).data( 'state' ) is 'enabled'
 				@disable()
 			else
-				@enabled()
+				@enable()
 		)

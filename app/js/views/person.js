@@ -210,7 +210,7 @@
       return $('[data-action="toggleEdit"]').data('state', 'disabled');
     };
 
-    PersonView.prototype.enabled = function() {
+    PersonView.prototype.enable = function() {
       this.$el.find('input, textarea, select').each(function(i, el) {
         el = $(el).prop('disabled', false).css('display', 'inline-block');
         return $("#" + (el.attr('id')) + "-display").remove();
@@ -226,7 +226,7 @@
         if ($(event.currentTarget).data('state') === 'enabled') {
           return _this.disable();
         } else {
-          return _this.enabled();
+          return _this.enable();
         }
       });
     };

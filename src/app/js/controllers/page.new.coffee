@@ -9,17 +9,16 @@ class Bolk.NewPageController extends Bolk.PageController
 	#
 	constructor: ( @uid ) ->
 		super new Bolk.MemberPage( 'member-' + @uid, @uid )
-
+		
 		# Define onSubmit callback
-		controller = this
-		@view.el.submit ->
-			data = controller.view.el.serializeObject()
-			controller.createMember data
+		@view.el.submit ( event ) =>
+			event.preventDefault()
+			@createMember @view.el.serializeObject()
 			false
 		
 		@_parseMember {}
 
-		$('input#search-field').attr('disabled','disabled')
+		$('input#search-field').prop( 'disabled', true )
 		
 	createMember: (data) ->
 		controller = this
@@ -41,7 +40,7 @@ class Bolk.NewPageController extends Bolk.PageController
 			operdata = data['input']['operculum']
 
 			operdata['uid'] = uid
-			operdata['alive'] = operdata['alive'] == "true";
+			operdata['alive'] = operdata['alive'] == "true"
 
 			operdata = JSON.stringify operdata
 			oper = new Bolk.OperculumRequest api, operdata, 'PUT'
@@ -62,6 +61,7 @@ class Bolk.NewPageController extends Bolk.PageController
 	_parseMember: ( data ) ->
 		@model = new Bolk.Person( data )
 		@view.display @model
+		@view.personView?.enable()
 
 	#
 	#
