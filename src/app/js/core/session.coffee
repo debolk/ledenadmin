@@ -20,7 +20,7 @@ class Bolk.Session
 	# @param redirect [String] Redirect uri
 	#
 	oauth: ( cid = Bolk.clientId, secret = Bolk.clientSecret, redirect = Bolk.baseUrl ) ->
-		state = Math.random().toString()
+		state = "__" + Math.random().toString().substring( 2 )
 		locache.async.set( 'session_token_state', state )
 			.finished( () ->
 				window.location = "https://login.i.bolkhuis.nl/" + 
@@ -42,9 +42,8 @@ class Bolk.Session
 		.finished( ( cached_state ) =>
 			
 			locache.remove 'session_token_state' 
-			
 			if not cached_state or cached_state isnt state
-				promise.reject "Wrong state! Did you make this request? #{ state } vs #{ cached_state } "
+				promise.reject "Wrong state! Did you make this request? #{ state } : #{ typeof state } vs #{ cached_state } : #{ typeof cached_state } "
 				return false
 				
 			Bolk.OAuthRequest.getAccessToken( code )
