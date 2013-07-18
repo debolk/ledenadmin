@@ -132,3 +132,19 @@ header .control-group input#name_last, input#name_first {
 	line-height: 0;
 	vertical-align: middle;
 }
+
+div.input-display {
+	cursor: text;
+}
+
+#errors {
+	position: fixed;
+	bottom: 0;
+	margin: 8px;
+	right: 0;
+}
+
+#errors .alert {
+	font-size: 32px;
+	padding: 16px 35px 16px 14px;
+}
