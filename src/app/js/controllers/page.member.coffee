@@ -4,17 +4,17 @@ class Bolk.MemberPageController extends Bolk.PageController
 
 	@CacheTime: 120
 
+	# Creates a member page controller
 	#
-	#
+	# @param uid [String] the uid of the member
 	#
 	constructor: ( @uid ) ->
 		super new Bolk.MemberPage( 'member-' + @uid, @uid )
 
 		# Define onSubmit callback
-		controller = this
-		@view.el.submit ->
-			data = controller.view.el.serializeObject()
-			controller.saveMember data
+		@view.el.submit ( event ) =>
+			event.preventDefault()
+			@saveMember @view.el.serializeObject()
 			false
 		
 		# Lets see if we have members data
@@ -25,12 +25,14 @@ class Bolk.MemberPageController extends Bolk.PageController
 				@_parseMember data
 		)
 
-		$('input#search').attr('disabled','disabled')
+		$('input#search').prop( 'disabled', true )
 		
+	# Fetch member
 	#
+	# @param display [Boolean] displays the member
+	# @return [self] the chainable self
 	#
-	#
-	_fetchMember: (display = true) ->
+	_fetchMember: ( display = true ) ->
 		blip = new Bolk.BlipRequest "persons/#{@uid}"
 		blip.request.done( ( blipdata ) =>
 			blipdata = JSON.parse blipdata if typeof blipdata is String
@@ -43,61 +45,73 @@ class Bolk.MemberPageController extends Bolk.PageController
 				operculumdata = JSON.parse operculumdata if typeof operculumdata is String
 				data = _.extend( operculumdata, blipdata, { complete : true } )
 				locache.async.set 'member-page-' + @uid, data, MemberPageController.CacheTime
-				if(display)
-					@_parseMember data
+				@_parseMember data if display
 			)
 		)
+		return this
 		
-	saveMember: (data) ->
-		controller = this
-
-		api = "persons/#{@uid}"
+	# Creates a request to save data to the blip endpoint
+	#
+	# @param data [Object] the form data
+	# @return [Bolk.BlipRequest] the request
+	#
+	_createSaveBlipMemberRequest: ( data ) ->
 		blipdata = JSON.stringify data['input']['blip']
-		blip = new Bolk.BlipRequest api, blipdata, 'PATCH'
-		console.log blipdata
-		progress = 0
-		$('#errors').children().remove()
-
-		blip.request.done (result) ->
-			progress++
-			if(progress == 2)
-				$('#errors').append controller.view.createSucces("Opslaan gelukt")
-			controller._fetchMember false
-		blip.request.fail (error) ->
-			console.log error
-			$('#errors').append controller.view.createError(error.responseText)
-
-		api = "person/#{@uid}"
+		blip = new Bolk.BlipRequest "persons/#{@uid}", blipdata, 'PATCH'
+		console.debug blipdata
+		return blip
+		
+	# Creates a request to save data to the operculum endpoint
+	#
+	# @param data [Object] the form data
+	# @return [Bolk.BlipRequest] the request
+	#
+	_createSaveOperculumMemberRequest: ( data ) ->
 		operdata = data['input']['operculum']
 
 		operdata['uid'] = @uid
-		operdata['alive'] = operdata['alive'] == "true";
-
-		console.log operdata
+		operdata['alive'] = operdata['alive'] is "true"
+		
 		operdata = JSON.stringify operdata
-		oper = new Bolk.OperculumRequest api, operdata, 'PUT'
-		oper.request.done (result) ->
-			progress++
-			if(progress == 2)
-				$('#errors').append controller.view.createSucces("Opslaan gelukt")
-			controller._fetchMember false
-		oper.request.fail (error) ->
+		oper = new Bolk.OperculumRequest "person/#{@uid}", operdata, 'PUT'
+		console.debug operdata
+		return oper
+		
+	# Save the member
+	# 
+	# @param data [Object] the member data
+	# @return this [self] the chainable self
+	#
+	saveMember: ( data ) ->
+		@view.clearErrors()
+		progress = 0
+		onDone = ( => 
+			@_fetchMember false
+			@view.showSuccess "Opslaan gelukt" if ++progress is 2  
+		)
+		
+		# The blip request handling
+		blip = @_createSaveBlipMemberRequest data
+		blip.request.done onDone
+		blip.request.fail ( error ) =>
+			console.error error
+			@view.showError error.responseText
+
+		# The operculum request handling
+		oper = @_createSaveOperculumMemberRequest data
+		oper.request.done onDone
+		oper.request.fail ( error ) =>
 			errors = error.responseJSON.error_description
 			console.log errors
-			for message in errors
-				$('#errors').append controller.view.createError(message)
+			@view.showError( message ) for message in errors
 
+	# Parses the member and displays it
 	#
-	#
+	# @param data [Object] the member data
+	# @return this [self] the chainable self
 	#
 	_parseMember: ( data ) ->
 		@model = new Bolk.Person( data )
 		@view.display @model
-
-	#
-	#
-	#
-	_displayMember: ( model ) ->
-		# create view from model
-		
+		return this
 				
