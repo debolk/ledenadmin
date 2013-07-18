@@ -17,15 +17,22 @@
     }
 
     Person.prototype.matches = function(filter) {
-      var part, parts, _i, _len;
-      parts = filter.split(' ');
-      for (_i = 0, _len = parts.length; _i < _len; _i++) {
-        part = parts[_i];
-        if (this.index.indexOf(part) === -1) {
-          return false;
+      var matching, options, part, _i, _j, _len, _len1;
+      for (_i = 0, _len = filter.length; _i < _len; _i++) {
+        options = filter[_i];
+        matching = true;
+        for (_j = 0, _len1 = options.length; _j < _len1; _j++) {
+          part = options[_j];
+          if (this.index.indexOf(part) === -1) {
+            matching = false;
+            break;
+          }
+        }
+        if (matching) {
+          return true;
         }
       }
-      return true;
+      return false;
     };
 
     Person.prototype.merge_operculum = function(finish) {
