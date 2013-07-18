@@ -62,6 +62,10 @@
       return this.createAlert(description, "Succes!", "alert-success");
     };
 
+    Page.prototype.createInfo = function(description) {
+      return this.createAlert(description, "Aandacht!", "alert-info");
+    };
+
     Page.prototype.clearErrors = function() {
       this.errors.empty();
       return this;
@@ -74,6 +78,10 @@
 
     Page.prototype.showError = function() {
       return this.errors.append(this.createError.apply(this, arguments));
+    };
+
+    Page.prototype.showInfo = function() {
+      return this.errors.append(this.createInfo.apply(this, arguments));
     };
 
     Page.prototype._fillHeader = function(title) {

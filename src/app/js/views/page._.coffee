@@ -84,6 +84,10 @@ class Bolk.Page extends Bolk.ViewCollection
 	createSuccess: ( description ) ->
 		@createAlert description, "Succes!", "alert-success"
 		
+	#
+	createInfo: ( description ) ->
+		@createAlert description, "Aandacht!", "alert-info"
+		
 	# Clears all errors
 	#
 	# @return [self] the chainable self
@@ -108,6 +112,12 @@ class Bolk.Page extends Bolk.ViewCollection
 	#
 	showError: ->
 		@errors.append( @createError arguments... )
+		
+	#
+	#
+	#
+	showInfo: ->
+		@errors.append( @createInfo arguments... )
 		
 	# Fills the header template with a title
 	#
