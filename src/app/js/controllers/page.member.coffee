@@ -97,7 +97,7 @@ class Bolk.MemberPageController extends Bolk.PageController
 		blip = @_createSaveBlipMemberRequest data
 		blip.request.done onDone
 		blip.request.fail ( error ) =>
-			console.error error
+			console.error "Error occurred on request #{ blip.statify() }", error
 			@view.showError error.responseText
 
 		# The operculum request handling

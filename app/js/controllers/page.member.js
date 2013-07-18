@@ -103,7 +103,7 @@
       blip = this._createSaveBlipMemberRequest(data);
       blip.request.done(onDone);
       blip.request.fail(function(error) {
-        console.error(error);
+        console.error("Error occurred on request " + (blip.statify()), error);
         return _this.view.showError(error.responseText);
       });
       oper = this._createSaveOperculumMemberRequest(data);
