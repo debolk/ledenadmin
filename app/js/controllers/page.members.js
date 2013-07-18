@@ -62,8 +62,11 @@
       var _this = this;
 
       this.exporter = $('<a>export</a>');
+      this.exportcount = $('<span></span>');
       $('.actions').append(' | ');
       $('.actions').append(this.exporter);
+      $('.actions').append(' ');
+      $('.actions').append(this.exportcount);
       return this.exporter.click(function() {
         var action, actions, model, _i, _len, _ref;
 
@@ -108,12 +111,14 @@
       var branch, branches, leaf, part, person, tree, _i, _j, _len, _len1, _ref, _ref1;
 
       this.query = query;
+      this.view.clearErrors();
       this.selection = [];
       if (this.query.length < 3) {
         this.query = "";
-        this.selection = this.model;
+        this.selection = this.model.models;
         this.view.display(this.model);
         this.showAllPersons();
+        this.exportcount.text('(' + this.selection.length + ')');
         return this;
       }
       this.hideAllPersons();
@@ -157,7 +162,11 @@
           this.selection.push(person);
           this.showPerson(person.get('uid'));
         }
+        if (this.selection.length === 0) {
+          this.view.showInfo('Geen leden gevonden!');
+        }
       }
+      this.exportcount.text('(' + this.selection.length + ')');
       return this;
     };
 

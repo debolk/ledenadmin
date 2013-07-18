@@ -52,8 +52,11 @@ class Bolk.MembersPageController extends Bolk.PageController
 	_createExport: () ->
 		
 		@exporter = $ '<a>export</a>'
+		@exportcount = $ '<span></span>'
 		$('.actions').append ' | '
 		$('.actions').append @exporter
+		$('.actions').append ' '
+		$('.actions').append @exportcount
 		
 		@exporter.click =>
 			return if @selection.length is 0
@@ -83,12 +86,14 @@ class Bolk.MembersPageController extends Bolk.PageController
 	# @param query [String] the query
 	#
 	_filter: ( @query ) ->
+		@view.clearErrors()
 		@selection = []
 		if @query.length < 3
 			@query = ""
-			@selection = @model
+			@selection = @model.models
 			@view.display @model
 			@showAllPersons()
+			@exportcount.text '(' + @selection.length + ')'
 			return this
 
 		@hideAllPersons()
@@ -103,7 +108,12 @@ class Bolk.MembersPageController extends Bolk.PageController
 			for person in @model.models when person.matches( tree )
 				@selection.push person
 				@showPerson person.get 'uid' 
-			
+		
+			if @selection.length is 0
+				@view.showInfo 'Geen leden gevonden!'
+		
+		@exportcount.text '(' + @selection.length + ')'
+		
 		return this
 		
 	#
