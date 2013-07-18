@@ -37,7 +37,7 @@
     };
 
     Page.prototype.showLoader = function() {
-      this.loading.html($("<div>LOADINGGGG</div>"));
+      this.loading.html($("<div>Loading...</div>"));
       return this;
     };
 

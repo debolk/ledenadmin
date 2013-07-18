@@ -44,7 +44,7 @@ class Bolk.Page extends Bolk.ViewCollection
 	# @return [self] the chainable self
 	#
 	showLoader: () ->
-		@loading.html( $ "<div>LOADINGGGG</div>" )
+		@loading.html( $ "<div>Loading...</div>" )
 		
 		return this
 		
