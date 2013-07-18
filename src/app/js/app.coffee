@@ -80,14 +80,12 @@ class Bolk.AppRouter extends Backbone.Router
 	
 	# Logs out
 	#
-	#
 	logout: ->
 		console.debug "Logging out"
 		@session.kill()
 		@navigate '//home', { trigger: true, replace: true }
 		
-	#
-	#
+	# Runs when page is unloaded
 	#
 	onUnload: ->
 		@session.unload()
@@ -112,7 +110,7 @@ class Bolk.AppRouter extends Backbone.Router
 		@session.oauth()
 		return false
 		
-	#
+	# Redirect the page without the ?params&params
 	#
 	redirectWithoutSearch: ->
 		window.location = window.location.protocol + "//" + 
@@ -120,8 +118,10 @@ class Bolk.AppRouter extends Backbone.Router
 			window.location.pathname + 
 			window.location.hash
 		
+	# Gets the value in the search location ?param=value or &param=value
 	#
-	#
+	# @param name [String] the param
+	# @returns [String] the value
 	#
 	get: ( name ) ->
 		name = name.replace( /[\[]/, "\\\[" ).replace( /[\]]/, "\\\]" )

@@ -17,10 +17,10 @@ class Bolk.MembersPageController extends Bolk.PageController
 		
 		# Lets see if we have members data
 		locache.async.get( 'members-page' ).finished( ( data ) =>
-			unless data
-				@_fetchMembers()
-			else
-				@_parseMembers data
+			#unless data
+			@_fetchMembers()
+			#else
+			#	@_parseMembers data
 		)
 
 		# Bind to search form
@@ -86,6 +86,7 @@ class Bolk.MembersPageController extends Bolk.PageController
 	#
 	#
 	_fetchMembers: () ->
+		console.log 'HALLOO'
 		@showLoader()
 		blip = new Bolk.BlipRequest 'persons'
 		blip.request.always( ( data ) =>

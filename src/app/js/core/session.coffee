@@ -1,5 +1,9 @@
+# The session class handles the login tokens
+#
 class Bolk.Session
 	
+	# Creates a new session
+	#
 	constructor: () ->
 		@token = locache.get 'session_token'
 		
@@ -57,15 +61,22 @@ class Bolk.Session
 		)
 		return promise.promise()
 		
+	# Unloads the session state
 	#
+	# @return [self] the chainable self
 	#
 	unload: () ->
-		locache.remove 'session_token'
-		locache.remove 'session_refresh_token'
+		#locache.remove 'session_token'
+		#locache.remove 'session_refresh_token'
+		return this
 		
 	# Kill the session
 	#
+	# @return [self] the chainable self
+	#
 	kill: () ->
-		@unload()
+		locache.remove 'session_token'
+		locache.remove 'session_refresh_token'
 		locache.flush()
+		return this
 	
