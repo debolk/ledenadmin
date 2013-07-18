@@ -19,7 +19,7 @@ class Bolk.NewPageController extends Bolk.PageController
 		
 		@_parseMember {}
 
-		$('input#search').attr('disabled','disabled')
+		$('input#search-field').attr('disabled','disabled')
 		
 	createMember: (data) ->
 		controller = this
@@ -30,11 +30,11 @@ class Bolk.NewPageController extends Bolk.PageController
 
 		$('#errors').children().remove()
 
-		blip.request.fail (error) ->
+		blip.request.fail (error) =>
 			console.log error
-			$('#errors').append controller.view.createError(error.responseText)
+			@view.showError(error.responseText)
 			
-		blip.request.done (result) ->
+		blip.request.done (result) =>
 			uid = result['uid']
 
 			api = "person/#{uid}"
@@ -45,15 +45,15 @@ class Bolk.NewPageController extends Bolk.PageController
 
 			operdata = JSON.stringify operdata
 			oper = new Bolk.OperculumRequest api, operdata, 'PUT'
-			oper.request.fail (error) ->
+			oper.request.fail (error) =>
 				errors = error.responseJSON.error_description
 				console.log errors
 				for message in errors
-					$('#errors').append controller.view.createError(message)
+					@view.showError(message)
 				
-			oper.request.done (result) ->
-				$('#errors').append controller.view.createSucces("Opslaan gelukt")
-				window.location.hash = "/member/" + uid
+			oper.request.done (result) =>
+				@view.showSuccess('Opslaan gelukt');
+				window.location.hash = "/member/" + uid + "/succes"
 
 
 	#

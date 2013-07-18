@@ -8,7 +8,7 @@ class Bolk.MemberPageController extends Bolk.PageController
 	#
 	# @param uid [String] the uid of the member
 	#
-	constructor: ( @uid ) ->
+	constructor: ( @uid, succes ) ->
 		super new Bolk.MemberPage( 'member-' + @uid, @uid )
 
 		# Define onSubmit callback
@@ -16,6 +16,9 @@ class Bolk.MemberPageController extends Bolk.PageController
 			event.preventDefault()
 			@saveMember @view.el.serializeObject()
 			false
+
+		if succes
+			@view.showSuccess("Aanmaken gelukt")
 		
 		# Lets see if we have members data
 		locache.async.get( 'member-page-' + @uid ).finished( ( data ) =>
@@ -25,7 +28,7 @@ class Bolk.MemberPageController extends Bolk.PageController
 				@_parseMember data
 		)
 
-		$('input#search').prop( 'disabled', true )
+		$('input#search-field').prop( 'disabled', true )
 		
 	# Fetch member
 	#
