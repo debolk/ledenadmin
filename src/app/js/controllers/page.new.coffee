@@ -53,7 +53,7 @@ class Bolk.NewPageController extends Bolk.PageController
 				
 			oper.request.done (result) =>
 				@view.showSuccess('Opslaan gelukt');
-				window.location.hash = "/member/" + uid
+				window.location.hash = "/member/" + uid + "/succes"
 
 
 	#

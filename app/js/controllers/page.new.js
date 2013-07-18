@@ -58,7 +58,7 @@
         });
         return oper.request.done(function(result) {
           _this.view.showSuccess('Opslaan gelukt');
-          return window.location.hash = "/member/" + uid;
+          return window.location.hash = "/member/" + uid + "/succes";
         });
       });
     };

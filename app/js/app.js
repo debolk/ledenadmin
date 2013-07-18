@@ -18,6 +18,7 @@
       'new': 'newmember',
       'members/:filter': 'members',
       'member/:id': 'member',
+      'member/:id/:succes': 'member',
       'logout': 'logout',
       '?code=:code&state=:state': 'getToken',
       'login': 'oauth'
@@ -57,8 +58,11 @@
       return this.controller = new Bolk.NewPageController;
     };
 
-    AppRouter.prototype.member = function(id) {
+    AppRouter.prototype.member = function(id, succes) {
       var _ref;
+      if (succes == null) {
+        succes = false;
+      }
       console.debug('Routing member:' + id);
       if ((_ref = this.controller) != null) {
         _ref.kill();
@@ -66,7 +70,7 @@
       if (!this.ensureSession()) {
         return;
       }
-      return this.controller = new Bolk.MemberPageController(id);
+      return this.controller = new Bolk.MemberPageController(id, succes);
     };
 
     AppRouter.prototype.search = function(action) {

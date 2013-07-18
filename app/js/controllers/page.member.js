@@ -9,7 +9,7 @@
 
     MemberPageController.CacheTime = 120;
 
-    function MemberPageController(uid) {
+    function MemberPageController(uid, succes) {
       var _this = this;
       this.uid = uid;
       MemberPageController.__super__.constructor.call(this, new Bolk.MemberPage('member-' + this.uid, this.uid));
@@ -18,6 +18,9 @@
         _this.saveMember(_this.view.el.serializeObject());
         return false;
       });
+      if (succes) {
+        this.view.showSuccess("Aanmaken gelukt");
+      }
       locache.async.get('member-page-' + this.uid).finished(function(data) {
         if (!data) {
           return _this._fetchMember();
