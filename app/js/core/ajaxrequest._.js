@@ -39,7 +39,9 @@
     };
 
     AjaxRequest.prototype.onFail = function(error) {
-      return console.error("Error occurred on request " + (this.statify()), error);
+      console.error("Error occurred on request " + (this.statify()));
+      console.error("" + (error.statusCode()) + " " + error.statusText + ": " + error.responseText);
+      return console.error(error);
     };
 
     AjaxRequest.prototype.onDone = function() {};
