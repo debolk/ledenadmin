@@ -130,4 +130,5 @@ header .control-group input#name_last, input#name_first {
 	height: auto;
 	margin-right: 12px;
 	line-height: 0;
+	vertical-align: middle;
 }
