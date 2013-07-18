@@ -122,16 +122,22 @@
           </td>
         </tr>
       </table>
+      <h2>Overview</h2>
+      <div class='docstring'>
+  <p>Class for all requests to the Oauth endpoint</p>
+</div>
+<div class='tags'>
+</div>
       <h2>Class Method Summary</h2>
       <ul class='summary'>
   <li>
     <span class='signature'>
       <a href='#getAccessToken-class'>
-        + (void) <strong>getAccessToken</strong>(code)
+        + (Bolk.OAuthRequest) <strong>getAccessToken</strong>(code)
       </a>
     </span>
     <span class='desc'>
-      
+      Gets a request that gets an access token
     </span>
   </li>
 </ul>
@@ -145,7 +151,7 @@
     </span>
     <span class='constructor note title'>Constructor</span>
     <span class='desc'>
-      
+      Creates a new OAuth request
     </span>
   </li>
 </ul>
@@ -171,9 +177,32 @@
       <div class='methods'>
   <div class='method_details'>
     <p class='signature' id='getAccessToken-class'>
-      + (void) <strong>getAccessToken</strong>(code)
+      + (Bolk.OAuthRequest) <strong>getAccessToken</strong>(code)
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Gets a request that gets an access token</p>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>code</span>
+      <span class='type'>
+        (<tt>String</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>code</span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (<tt><a href='../../classes/Bolk/OAuthRequest.html'>Bolk.OAuthRequest</a></tt>)
+      &mdash;
+      <span class='desc'>the request</span>
+    </li>
+  </ul>
 </div>
   </div>
 </div>
@@ -183,14 +212,44 @@
     <p class='signature' id='constructor-instance'>
       - (void) <strong>constructor</strong>()
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Creates a new OAuth request</p>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>api</span>
+      <span class='type'>
+        (<tt>String</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the api to invoke</span>
+    </li>
+    <li>
+      <span class='name'>params</span>
+      <span class='type'>
+        (<tt>Object</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the parameters</span>
+    </li>
+    <li>
+      <span class='name'>method</span>
+      <span class='type'>
+        (<tt>String</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the method to use</span>
+    </li>
+  </ul>
 </div>
   </div>
 </div>
     </div>
     <div id='footer'>
   Generated on
-  Mon Jul 15 2013 17:49:17 GMT+0200 (W. Europe Daylight Time)
+  Thu Jul 18 2013 19:43:29 GMT+0200 (W. Europe Daylight Time)
   by
   <a href='https://github.com/netzpirat/codo' title='CoffeeScript API documentation generator'>Codo</a>
   v1.5.6

@@ -152,8 +152,18 @@
   </li>
   <li>
     <span class='signature'>
+      <a href='#newmember-instance'>
+        - (void) <strong>newmember</strong>()
+      </a>
+    </span>
+    <span class='desc'>
+      Routes the NewMember page
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
       <a href='#member-instance'>
-        - (void) <strong>member</strong>(id)
+        - (void) <strong>member</strong>(id, succes = false)
       </a>
     </span>
     <span class='desc'>
@@ -207,7 +217,7 @@
       </a>
     </span>
     <span class='desc'>
-      
+      Runs when page is unloaded
     </span>
   </li>
   <li>
@@ -227,7 +237,7 @@
       </a>
     </span>
     <span class='desc'>
-      
+      Redirect the page without the ?params&amp;params
     </span>
   </li>
   <li>
@@ -237,7 +247,7 @@
       </a>
     </span>
     <span class='desc'>
-      
+      Gets the value in the search location ?param=value or &amp;param=value @returns [String] the value
     </span>
   </li>
 </ul>
@@ -275,8 +285,18 @@
 </div>
   </div>
   <div class='method_details'>
+    <p class='signature' id='newmember-instance'>
+      - (void) <strong>newmember</strong>()
+    </p>
+    <div class='docstring'>
+  <p>Routes the NewMember page</p>
+</div>
+<div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
     <p class='signature' id='member-instance'>
-      - (void) <strong>member</strong>(id)
+      - (void) <strong>member</strong>(id, succes = false)
     </p>
     <div class='docstring'>
   <p>Routes the member page</p>
@@ -361,7 +381,10 @@
     <p class='signature' id='onUnload-instance'>
       - (void) <strong>onUnload</strong>()
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Runs when page is unloaded</p>
+</div>
+<div class='tags'>
 </div>
   </div>
   <div class='method_details'>
@@ -378,21 +401,38 @@
     <p class='signature' id='redirectWithoutSearch-instance'>
       - (void) <strong>redirectWithoutSearch</strong>()
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Redirect the page without the ?params&amp;params</p>
+</div>
+<div class='tags'>
 </div>
   </div>
   <div class='method_details'>
     <p class='signature' id='get-instance'>
       - (void) <strong>get</strong>(name)
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Gets the value in the search location ?param=value or &amp;param=value</p><p>@returns [String] the value</p>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>name</span>
+      <span class='type'>
+        (<tt>String</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the param</span>
+    </li>
+  </ul>
 </div>
   </div>
 </div>
     </div>
     <div id='footer'>
   Generated on
-  Mon Jul 15 2013 17:49:17 GMT+0200 (W. Europe Daylight Time)
+  Thu Jul 18 2013 19:43:29 GMT+0200 (W. Europe Daylight Time)
   by
   <a href='https://github.com/netzpirat/codo' title='CoffeeScript API documentation generator'>Codo</a>
   v1.5.6

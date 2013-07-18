@@ -133,42 +133,62 @@
   <li>
     <span class='signature'>
       <a href='#constructor-instance'>
-        - (void) <strong>constructor</strong>(uid)
+        - (void) <strong>constructor</strong>(uid, succes)
       </a>
     </span>
     <span class='constructor note title'>Constructor</span>
     <span class='desc'>
-      Creates the controller for the Members Listing Page
+      Creates a member page controller
     </span>
   </li>
   <li>
     <span class='signature'>
       <a href='#_fetchMember-instance'>
-        - (void) <strong>_fetchMember</strong>()
+        - (self) <strong>_fetchMember</strong>(display = true)
       </a>
     </span>
     <span class='desc'>
-      
+      Fetch member
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#_createSaveBlipMemberRequest-instance'>
+        - (Bolk.BlipRequest) <strong>_createSaveBlipMemberRequest</strong>(data)
+      </a>
+    </span>
+    <span class='desc'>
+      Creates a request to save data to the blip endpoint
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#_createSaveOperculumMemberRequest-instance'>
+        - (Bolk.BlipRequest) <strong>_createSaveOperculumMemberRequest</strong>(data)
+      </a>
+    </span>
+    <span class='desc'>
+      Creates a request to save data to the operculum endpoint
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#saveMember-instance'>
+        - (?) <strong>saveMember</strong>(data)
+      </a>
+    </span>
+    <span class='desc'>
+      Save the member
     </span>
   </li>
   <li>
     <span class='signature'>
       <a href='#_parseMember-instance'>
-        - (void) <strong>_parseMember</strong>(data)
+        - (?) <strong>_parseMember</strong>(data)
       </a>
     </span>
     <span class='desc'>
-      
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#_displayMember-instance'>
-        - (void) <strong>_displayMember</strong>(model)
-      </a>
-    </span>
-    <span class='desc'>
-      
+      Parses the member and displays it
     </span>
   </li>
 </ul>
@@ -206,21 +226,21 @@
       <div class='methods'>
   <div class='method_details'>
     <p class='signature' id='constructor-instance'>
-      - (void) <strong>constructor</strong>(uid)
+      - (void) <strong>constructor</strong>(uid, succes)
     </p>
     <div class='docstring'>
-  <p>Creates the controller for the Members Listing Page</p>
+  <p>Creates a member page controller</p>
 </div>
 <div class='tags'>
   <h3>Parameters:</h3>
   <ul class='param'>
     <li>
-      <span class='name'>filter</span>
+      <span class='name'>uid</span>
       <span class='type'>
         (<tt>String</tt>)
       </span>
       &mdash;
-      <span class='desc'>the filter, defines the request type</span>
+      <span class='desc'>the uid of the member</span>
     </li>
   </ul>
 </div>
@@ -230,30 +250,159 @@
       <div class='methods'>
   <div class='method_details'>
     <p class='signature' id='_fetchMember-instance'>
-      - (void) <strong>_fetchMember</strong>()
+      - (self) <strong>_fetchMember</strong>(display = true)
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Fetch member</p>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>display</span>
+      <span class='type'>
+        (<tt>Boolean</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>displays the member</span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (<tt>self</tt>)
+      &mdash;
+      <span class='desc'>the chainable self</span>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='_createSaveBlipMemberRequest-instance'>
+      - (Bolk.BlipRequest) <strong>_createSaveBlipMemberRequest</strong>(data)
+    </p>
+    <div class='docstring'>
+  <p>Creates a request to save data to the blip endpoint</p>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>data</span>
+      <span class='type'>
+        (<tt>Object</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the form data</span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (<tt><a href='../../classes/Bolk/BlipRequest.html'>Bolk.BlipRequest</a></tt>)
+      &mdash;
+      <span class='desc'>the request</span>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='_createSaveOperculumMemberRequest-instance'>
+      - (Bolk.BlipRequest) <strong>_createSaveOperculumMemberRequest</strong>(data)
+    </p>
+    <div class='docstring'>
+  <p>Creates a request to save data to the operculum endpoint</p>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>data</span>
+      <span class='type'>
+        (<tt>Object</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the form data</span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (<tt><a href='../../classes/Bolk/BlipRequest.html'>Bolk.BlipRequest</a></tt>)
+      &mdash;
+      <span class='desc'>the request</span>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='saveMember-instance'>
+      - (?) <strong>saveMember</strong>(data)
+    </p>
+    <div class='docstring'>
+  <p>Save the member</p>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>data</span>
+      <span class='type'>
+        (<tt>Object</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the member data</span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (<tt>?</tt>)
+      &mdash;
+      <span class='desc'>this [self] the chainable self</span>
+    </li>
+  </ul>
 </div>
   </div>
   <div class='method_details'>
     <p class='signature' id='_parseMember-instance'>
-      - (void) <strong>_parseMember</strong>(data)
+      - (?) <strong>_parseMember</strong>(data)
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Parses the member and displays it</p>
 </div>
-  </div>
-  <div class='method_details'>
-    <p class='signature' id='_displayMember-instance'>
-      - (void) <strong>_displayMember</strong>(model)
-    </p>
-    <div class='tags'>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>data</span>
+      <span class='type'>
+        (<tt>Object</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the member data</span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (<tt>?</tt>)
+      &mdash;
+      <span class='desc'>this [self] the chainable self</span>
+    </li>
+  </ul>
 </div>
   </div>
 </div>
     </div>
     <div id='footer'>
   Generated on
-  Mon Jul 15 2013 17:49:17 GMT+0200 (W. Europe Daylight Time)
+  Thu Jul 18 2013 19:43:29 GMT+0200 (W. Europe Daylight Time)
   by
   <a href='https://github.com/netzpirat/codo' title='CoffeeScript API documentation generator'>Codo</a>
   v1.5.6

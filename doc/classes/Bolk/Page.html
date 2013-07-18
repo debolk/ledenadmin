@@ -156,6 +156,106 @@ action lists, fill predefined templates and so forth and so on.</p>
       </a>
     </span>
     <span class='desc'>
+      Gets the header template
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#showLoader-instance'>
+        - (self) <strong>showLoader</strong>()
+      </a>
+    </span>
+    <span class='desc'>
+      Shows the loader
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#hideLoader-instance'>
+        - (self) <strong>hideLoader</strong>()
+      </a>
+    </span>
+    <span class='desc'>
+      Hides the loader
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#createAlert-instance'>
+        - (jQuery.Elem) <strong>createAlert</strong>(description, title = "Warning!", style = "")
+      </a>
+    </span>
+    <span class='desc'>
+      Creates a alert div
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#createError-instance'>
+        - (jQuery.Elem) <strong>createError</strong>(description)
+      </a>
+    </span>
+    <span class='desc'>
+      Creates an error div
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#createSuccess-instance'>
+        - (jQuery.Elem) <strong>createSuccess</strong>(description)
+      </a>
+    </span>
+    <span class='desc'>
+      Creates a success div
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#createInfo-instance'>
+        - (void) <strong>createInfo</strong>(description)
+      </a>
+    </span>
+    <span class='desc'>
+      
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#clearErrors-instance'>
+        - (self) <strong>clearErrors</strong>()
+      </a>
+    </span>
+    <span class='desc'>
+      Clears all errors
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#showSuccess-instance'>
+        - (self) <strong>showSuccess</strong>()
+      </a>
+    </span>
+    <span class='desc'>
+      Show a success message
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#showError-instance'>
+        - (self) <strong>showError</strong>()
+      </a>
+    </span>
+    <span class='desc'>
+      Show an error message
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#showInfo-instance'>
+        - (void) <strong>showInfo</strong>()
+      </a>
+    </span>
+    <span class='desc'>
       
     </span>
   </li>
@@ -177,26 +277,6 @@ action lists, fill predefined templates and so forth and so on.</p>
     </span>
     <span class='desc'>
       Clears the page
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#showLoader-instance'>
-        - (void) <strong>showLoader</strong>()
-      </a>
-    </span>
-    <span class='desc'>
-      
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#hideLoader-instance'>
-        - (void) <strong>hideLoader</strong>()
-      </a>
-    </span>
-    <span class='desc'>
-      
     </span>
   </li>
 </ul>
@@ -247,6 +327,246 @@ action lists, fill predefined templates and so forth and so on.</p>
     <p class='signature' id='_getHeaderTemplate-instance'>
       - (void) <strong>_getHeaderTemplate</strong>()
     </p>
+    <div class='docstring'>
+  <p>Gets the header template</p>
+</div>
+<div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='showLoader-instance'>
+      - (self) <strong>showLoader</strong>()
+    </p>
+    <div class='docstring'>
+  <p>Shows the loader</p>
+</div>
+<div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (<tt>self</tt>)
+      &mdash;
+      <span class='desc'>the chainable self</span>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='hideLoader-instance'>
+      - (self) <strong>hideLoader</strong>()
+    </p>
+    <div class='docstring'>
+  <p>Hides the loader</p>
+</div>
+<div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (<tt>self</tt>)
+      &mdash;
+      <span class='desc'>the chainable self</span>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='createAlert-instance'>
+      - (jQuery.Elem) <strong>createAlert</strong>(description, title = "Warning!", style = "")
+    </p>
+    <div class='docstring'>
+  <p>Creates a alert div</p>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>description</span>
+      <span class='type'>
+        (<tt>String</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the alert message</span>
+    </li>
+    <li>
+      <span class='name'>title</span>
+      <span class='type'>
+        (<tt>String</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the title message</span>
+    </li>
+    <li>
+      <span class='name'>style</span>
+      <span class='type'>
+        (<tt>String</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the style</span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (<tt>jQuery.Elem</tt>)
+      &mdash;
+      <span class='desc'>the element </span>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='createError-instance'>
+      - (jQuery.Elem) <strong>createError</strong>(description)
+    </p>
+    <div class='docstring'>
+  <p>Creates an error div</p>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>description</span>
+      <span class='type'>
+        (<tt>String</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the error message</span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (<tt>jQuery.Elem</tt>)
+      &mdash;
+      <span class='desc'>the element </span>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='createSuccess-instance'>
+      - (jQuery.Elem) <strong>createSuccess</strong>(description)
+    </p>
+    <div class='docstring'>
+  <p>Creates a success div</p>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>description</span>
+      <span class='type'>
+        (<tt>String</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the success message</span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (<tt>jQuery.Elem</tt>)
+      &mdash;
+      <span class='desc'>the element </span>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='createInfo-instance'>
+      - (void) <strong>createInfo</strong>(description)
+    </p>
+    <div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='clearErrors-instance'>
+      - (self) <strong>clearErrors</strong>()
+    </p>
+    <div class='docstring'>
+  <p>Clears all errors</p>
+</div>
+<div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (<tt>self</tt>)
+      &mdash;
+      <span class='desc'>the chainable self</span>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='showSuccess-instance'>
+      - (self) <strong>showSuccess</strong>()
+    </p>
+    <div class='docstring'>
+  <p>Show a success message</p>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>description</span>
+      <span class='type'>
+        (<tt>String</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the success message</span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (<tt>self</tt>)
+      &mdash;
+      <span class='desc'>the chainable self</span>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='showError-instance'>
+      - (self) <strong>showError</strong>()
+    </p>
+    <div class='docstring'>
+  <p>Show an error message</p>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>description</span>
+      <span class='type'>
+        (<tt>String</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the error message</span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (<tt>self</tt>)
+      &mdash;
+      <span class='desc'>the chainable self</span>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='showInfo-instance'>
+      - (void) <strong>showInfo</strong>()
+    </p>
     <div class='tags'>
 </div>
   </div>
@@ -290,25 +610,11 @@ action lists, fill predefined templates and so forth and so on.</p>
   </ul>
 </div>
   </div>
-  <div class='method_details'>
-    <p class='signature' id='showLoader-instance'>
-      - (void) <strong>showLoader</strong>()
-    </p>
-    <div class='tags'>
-</div>
-  </div>
-  <div class='method_details'>
-    <p class='signature' id='hideLoader-instance'>
-      - (void) <strong>hideLoader</strong>()
-    </p>
-    <div class='tags'>
-</div>
-  </div>
 </div>
     </div>
     <div id='footer'>
   Generated on
-  Mon Jul 15 2013 17:49:17 GMT+0200 (W. Europe Daylight Time)
+  Thu Jul 18 2013 19:43:29 GMT+0200 (W. Europe Daylight Time)
   by
   <a href='https://github.com/netzpirat/codo' title='CoffeeScript API documentation generator'>Codo</a>
   v1.5.6

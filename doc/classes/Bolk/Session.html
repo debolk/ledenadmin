@@ -116,6 +116,12 @@
           <td>src&#47;app&#47;js&#47;core&#47;session.coffee</td>
         </tr>
       </table>
+      <h2>Overview</h2>
+      <div class='docstring'>
+  <p>The session class handles the login tokens</p>
+</div>
+<div class='tags'>
+</div>
       <h2>Instance Method Summary</h2>
       <ul class='summary'>
   <li>
@@ -126,13 +132,13 @@
     </span>
     <span class='constructor note title'>Constructor</span>
     <span class='desc'>
-      
+      Creates a new session
     </span>
   </li>
   <li>
     <span class='signature'>
       <a href='#oauth-instance'>
-        - (void) <strong>oauth</strong>(cid = Bolk.clientId, secret = Bolk.clientSecret, redirect = "https://ledenadmin.i.bolkhuis.nl/")
+        - (void) <strong>oauth</strong>(cid = Bolk.clientId, secret = Bolk.clientSecret, redirect = Bolk.baseUrl)
       </a>
     </span>
     <span class='desc'>
@@ -152,17 +158,17 @@
   <li>
     <span class='signature'>
       <a href='#unload-instance'>
-        - (void) <strong>unload</strong>()
+        - (self) <strong>unload</strong>()
       </a>
     </span>
     <span class='desc'>
-      
+      Unloads the session state
     </span>
   </li>
   <li>
     <span class='signature'>
       <a href='#kill-instance'>
-        - (void) <strong>kill</strong>()
+        - (self) <strong>kill</strong>()
       </a>
     </span>
     <span class='desc'>
@@ -176,7 +182,10 @@
     <p class='signature' id='constructor-instance'>
       - (void) <strong>constructor</strong>()
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Creates a new session</p>
+</div>
+<div class='tags'>
 </div>
   </div>
 </div>
@@ -184,7 +193,7 @@
       <div class='methods'>
   <div class='method_details'>
     <p class='signature' id='oauth-instance'>
-      - (void) <strong>oauth</strong>(cid = Bolk.clientId, secret = Bolk.clientSecret, redirect = "https://ledenadmin.i.bolkhuis.nl/")
+      - (void) <strong>oauth</strong>(cid = Bolk.clientId, secret = Bolk.clientSecret, redirect = Bolk.baseUrl)
     </p>
     <div class='docstring'>
   <p>Authenticate the client</p>
@@ -242,26 +251,47 @@
   </div>
   <div class='method_details'>
     <p class='signature' id='unload-instance'>
-      - (void) <strong>unload</strong>()
+      - (self) <strong>unload</strong>()
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Unloads the session state</p>
+</div>
+<div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (<tt>self</tt>)
+      &mdash;
+      <span class='desc'>the chainable self</span>
+    </li>
+  </ul>
 </div>
   </div>
   <div class='method_details'>
     <p class='signature' id='kill-instance'>
-      - (void) <strong>kill</strong>()
+      - (self) <strong>kill</strong>()
     </p>
     <div class='docstring'>
   <p>Kill the session</p>
 </div>
 <div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      (<tt>self</tt>)
+      &mdash;
+      <span class='desc'>the chainable self</span>
+    </li>
+  </ul>
 </div>
   </div>
 </div>
     </div>
     <div id='footer'>
   Generated on
-  Mon Jul 15 2013 17:49:17 GMT+0200 (W. Europe Daylight Time)
+  Thu Jul 18 2013 19:43:29 GMT+0200 (W. Europe Daylight Time)
   by
   <a href='https://github.com/netzpirat/codo' title='CoffeeScript API documentation generator'>Codo</a>
   v1.5.6

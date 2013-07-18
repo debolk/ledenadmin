@@ -122,6 +122,12 @@
           </td>
         </tr>
       </table>
+      <h2>Overview</h2>
+      <div class='docstring'>
+  <p>Class for all requests to the Operculum endpoint</p>
+</div>
+<div class='tags'>
+</div>
       <h2>Instance Method Summary</h2>
       <ul class='summary'>
   <li>
@@ -132,7 +138,7 @@
     </span>
     <span class='constructor note title'>Constructor</span>
     <span class='desc'>
-      
+      Creates a new Operculum request
     </span>
   </li>
   <li>
@@ -143,7 +149,7 @@
     </span>
     <span class='bound note title'>Bound</span>
     <span class='desc'>
-      
+      Runs when the request was successfull
     </span>
   </li>
 </ul>
@@ -171,7 +177,37 @@
     <p class='signature' id='constructor-instance'>
       - (void) <strong>constructor</strong>()
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Creates a new Operculum request</p>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>api</span>
+      <span class='type'>
+        (<tt>String</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the api to invoke</span>
+    </li>
+    <li>
+      <span class='name'>params</span>
+      <span class='type'>
+        (<tt>Object</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the parameters</span>
+    </li>
+    <li>
+      <span class='name'>method</span>
+      <span class='type'>
+        (<tt>String</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>the method to use</span>
+    </li>
+  </ul>
 </div>
   </div>
 </div>
@@ -182,14 +218,28 @@
       - (void) <strong>onSuccess</strong>(data)
       (bound)
     </p>
-    <div class='tags'>
+    <div class='docstring'>
+  <p>Runs when the request was successfull</p>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>data</span>
+      <span class='type'>
+        (<tt>Object</tt>)
+      </span>
+      &mdash;
+      <span class='desc'>result data</span>
+    </li>
+  </ul>
 </div>
   </div>
 </div>
     </div>
     <div id='footer'>
   Generated on
-  Mon Jul 15 2013 17:49:17 GMT+0200 (W. Europe Daylight Time)
+  Thu Jul 18 2013 19:43:29 GMT+0200 (W. Europe Daylight Time)
   by
   <a href='https://github.com/netzpirat/codo' title='CoffeeScript API documentation generator'>Codo</a>
   v1.5.6
