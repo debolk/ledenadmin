@@ -72,7 +72,6 @@ class Bolk.MembersPageController extends Bolk.PageController
 	#
 	_filter: ( @query ) ->
 		@selection = []
-		@hideAllPersons()
 		if @query.length < 3
 			@query = ""
 			@selection = @model
@@ -80,6 +79,7 @@ class Bolk.MembersPageController extends Bolk.PageController
 			@showAllPersons()
 			return this
 
+		@hideAllPersons()
 		branches = @query.split(' and ')
 		tree = []
 		
@@ -88,7 +88,7 @@ class Bolk.MembersPageController extends Bolk.PageController
 		for branch in branches
 			tree.push (leaf.trim().split(' ') for leaf in branch.split(' or ') when leaf.trim().length != 0)
 
-		for person in @model.models when person.matches( @tree )
+		for person in @model.models when person.matches( tree )
 			@selection.push person
 			@showPerson person.get 'uid' 
 			
@@ -98,23 +98,21 @@ class Bolk.MembersPageController extends Bolk.PageController
 	#
 	#
 	showAllPersons: () ->
-		$( '#members' ).children().css( 'display', 'inline-block' )
+		$( '.members' ).children().css( 'display', 'inline-block' )
 		return this
 		
 	hideAllPersons: () ->
-		$( '#members' ).children().css( 'display', 'none' )
+		$( '.members' ).children().css( 'display', 'none' )
 		return this
 	
 	#
 	#
 	#	
 	hidePerson: ( uid ) ->
-		console.log 'hide ' + uid
 		$( "#person-#{ uid }" ).css( 'display', 'none' )
 		return this
 		
 	showPerson: ( uid ) ->
-		console.log 'show ' + uid
 		$( "#person-#{ uid }" ).css( 'display', 'inline-block' )
 		return this
 

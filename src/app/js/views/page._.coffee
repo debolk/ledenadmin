@@ -118,7 +118,7 @@ class Bolk.Page extends Bolk.ViewCollection
 		template = locache.get( key )
 		
 		@header.hide()
-		unless template
+		unless !template
 			template = _.template( @_getHeaderTemplate(), { route_home: '/home', title: title } )
 			locache.async.set key, template, 3600
 		@header.html( template )

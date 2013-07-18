@@ -91,7 +91,6 @@
       var branch, branches, leaf, part, person, tree, _i, _j, _len, _len1, _ref;
       this.query = query;
       this.selection = [];
-      this.hideAllPersons();
       if (this.query.length < 3) {
         this.query = "";
         this.selection = this.model;
@@ -99,6 +98,7 @@
         this.showAllPersons();
         return this;
       }
+      this.hideAllPersons();
       branches = this.query.split(' and ');
       tree = [];
       branches = (function() {
@@ -130,7 +130,7 @@
       _ref = this.model.models;
       for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
         person = _ref[_j];
-        if (!(person.matches(this.tree))) {
+        if (!(person.matches(tree))) {
           continue;
         }
         this.selection.push(person);
@@ -140,23 +140,21 @@
     };
 
     MembersPageController.prototype.showAllPersons = function() {
-      $('#members').children().css('display', 'inline-block');
+      $('.members').children().css('display', 'inline-block');
       return this;
     };
 
     MembersPageController.prototype.hideAllPersons = function() {
-      $('#members').children().css('display', 'none');
+      $('.members').children().css('display', 'none');
       return this;
     };
 
     MembersPageController.prototype.hidePerson = function(uid) {
-      console.log('hide ' + uid);
       $("#person-" + uid).css('display', 'none');
       return this;
     };
 
     MembersPageController.prototype.showPerson = function(uid) {
-      console.log('show ' + uid);
       $("#person-" + uid).css('display', 'inline-block');
       return this;
     };

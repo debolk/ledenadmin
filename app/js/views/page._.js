@@ -82,7 +82,7 @@
       key = "header-" + (title.toLowerCase());
       template = locache.get(key);
       this.header.hide();
-      if (!template) {
+      if (!!template) {
         template = _.template(this._getHeaderTemplate(), {
           route_home: '/home',
           title: title
