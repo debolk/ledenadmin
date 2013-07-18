@@ -56,7 +56,9 @@ class Bolk.AjaxRequest
 	# @param error [Object] error data
 	#
 	onFail: ( error ) =>
-		console.error "Error occurred on request #{ @statify() }", error
+		console.error "Error occurred on request #{ @statify() }"
+		console.error error.statusText
+		console.error error
 	
 	# Runs regardless of the request completion success/fail status
 	# 
