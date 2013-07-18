@@ -10,7 +10,11 @@ class Bolk.Person extends Backbone.Model
 		@index = @index.toLowerCase()
 
 	matches: (filter) ->
-		return @index.indexOf(filter) != -1
+		parts = filter.split(' ')
+		for part in parts
+			if @index.indexOf(part) == -1
+				return false
+		return true
 
 	merge_operculum: ( finish = -> {} ) ->
 		if @complete
