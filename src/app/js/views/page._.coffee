@@ -25,7 +25,7 @@ class Bolk.Page extends Bolk.ViewCollection
 	_getHeaderTemplate: () ->
 		'<div id="branding">
 			<a name="home" data-route="<%= route_home %>">
-				<img src="/app/img/logo.png">
+				<img src="app/img/logo.png">
 			<h1>Whiting</h1>
 			</a>
 		</div>
