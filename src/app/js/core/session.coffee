@@ -23,7 +23,7 @@ class Bolk.Session
 		state = "__" + Math.random().toString().substring( 2 )
 		locache.async.set( 'session_token_state', state )
 			.finished( () ->
-				window.location = "https://login.i.bolkhuis.nl/" + 
+				window.location = Bolk.OAuthEndpoint + 
 					"authorize?response_type=code" +
 					"&state=#{state}" +
 					"&client_id=#{cid}" +

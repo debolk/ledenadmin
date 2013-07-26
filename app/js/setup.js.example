@@ -4,7 +4,8 @@
     version: '1.0.0',
     clientId: 'ledenadmin',
     clientSecret: 'ledenadmin',
-    baseUrl: 'https://ledenadmin.i.bolkhuis.nl/'
+    baseUrl: 'https://ledenadmin.i.bolkhuis.nl/',
+	OAuthEndpoint: "https://login.i.bolkhuis.nl/" 
   };
 
   locache.cachePrefix += '.bolk.';
