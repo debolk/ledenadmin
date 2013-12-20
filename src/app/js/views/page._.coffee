@@ -44,7 +44,21 @@ class Bolk.Page extends Bolk.ViewCollection
 	# @return [self] the chainable self
 	#
 	showLoader: () ->
-		@loading.html( $ "<div>Loading...</div>" )
+        docheight = $(document).height()
+		@loading.html( $ '<div id="loading">Loading</div>' )
+        $("#overlay").css({
+            height: '100%',
+            width: '100%',
+            opacity: 0.4,
+            position: 'absolute',
+            top: 0
+            left: 0
+            background-color: 'black'
+            z-index: 5000
+            text-align: 'center'
+            color: 'white',
+            font-size: '20em'
+        })
 		
 		return this
 		
