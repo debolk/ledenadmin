@@ -139,3 +139,4 @@ class Bolk.AppRouter extends Backbone.Router
         is_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
         if !is_firefox
             alert 'De ledenadministratie werkt alleen betrouwbaar in Firefox'
+            window.location = 'https://www.mozilla.org/firefox/'
