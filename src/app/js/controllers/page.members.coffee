@@ -142,14 +142,16 @@ class Bolk.MembersPageController extends Bolk.PageController
     _fetchMembers: () ->
         @showLoader()
         blip = new Bolk.BlipRequest 'persons' 
-        blip.request.always( ( data ) =>
+        blip.request
+        .always ( data ) =>
             @hideLoader()
             if blip.result
                 data = blip.result
                 data = JSON.parse data if typeof data is String
                 locache.async.set 'members-page', data, MembersPageController.CacheTime
                 @_parseMembers data 
-        )
+        .fail (data) =>
+            @view.showError 'Je hebt geen toegang tot de ledenadministratie'
         
     #
     #
