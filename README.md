@@ -9,7 +9,7 @@ Requires debolk/[bolklogin](https://github.com/debolk/bolklogin).
 2. Setup the application by
 
 	1. Install **a** [coffeescript](http://coffeescript.org/#installation) compiler
-	2. Copy `src/js/setup.coffee.example` to `src/js/setup.coffee`
+	2. Copy `src/app/js/setup.coffee.example` to `src/app/js/setup.coffee`
 	3. Edit the file with the correct settings
 	4. Run `./compile` to compile the application. Compile will keep watching your files for any changes and directly compiling them. 
 3. Open index.html in your browser
