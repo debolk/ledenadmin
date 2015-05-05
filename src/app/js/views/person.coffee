@@ -121,8 +121,8 @@ class Bolk.PersonView extends Backbone.View
 			</label>
 			<div class="controls">
 				<select id="alive" name="input[operculum][alive]">
-					<option value="true">Ja</option>
-					<option value="false">Nee</option>
+					<option value="true" <%= alive ? "selected" : "" %>>Ja</option>
+					<option value="false" <%= alive? "" : "selected" %>>Nee</option>
 				</select>
 			</div>
 		</div>
