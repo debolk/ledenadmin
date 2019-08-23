@@ -69,6 +69,7 @@ class Bolk.PersonView extends Backbone.View
 			</label>
 			<div class="controls">
 				<select id="gender" name="input[blip][gender]">
+					<option value="U">Niet Aangegeven</option>
 					<option <%= gender == "M"?"selected ":"" %> value="M">Man</option>
 					<option <%= gender == "F"?"selected ":"" %> value="F">Vrouw</option>
 				</select>
